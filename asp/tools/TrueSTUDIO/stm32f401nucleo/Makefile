@@ -480,7 +480,7 @@ ifeq ($(TOOL),gcc)
 #  Windowsの場合はフルパスにする
 #
 ifeq ($(UNAME),Windows)
-  GCC_PATH_WIN = C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 5.4.0\ARMTools\bin
+  GCC_PATH_WIN = C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.0.1\ARMTools\bin
   GCC_TARGET_PREFIX = arm-atollic-eabi-
   CC = "$(GCC_TARGET_PREFIX)gcc"
   CXX = "$(GCC_PATH_WIN)\$(GCC_TARGET_PREFIX)g++"
