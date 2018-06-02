@@ -1082,3 +1082,15 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.eclipse.cdt.core 1 0 2018-06-02 11:01:35.000
 !MESSAGE Indexed 'stm32l476nucleo' (1 sources, 1 headers) in 0.27 sec: 45 declarations; 418 references; 7 unresolved inclusions; 1 syntax errors; 88 unresolved names (16%)
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-06-02 11:26:24.685
+!MESSAGE stm32l475iot01 needs property 'com.atollic.truestudio.general.runtimelib.100452254' fixed. Fixing to 'com.atollic.truestudio.ld.general.clib.small'.
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-06-02 11:26:24.693
+!MESSAGE stm32l475iot01 needs property 'com.atollic.truestudio.toolchain_options.mcu.58631798' fixed. Fixing to 'STM32F401RE'.
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2018-06-02 11:26:24.701
+!MESSAGE stm32l475iot01 needs property 'com.atollic.truestudio.toolchain_options.vendor.410819743' fixed. Fixing to 'STMicroelectronics'.
+
+!ENTRY org.eclipse.cdt.core 1 0 2018-06-02 11:26:25.261
+!MESSAGE Indexed 'stm32l475iot01' (1 sources, 1 headers) in 0.042 sec: 45 declarations; 418 references; 7 unresolved inclusions; 1 syntax errors; 88 unresolved names (16%)

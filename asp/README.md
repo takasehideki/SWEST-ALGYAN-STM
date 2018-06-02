@@ -14,3 +14,9 @@
 * Atollic TrueSTUDIO for STM32 v9.0.1
   * http://download.atollic.com/TrueSTUDIO/installers/Atollic_TrueSTUDIO_for_STM32_windows_x86_v9.0.1_20180420-1214.exe
 
+## éÂÇ»é¿ëïëŒè€
+
+* target/stm32l475iot01_gcc
+  * copy from target/stm32l476nucleo_gcc
+* tools/TrueSTUDIO/stm32l475iot01
+
