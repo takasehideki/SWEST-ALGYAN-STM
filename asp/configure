@@ -109,6 +109,9 @@ sub get_objext {
 	if ($^O eq 'cygwin') {
 		return("exe");
 	}
+	elsif ($^O eq 'msys') {
+		return("exe");
+	}
 	else {
 		return("");
 	}
