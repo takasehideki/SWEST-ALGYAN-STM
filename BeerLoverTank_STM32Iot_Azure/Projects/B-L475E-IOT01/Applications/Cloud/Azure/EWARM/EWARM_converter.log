@@ -1,0 +1,7 @@
+Project: EWARM
+Converter: IARProjectParser
+Date: 20180526
+
+Project needs GCC compatible startup code and linker script
+B-L475E-IOT01_Azure: FPU set to default FPU for device: FPv4-SP-D16.
+B-L475E-IOT01_Azure: FPU set to default FPU for device: FPv4-SP-D16.

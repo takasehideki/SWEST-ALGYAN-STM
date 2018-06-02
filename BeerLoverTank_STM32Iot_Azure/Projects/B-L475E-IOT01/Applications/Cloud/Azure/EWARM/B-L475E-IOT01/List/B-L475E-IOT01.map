@@ -1,0 +1,806 @@
+###############################################################################
+#
+# IAR ELF Linker V8.22.2.15995/W32 for ARM                30/May/2018  02:45:12
+# Copyright 2007-2018 IAR Systems AB.
+#
+#    Output file  =  
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Exe\B-L475E-IOT01.out
+#    Map file     =  
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\List\B-L475E-IOT01.map
+#    Command line =  
+#        -f C:\Users\hosoai\AppData\Local\Temp\EWB252.tmp
+#        (C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\aes.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\aesni.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\agenttime.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\agenttypesystem.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\arc4.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\asn1parse.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\asn1write.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\az_platform_STM32Cube.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\az_socketio_mbed.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\az_tcpsocketconnection_c_STM32Cube.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\az_threadapi_STM32Cube.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\az_tickcounter_STM32Cube.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\az_tlsio_mbedtls.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\azure_base64.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\azure_sha1.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\azure_version.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\AzureXcubeSample.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\base64.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\bignum.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\blowfish.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\buffer.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\camellia.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\ccm.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\certs.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\cipher.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\cipher_wrap.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\cloud.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\cmac.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\codefirst.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\commanddecoder.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\connection_string_parser.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\consolelogger.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\constbuffer.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\constmap.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\crt_abstractions.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\ctr_drbg.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\datamarshaller.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\datapublisher.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\debug.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\des.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\dhm.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\doublylinkedlist.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\ecdh.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\ecdsa.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\ecjpake.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\ecp.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\ecp_curves.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\entropy.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\entropy_hardware_poll.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\entropy_poll.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\error.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\es_wifi.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\es_wifi_io.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\flash_l4.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\gcm.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\grove_serial_camera.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\havege.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\heap.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\hmac.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\hmac_drbg.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\hmacsha256.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\hts221.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\http_util.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\iot_flash_config.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\iotdevice.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\iothub_client_authorization.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\iothub_client_diagnostic.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\iothub_client_ll.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\iothub_client_retry_control.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\iothub_message.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\iothubtransport_mqtt_common.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\iothubtransportmqtt.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\jsondecoder.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\jsonencoder.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\lis3mdl.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\lps22hb.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\lsm6dsl.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\main.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\map.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\mbedtls_net.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\md.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\md2.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\md4.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\md5.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\md_wrap.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\memory_buffer_alloc.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\methodreturn.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\mqtt_client.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\mqtt_codec.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\mqtt_message.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\multitree.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\net.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\net_tcp_wifi.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\net_tls_mbedtls.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\oid.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\optionhandler.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\padlock.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\parson.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\pem.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\pk.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\pk_wrap.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\pkcs11.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\pkcs12.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\pkcs5.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\pkparse.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\pkwrite.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\platform.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\rfu.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\ripemd160.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\rsa.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\sastoken.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\schema.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\schemalib.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\sensors_data.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\sha1.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\sha224.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\sha256.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\sha384-512.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\sha512.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\singlylinkedlist.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\ssl_cache.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\ssl_ciphersuites.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\ssl_cli.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\ssl_cookie.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\ssl_srv.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\ssl_ticket.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\ssl_tls.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\startup_stm32l475xx.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\STM32CubeRTCInterface.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l475e_iot01.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l475e_iot01_accelero.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l475e_iot01_gyro.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l475e_iot01_hsensor.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l475e_iot01_magneto.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l475e_iot01_psensor.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l475e_iot01_tsensor.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_can.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_cortex.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_crc.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_cryp.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_cryp_ex.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_dac.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_dac_ex.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_dfsdm.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_dma.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_flash.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_flash_ex.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_gpio.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_hash.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_hash_ex.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_i2c.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_i2c_ex.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_iwdg.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_lptim.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_msp.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_nand.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_nor.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_pwr.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_pwr_ex.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_qspi.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_rcc.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_rcc_ex.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_rng.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_rtc.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_rtc_ex.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_spi.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_spi_ex.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_sram.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_tim.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_tim_ex.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_uart.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_uart_ex.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_usart.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_hal_wwdg.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_it.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\stm32l4xx_ll_fmc.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\string_tokenizer.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\strings.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\system_stm32l4xx.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\threading.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\timedate.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\timing.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\timingSystem.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\urlencode.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\usha.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\vector.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\version.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\version_features.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\vl53l0x_api.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\vl53l0x_api_calibration.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\vl53l0x_api_core.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\vl53l0x_api_ranging.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\vl53l0x_api_strings.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\vl53l0x_platform.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\vl53l0x_platform_log.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\vl53l0x_proximity.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\wifi.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\wifi_net.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\x509.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\x509_create.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\x509_crl.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\x509_crt.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\x509_csr.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\x509write_crt.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\x509write_csr.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\xio.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\xlogging.o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj\xtea.o
+#        --redirect _Printf=_PrintfFull --redirect _Scanf=_ScanfFull -o
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Exe\B-L475E-IOT01.out
+#        --map
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\List\B-L475E-IOT01.map
+#        --config
+#        C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM/stm32l475xx_flash.icf
+#        --semihosting --entry __iar_program_start --vfe --text_out locale)
+#
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+CppFlavor       = *
+__Heap_Handler  = DLMalloc
+__SystemLibrary = DLib
+__dlib_version  = 6
+
+
+*******************************************************************************
+*** HEAP SELECTION
+***
+
+The advanced heap was selected because the application calls memory
+allocation functions outside of system library functions, and there
+are calls to deallocation functions in the application.
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+"A0":  place at 0x08000000 { ro section .intvec };
+"P1":  place in [from 0x08000000 to 0x08063fff] |
+                [from 0x08067000 to 0x0807ffff] { ro };
+define block CSTACK with size = 8K, alignment = 8 { };
+define block HEAP with size = 76K, alignment = 8 { };
+"P2":  place in [from 0x20000000 to 0x20017fff] {
+          block CSTACK, rw, block HEAP };
+initialize by copy { rw };
+
+No sections matched the following patterns:
+
+  ro section UNINIT_FIXED_LOC  in "P3"
+
+
+  Section            Kind        Address    Size  Object
+  -------            ----        -------    ----  ------
+"A0":                                      0x188
+  .intvec            ro code  0x08000000   0x188  startup_stm32l475xx.o [1]
+                            - 0x08000188   0x188
+
+"P1":                                     0x42dc
+  .text              ro code  0x08000188   0xf96  xprintffull.o [3]
+  .text              ro code  0x0800111e    0x1e  xencoding_8859_1.o [3]
+  .text              ro code  0x0800113c    0x74  xlocale_c.o [3]
+  .text              ro code  0x080011b0    0x16  strchr.o [5]
+  .text              ro code  0x080011c8    0x40  xfail_s.o [3]
+  .text              ro code  0x08001208    0x36  strlen.o [5]
+  .text              ro code  0x08001240    0x58  memchr.o [5]
+  .text              ro code  0x08001298     0xa  xmbcurmax.o [3]
+  .text              ro code  0x080012a4    0xa6  ABImemcpy.o [5]
+  .text              ro code  0x0800134c   0x22e  I64DivMod.o [5]
+  .text              ro code  0x0800157c   0x1a2  DblMul.o [4]
+  .text              ro code  0x08001720    0x70  frexp.o [4]
+  .text              ro code  0x08001790    0x2e  DblCmpLe.o [4]
+  .text              ro code  0x080017c0    0x2e  DblCmpGe.o [4]
+  .text              ro code  0x080017f0   0x13a  ldexp.o [4]
+  .text              ro code  0x0800192c    0x3a  DblToS32.o [4]
+  .text              ro code  0x08001968    0x22  S32ToDbl.o [4]
+  .text              ro code  0x0800198c    0xe2  DblSub.o [4]
+  .text              ro code  0x08001a70   0x246  DblDiv.o [4]
+  .text              ro code  0x08001cb8    0x28  DblToU32.o [4]
+  .text              ro code  0x08001ce0    0x1a  U32ToDbl.o [4]
+  .text              ro code  0x08001cfa     0x6  abort.o [3]
+  .text              ro code  0x08001d00     0x2  I64DivZer.o [5]
+  .text              ro code  0x08001d04    0x18  errno.o [3]
+  .text              ro code  0x08001d1c   0x168  DblAdd.o [4]
+  .text              ro code  0x08001e84    0x14  exit.o [6]
+  .text              ro code  0x08001e98     0x4  tp_nothreads.o [3]
+  .text              ro code  0x08001e9c    0x2c  iarttio.o [6]
+  .text              ro code  0x08001ec8     0xc  XShttio.o [3]
+  .text              ro code  0x08001ed4   0x6c4  stm32l4xx_hal_rcc.o [1]
+  .text              ro code  0x08002598     0xc  stm32l4xx_hal.o [1]
+  .text              ro code  0x080025a4    0x28  stm32l4xx_hal.o [1]
+  .text              ro code  0x080025cc    0x7c  stm32l4xx_hal_pwr_ex.o [1]
+  .text              ro code  0x08002648    0xce  stm32l4xx_hal_cortex.o [1]
+  .text              ro code  0x08002718   0x632  stm32l4xx_hal_uart.o [1]
+  .text              ro code  0x08002d4c   0x542  stm32l4xx_hal_rcc_ex.o [1]
+  .text              ro code  0x08003290   0x378  grove_serial_camera.o [1]
+  .text              ro code  0x08003608    0x28  printf.o [3]
+  .text              ro code  0x08003630   0x2a8  main.o [1]
+  .text              ro code  0x080038d8    0x18  stm32l4xx_hal.o [1]
+  .text              ro code  0x080038f0    0x9c  stm32l4xx_hal_msp.o [1]
+  .text              ro code  0x0800398c   0x1aa  stm32l475e_iot01.o [1]
+  .text              ro code  0x08003b36    0x30  stm32l4xx_hal_rng.o [1]
+  .text              ro code  0x08003b68   0x130  stm32l4xx_hal_rtc.o [1]
+  .text              ro code  0x08003c98    0x1e  stm32l4xx_hal.o [1]
+  .text              ro code  0x08003cb8    0x14  es_wifi_io.o [1]
+  .text              ro code  0x08003ccc   0x104  stm32l4xx_hal_spi.o [1]
+  .text              ro code  0x08003dd0   0x200  stm32l4xx_hal_gpio.o [1]
+  .text              ro code  0x08003fd0    0x4c  stm32l4xx_hal_dma.o [1]
+  .text              ro code  0x0800401c     0x2  stm32l4xx_hal_spi.o [1]
+  .text              ro code  0x08004020    0x90  system_stm32l4xx.o [1]
+  .text              ro code  0x080040b0    0x40  zero_init3.o [5]
+  .text              ro code  0x080040f0    0x2c  stm32l4xx_it.o [1]
+  .text              ro code  0x0800411c    0x10  stm32l4xx_hal.o [1]
+  .text              ro code  0x0800412c    0x2c  copy_init3.o [5]
+  .text              ro code  0x08004158    0x28  data_init.o [5]
+  .text              ro code  0x08004180    0x22  fpinit_M.o [4]
+  .iar.init_table    const    0x080041a4    0x24  - Linker created -
+  .text              ro code  0x080041c8    0x1e  cmain.o [5]
+  .text              ro code  0x080041e6     0x4  low_level_init.o [3]
+  .text              ro code  0x080041ea     0x4  exit.o [3]
+  .text              ro code  0x080041f0     0xa  cexit.o [5]
+  .text              ro code  0x080041fa    0x16  xprout.o [3]
+  .text              ro code  0x08004210     0xc  putchar.o [3]
+  .text              ro code  0x0800421c    0x10  startup_stm32l475xx.o [1]
+  .text              ro code  0x0800422c     0xc  cstartup_M.o [5]
+  .rodata            const    0x08004238     0x8  system_stm32l4xx.o [1]
+  .rodata            const    0x08004240     0x6  xlocale_c.o [3]
+  .text              ro code  0x08004246     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x0800424a     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x0800424e     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x08004252     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x08004256     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x0800425a     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x0800425e     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x08004262     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x08004266     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x0800426a     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x0800426e     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x08004272     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x08004276     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x0800427a     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x0800427e     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x08004282     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x08004286     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x0800428a     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x0800428e     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x08004292     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x08004296     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x0800429a     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x0800429e     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x080042a2     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x080042a6     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x080042aa     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x080042ae     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x080042b2     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x080042b6     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x080042ba     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x080042be     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x080042c2     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x080042c6     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x080042ca     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x080042ce     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x080042d2     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x080042d6     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x080042da     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x080042de     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x080042e2     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x080042e6     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x080042ea     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x080042ee     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x080042f2     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x080042f6     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x080042fa     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x080042fe     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x08004302     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x08004306     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x0800430a     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x0800430e     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x08004312     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x08004316     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x0800431a     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x0800431e     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x08004322     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x08004326     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x0800432a     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x0800432e     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x08004332     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x08004336     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x0800433a     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x0800433e     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x08004342     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x08004346     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x0800434a     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x0800434e     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x08004352     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x08004356     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x0800435a     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x0800435e     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x08004362     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x08004366     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x0800436a     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x0800436e     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x08004372     0x4  startup_stm32l475xx.o [1]
+  .text              ro code  0x08004376     0x4  startup_stm32l475xx.o [1]
+  .rodata            const    0x0800437a     0x0  zero_init3.o [5]
+  .rodata            const    0x0800437a     0x0  copy_init3.o [5]
+  Initializer bytes  const    0x0800437c    0xe8  <for P2 s0>
+                            - 0x08004464  0x42dc
+
+"P2", part 1 of 3:                          0xe8
+  P2 s0                       0x20000000    0xe8  <Init block>
+    .data            inited   0x20000000    0x48  xfiles.o [3]
+    .data            inited   0x20000048    0x48  xlocale_c.o [3]
+    .data            inited   0x20000090    0x38  xlocale_c.o [3]
+    .data            inited   0x200000c8     0xc  stm32l475e_iot01.o [1]
+    .data            inited   0x200000d4     0x8  XShttio.o [3]
+    .data            inited   0x200000dc     0x4  stm32l475e_iot01.o [1]
+    .data            inited   0x200000e0     0x4  stm32l475e_iot01.o [1]
+    .data            inited   0x200000e4     0x4  system_stm32l4xx.o [1]
+                            - 0x200000e8    0xe8
+
+"P2", part 2 of 3:                         0x1f4
+  .bss               zero     0x200000e8    0xa8  main.o [1]
+  .bss               zero     0x20000190    0x78  main.o [1]
+  .bss               zero     0x20000208    0x70  es_wifi_io.o [1]
+  .bss               zero     0x20000278    0x50  xfiles.o [3]
+  .bss               zero     0x200002c8     0x4  grove_serial_camera.o [1]
+  .bss               zero     0x200002cc     0x4  stm32l4xx_hal.o [1]
+  .bss               zero     0x200002d0     0x4  xfail_s.o [3]
+  .tbss              zero     0x200002d4     0x4  errno.o [3]
+  .bss               zero     0x200002d8     0x1  main.o [1]
+                            - 0x200002d9   0x1f1
+
+"P2", part 3 of 3:                        0x2000
+  CSTACK                      0x200002e0  0x2000  <Block>
+    CSTACK           uninit   0x200002e0  0x2000  <Block tail>
+                            - 0x200022e0  0x2000
+
+
+*******************************************************************************
+*** INIT TABLE
+***
+
+          Address     Size
+          -------     ----
+Zero (__iar_zero_init3)
+    1 destination range, total size 0x1f1:
+          0x200000e8  0x1f1
+
+Copy (__iar_copy_init3)
+    1 source range, total size 0xe8:
+          0x0800437c   0xe8
+    1 destination range, total size 0xe8:
+          0x20000000   0xe8
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module                  ro code  ro data  rw data
+    ------                  -------  -------  -------
+C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj: [1]
+    es_wifi_io.o                 20               112
+    grove_serial_camera.o       888                 4
+    main.o                      680               289
+    startup_stm32l475xx.o       716
+    stm32l475e_iot01.o          426       20       20
+    stm32l4xx_hal.o             122                 4
+    stm32l4xx_hal_cortex.o      206
+    stm32l4xx_hal_dma.o          76
+    stm32l4xx_hal_gpio.o        512
+    stm32l4xx_hal_msp.o         156
+    stm32l4xx_hal_pwr_ex.o      124
+    stm32l4xx_hal_rcc.o       1 732
+    stm32l4xx_hal_rcc_ex.o    1 346
+    stm32l4xx_hal_rng.o          48
+    stm32l4xx_hal_rtc.o         304
+    stm32l4xx_hal_spi.o         262
+    stm32l4xx_hal_uart.o      1 586
+    stm32l4xx_it.o               44
+    system_stm32l4xx.o          144       12        4
+    -------------------------------------------------
+    Total:                    9 392       32      433
+
+command line: [2]
+    -------------------------------------------------
+    Total:
+
+dl7M_tlf.a: [3]
+    XShttio.o                    12        8        8
+    abort.o                       6
+    errno.o                      24                 4
+    exit.o                        4
+    low_level_init.o              4
+    printf.o                     40
+    putchar.o                    12
+    tp_nothreads.o                4
+    xencoding_8859_1.o           30
+    xfail_s.o                    64                 4
+    xfiles.o                              72      152
+    xlocale_c.o                 116      134      128
+    xmbcurmax.o                  10
+    xprintffull.o             3 990
+    xprout.o                     22
+    -------------------------------------------------
+    Total:                    4 338      214      296
+
+m7M_tls.a: [4]
+    DblAdd.o                    360
+    DblCmpGe.o                   46
+    DblCmpLe.o                   46
+    DblDiv.o                    582
+    DblMul.o                    418
+    DblSub.o                    226
+    DblToS32.o                   58
+    DblToU32.o                   40
+    S32ToDbl.o                   34
+    U32ToDbl.o                   26
+    fpinit_M.o                   34
+    frexp.o                     112
+    ldexp.o                     314
+    -------------------------------------------------
+    Total:                    2 296
+
+rt7M_tl.a: [5]
+    ABImemcpy.o                 166
+    I64DivMod.o                 558
+    I64DivZer.o                   2
+    cexit.o                      10
+    cmain.o                      30
+    copy_init3.o                 44
+    cstartup_M.o                 12
+    data_init.o                  40
+    memchr.o                     88
+    strchr.o                     22
+    strlen.o                     54
+    zero_init3.o                 64
+    -------------------------------------------------
+    Total:                    1 090
+
+shb_l.a: [6]
+    exit.o                       20
+    iarttio.o                    44
+    -------------------------------------------------
+    Total:                       64
+
+    Gaps                         42        2
+    Linker created                        38    8 192
+-----------------------------------------------------
+    Grand Total:             17 222      286    8 921
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                      Address   Size  Type      Object
+-----                      -------   ----  ----      ------
+.iar.init_table$$Base   0x080041a4          --   Gb  - Linker created -
+.iar.init_table$$Limit  0x080041c8          --   Gb  - Linker created -
+?main                   0x080041c9         Code  Gb  cmain.o [5]
+AHBPrescTable           0x08004070   0x10  Data  Gb  system_stm32l4xx.o [1]
+APBPrescTable           0x08004238    0x8  Data  Gb  system_stm32l4xx.o [1]
+BSP_COM_Init            0x08003a6b   0x88  Code  Gb  stm32l475e_iot01.o [1]
+BSP_LED_Init            0x0800398d   0x46  Code  Gb  stm32l475e_iot01.o [1]
+BSP_LED_Toggle          0x080039d3   0x16  Code  Gb  stm32l475e_iot01.o [1]
+BSP_PB_Init             0x080039e9   0x78  Code  Gb  stm32l475e_iot01.o [1]
+BUTTON_IRQn             0x08003b24    0x2  Data  Gb  stm32l475e_iot01.o [1]
+BUTTON_PIN              0x08003b20    0x2  Data  Gb  stm32l475e_iot01.o [1]
+BUTTON_PORT             0x200000e0    0x4  Data  Gb  stm32l475e_iot01.o [1]
+BusFault_Handler        0x080040f7    0x2  Code  Gb  stm32l4xx_it.o [1]
+COM_RX_AF               0x08003b34    0x2  Data  Gb  stm32l475e_iot01.o [1]
+COM_RX_PIN              0x08003b2c    0x2  Data  Gb  stm32l475e_iot01.o [1]
+COM_RX_PORT             0x200000d0    0x4  Data  Gb  stm32l475e_iot01.o [1]
+COM_TX_AF               0x08003b30    0x2  Data  Gb  stm32l475e_iot01.o [1]
+COM_TX_PIN              0x08003b28    0x2  Data  Gb  stm32l475e_iot01.o [1]
+COM_TX_PORT             0x200000cc    0x4  Data  Gb  stm32l475e_iot01.o [1]
+COM_USART               0x200000c8    0x4  Data  Gb  stm32l475e_iot01.o [1]
+CSTACK$$Base            0x200002e0          --   Gb  - Linker created -
+CSTACK$$Limit           0x200022e0          --   Gb  - Linker created -
+CacheMore               0x08001141   0x24  Code  Lc  xlocale_c.o [3]
+DebugMon_Handler        0x080040fd    0x2  Code  Gb  stm32l4xx_it.o [1]
+EXTI15_10_IRQHandler    0x0800410f    0x8  Code  Gb  stm32l4xx_it.o [1]
+EXTI1_IRQHandler        0x08004117    0x6  Code  Gb  stm32l4xx_it.o [1]
+Error_Handler           0x0800385d   0x10  Code  Gb  main.o [1]
+GPIO_PIN                0x08003b1c    0x4  Data  Gb  stm32l475e_iot01.o [1]
+GPIO_PORT               0x200000dc    0x4  Data  Gb  stm32l475e_iot01.o [1]
+HAL_DMA_Abort_IT        0x08003fd1   0x42  Code  Gb  stm32l4xx_hal_dma.o [1]
+HAL_Delay               0x08003c99   0x1e  Code  Wk  stm32l4xx_hal.o [1]
+HAL_GPIO_EXTI_Callback  0x0800381b   0x1a  Code  Gb  main.o [1]
+HAL_GPIO_EXTI_IRQHandler
+                        0x08003f95   0x10  Code  Gb  stm32l4xx_hal_gpio.o [1]
+HAL_GPIO_Init           0x08003dd1  0x1bc  Code  Gb  stm32l4xx_hal_gpio.o [1]
+HAL_GPIO_TogglePin      0x08003f8d    0x8  Code  Gb  stm32l4xx_hal_gpio.o [1]
+HAL_GetTick             0x08002599    0xc  Code  Wk  stm32l4xx_hal.o [1]
+HAL_IncTick             0x0800411d   0x10  Code  Wk  stm32l4xx_hal.o [1]
+HAL_Init                0x080038d9   0x16  Code  Gb  stm32l4xx_hal.o [1]
+HAL_InitTick            0x080025a5   0x28  Code  Wk  stm32l4xx_hal.o [1]
+HAL_NVIC_EnableIRQ      0x080026bb    0xa  Code  Gb  stm32l4xx_hal_cortex.o [1]
+HAL_NVIC_SetPriority    0x08002681   0x3a  Code  Gb  stm32l4xx_hal_cortex.o [1]
+HAL_NVIC_SetPriorityGrouping
+                        0x08002667   0x1a  Code  Gb  stm32l4xx_hal_cortex.o [1]
+HAL_PWREx_ControlVoltageScaling
+                        0x080025d9   0x64  Code  Gb  stm32l4xx_hal_pwr_ex.o [1]
+HAL_PWREx_GetVoltageRange
+                        0x080025cd    0xc  Code  Gb  stm32l4xx_hal_pwr_ex.o [1]
+HAL_RCCEx_EnableMSIPLLMode
+                        0x08003089    0xc  Code  Gb  stm32l4xx_hal_rcc_ex.o [1]
+HAL_RCCEx_PeriphCLKConfig
+                        0x08002d4d  0x318  Code  Gb  stm32l4xx_hal_rcc_ex.o [1]
+HAL_RCC_ClockConfig     0x080022ed  0x122  Code  Gb  stm32l4xx_hal_rcc.o [1]
+HAL_RCC_GetPCLK1Freq    0x080024c9   0x10  Code  Gb  stm32l4xx_hal_rcc.o [1]
+HAL_RCC_GetPCLK2Freq    0x080024d9    0xe  Code  Gb  stm32l4xx_hal_rcc.o [1]
+HAL_RCC_GetSysClockFreq
+                        0x08002423   0xa6  Code  Gb  stm32l4xx_hal_rcc.o [1]
+HAL_RCC_OscConfig       0x08001ed5  0x3d4  Code  Gb  stm32l4xx_hal_rcc.o [1]
+HAL_RNG_Init            0x08003b37   0x30  Code  Gb  stm32l4xx_hal_rng.o [1]
+HAL_RNG_MspInit         0x0800393f   0x22  Code  Gb  stm32l4xx_hal_msp.o [1]
+HAL_RTC_Init            0x08003b69   0x8a  Code  Gb  stm32l4xx_hal_rtc.o [1]
+HAL_RTC_MspInit         0x08003961   0x14  Code  Gb  stm32l4xx_hal_msp.o [1]
+HAL_RTC_WaitForSynchro  0x08003c31   0x32  Code  Gb  stm32l4xx_hal_rtc.o [1]
+HAL_SPI_IRQHandler      0x08003ccd   0xf4  Code  Gb  stm32l4xx_hal_spi.o [1]
+HAL_SYSTICK_Config      0x080026cf   0x28  Code  Gb  stm32l4xx_hal_cortex.o [1]
+HAL_SYSTICK_IRQHandler  0x080026f7    0x4  Code  Gb  stm32l4xx_hal_cortex.o [1]
+HAL_UART_Init           0x08002719   0x30  Code  Gb  stm32l4xx_hal_uart.o [1]
+HAL_UART_Receive        0x08002847   0xc8  Code  Gb  stm32l4xx_hal_uart.o [1]
+HAL_UART_Transmit       0x08002799   0xae  Code  Gb  stm32l4xx_hal_uart.o [1]
+HardFault_Handler       0x080040f3    0x2  Code  Gb  stm32l4xx_it.o [1]
+LoadInt                 0x08000377   0x7a  Code  Lc  xprintffull.o [3]
+MSIRangeTable           0x08004080   0x30  Data  Gb  system_stm32l4xx.o [1]
+MemManage_Handler       0x080040f5    0x2  Code  Gb  stm32l4xx_it.o [1]
+NMI_Handler             0x080040f1    0x2  Code  Gb  stm32l4xx_it.o [1]
+NVIC_SetPriority        0x08002649   0x1e  Code  Lc  stm32l4xx_hal_cortex.o [1]
+PendSV_Handler          0x080040ff    0x2  Code  Gb  stm32l4xx_it.o [1]
+Periph_Config           0x080038f1   0x4e  Code  Gb  stm32l4xx_hal_msp.o [1]
+RCCEx_PLLSAI1_Config    0x08003099   0xcc  Code  Lc  stm32l4xx_hal_rcc_ex.o [1]
+RCCEx_PLLSAI2_Config    0x08003169   0xb0  Code  Lc  stm32l4xx_hal_rcc_ex.o [1]
+RCC_SetFlashLatencyFromMSIRange
+                        0x080024ed   0x74  Code  Lc  stm32l4xx_hal_rcc.o [1]
+RTC_EnterInitMode       0x08003c63   0x36  Code  Gb  stm32l4xx_hal_rtc.o [1]
+Region$$Table$$Base     0x080041a4          --   Gb  - Linker created -
+Region$$Table$$Limit    0x080041c8          --   Gb  - Linker created -
+SPI3_IRQHandler         0x08003835    0x6  Code  Gb  main.o [1]
+SPI_DMAAbortOnError     0x08003dc1   0x10  Code  Lc  stm32l4xx_hal_spi.o [1]
+SPI_WIFI_ISR            0x08003cb9    0xe  Code  Gb  es_wifi_io.o [1]
+SVC_Handler             0x080040fb    0x2  Code  Gb  stm32l4xx_it.o [1]
+SerialCam_Capture       0x0800337d   0xbc  Code  Gb  grove_serial_camera.o [1]
+SerialCam_CloseData     0x08003473    0xa  Code  Gb  grove_serial_camera.o [1]
+SerialCam_GetData       0x08003445   0x2e  Code  Gb  grove_serial_camera.o [1]
+SerialCam_Initialize    0x08003291   0xae  Code  Gb  grove_serial_camera.o [1]
+SerialCam_Initialize::__func__
+                        0x08003574   0x18  Data  Lc  grove_serial_camera.o [1]
+SerialCam_PreCapture    0x08003347   0x36  Code  Gb  grove_serial_camera.o [1]
+SysTick_Handler         0x08004101    0xe  Code  Gb  stm32l4xx_it.o [1]
+SystemCoreClock         0x200000e4    0x4  Data  Gb  system_stm32l4xx.o [1]
+SystemInit              0x08004021   0x3a  Code  Gb  system_stm32l4xx.o [1]
+UART_AdvFeatureConfig   0x08002bc5   0xc6  Code  Gb  stm32l4xx_hal_uart.o [1]
+UART_CheckIdleState     0x08002c8b   0x5a  Code  Gb  stm32l4xx_hal_uart.o [1]
+UART_SetConfig          0x08002911  0x278  Code  Gb  stm32l4xx_hal_uart.o [1]
+UART_WaitOnFlagUntilTimeout
+                        0x08002ce5   0x58  Code  Gb  stm32l4xx_hal_uart.o [1]
+UsageFault_Handler      0x080040f9    0x2  Code  Gb  stm32l4xx_it.o [1]
+_Encoding_8859_1_Mbrlen
+                        0x08001131    0x2  Code  Gb  xencoding_8859_1.o [3]
+_Encoding_8859_1_Wctomb
+                        0x0800111f   0x12  Code  Gb  xencoding_8859_1.o [3]
+_GenldFull              0x08000df9  0x274  Code  Lc  xprintffull.o [3]
+_LdtobFull              0x080009cd  0x3fe  Code  Lc  xprintffull.o [3]
+_LitobFull              0x08000875  0x112  Code  Lc  xprintffull.o [3]
+_Locale_lconv           0x20000090   0x38  Data  Lc  xlocale_c.o [3]
+_PrintfFull             0x08000189  0x1d6  Code  Gb  xprintffull.o [3]
+_Prout                  0x080041fb   0x16  Code  Gb  xprout.o [3]
+_PutcharsFull           0x0800106d   0x2e  Code  Lc  xprintffull.o [3]
+_PutfldFull             0x080003f1  0x2d0  Code  Lc  xprintffull.o [3]
+_PutstrFull             0x080007b7   0xbe  Code  Lc  xprintffull.o [3]
+_PuttxtFull             0x080006c1   0xf6  Code  Lc  xprintffull.o [3]
+__ICFEDIT_intvec_start__ {Abs}
+                        0x08000000         Data  Gb  command line/config [2]
+__ICFEDIT_region_FIXED_LOC_start__ {Abs}
+                        0x08064000         Data  Gb  command line/config [2]
+__aeabi_cdcmple         0x08001791         Code  Gb  DblCmpLe.o [4]
+__aeabi_cdrcmple        0x080017c1         Code  Gb  DblCmpGe.o [4]
+__aeabi_d2iz            0x0800192d         Code  Gb  DblToS32.o [4]
+__aeabi_d2uiz           0x08001cb9         Code  Gb  DblToU32.o [4]
+__aeabi_ddiv            0x08001a71         Code  Gb  DblDiv.o [4]
+__aeabi_dmul            0x0800157d         Code  Gb  DblMul.o [4]
+__aeabi_dsub            0x0800198d         Code  Gb  DblSub.o [4]
+__aeabi_i2d             0x08001969         Code  Gb  S32ToDbl.o [4]
+__aeabi_ldiv0           0x08001d01         Code  Gb  I64DivZer.o [5]
+__aeabi_memcpy          0x080012a5         Code  Gb  ABImemcpy.o [5]
+__aeabi_memcpy4         0x080012c5         Code  Gb  ABImemcpy.o [5]
+__aeabi_memcpy8         0x080012c5         Code  Gb  ABImemcpy.o [5]
+__aeabi_ui2d            0x08001ce1         Code  Gb  U32ToDbl.o [4]
+__aeabi_uldivmod        0x0800134d         Code  Gb  I64DivMod.o [5]
+__cmain                 0x080041c9         Code  Gb  cmain.o [5]
+__exit                  0x08001e85   0x14  Code  Gb  exit.o [6]
+__iar_Errno             0x200002d4    0x4  Tls   Gb  errno.o [3]
+__iar_Fail_s            0x080011c9   0x1c  Code  Gb  xfail_s.o [3]
+__iar_Mbcurmax          0x08001299    0xa  Code  Gb  xmbcurmax.o [3]
+__iar_Memchr            0x08001241         Code  Gb  memchr.o [5]
+__iar_Stdout            0x20000000   0x48  Data  Gb  xfiles.o [3]
+__iar_Strchr            0x080011b1         Code  Gb  strchr.o [5]
+__iar_close_ttio        0x08001e9d   0x2c  Code  Gb  iarttio.o [6]
+__iar_copy_init3        0x0800412d   0x2c  Code  Gb  copy_init3.o [5]
+__iar_dadd              0x0800199d         Code  Gb  DblSub.o [4]
+__iar_data_init3        0x08004159   0x28  Code  Gb  data_init.o [5]
+__iar_dsub              0x08001d1d         Code  Gb  DblAdd.o [4]
+__iar_dsubStart         0x08001d2f         Code  Gb  DblAdd.o [4]
+__iar_errno_set_ERANGE  0x08001d05    0xc  Code  Gb  errno.o [3]
+__iar_frexp             0x0800172d         Code  Gb  frexp.o [4]
+__iar_frexpl            0x0800172d         Code  Gb  frexp.o [4]
+__iar_globLocale        0x20000048   0x48  Data  Lc  xlocale_c.o [3]
+__iar_global_Locale     0x0800113d    0x4  Code  Gb  xlocale_c.o [3]
+__iar_init_vfp          0x08004181         Code  Gb  fpinit_M.o [4]
+__iar_ldexp64           0x080017f1         Code  Gb  ldexp.o [4]
+__iar_lookup_ttioh      0x08001ec9    0x4  Code  Gb  XShttio.o [3]
+__iar_nothread_read_tp  0x08001e99    0x4  Code  Gb  tp_nothreads.o [3]
+__iar_program_start     0x0800422d         Code  Gb  cstartup_M.o [5]
+__iar_scalbln64         0x080017f1         Code  Gb  ldexp.o [4]
+__iar_scalbn64          0x080017f1         Code  Gb  ldexp.o [4]
+__iar_softfp___iar_frexp64
+                        0x08001721         Code  Gb  frexp.o [4]
+__iar_softfp_frexp      0x08001721         Code  Gb  frexp.o [4]
+__iar_softfp_frexpl     0x08001721         Code  Gb  frexp.o [4]
+__iar_systems$$module {Abs}
+                        0x00000001         Data  Gb  command line/config [2]
+__iar_ttio_handles      0x200000d4    0x8  Data  Lc  XShttio.o [3]
+__iar_zero_init3        0x080040b1   0x40  Code  Gb  zero_init3.o [5]
+__low_level_init        0x080041e7    0x4  Code  Gb  low_level_init.o [3]
+__vector_table          0x08000000         Data  Gb  startup_stm32l475xx.o [1]
+_call_main              0x080041d5         Code  Gb  cmain.o [5]
+_clearRxBuf             0x0800347d   0x16  Code  Lc  grove_serial_camera.o [1]
+_cmd_ack                0x0800355d   0x16  Code  Lc  grove_serial_camera.o [1]
+_exit                   0x080041f1         Code  Gb  cexit.o [5]
+_gLocale_mblen          0x0800119d    0x4  Code  Gb  xlocale_c.o [3]
+_gLocale_mblenInt       0x08001165   0x34  Code  Gb  xlocale_c.o [3]
+_gLocale_wctomb         0x080011a1    0x4  Code  Gb  xlocale_c.o [3]
+_gLocale_wctombInt      0x08001199    0x4  Code  Gb  xlocale_c.o [3]
+_main                   0x080041e3         Code  Gb  cmain.o [5]
+_sendCommand            0x08003495   0x42  Code  Lc  grove_serial_camera.o [1]
+_waitCmdAck             0x080034d9   0x7e  Code  Lc  grove_serial_camera.o [1]
+_waitCmdAck::__func__   0x080035c8    0xc  Data  Lc  grove_serial_camera.o [1]
+abort                   0x08001cfb    0x6  Code  Gb  abort.o [3]
+button_flags            0x200002d8    0x1  Data  Lc  main.o [1]
+cam_uart                0x200000e8   0x78  Data  Lc  main.o [1]
+cmddata_rdy_rising_event
+                        0x20000274    0x4  Data  Lc  es_wifi_io.o [1]
+console_uart            0x20000190   0x78  Data  Lc  main.o [1]
+exit                    0x080041eb    0x4  Code  Gb  exit.o [3]
+fputc                   0x080037ff   0x1c  Code  Gb  main.o [1]
+hrng                    0x20000184    0xc  Data  Gb  main.o [1]
+hrtc                    0x20000160   0x24  Data  Gb  main.o [1]
+hspi                    0x20000208   0x64  Data  Gb  es_wifi_io.o [1]
+ldexp                   0x080017f1         Code  Gb  ldexp.o [4]
+ldexpl                  0x080017f1         Code  Gb  ldexp.o [4]
+localeconv              0x080011a5    0x4  Code  Gb  xlocale_c.o [3]
+m_uart                  0x200002c8    0x4  Data  Lc  grove_serial_camera.o [1]
+main                    0x08003631  0x1c6  Code  Gb  main.o [1]
+main::__func__          0x0800386c    0x8  Data  Lc  main.o [1]
+memchr                  0x08001241         Code  Gb  memchr.o [5]
+obuf                    0x20000278   0x50  Data  Lc  xfiles.o [3]
+printf                  0x08003609   0x28  Code  Gb  printf.o [3]
+putchar                 0x08004211    0xc  Code  Gb  putchar.o [3]
+scalbln                 0x080017f1         Code  Gb  ldexp.o [4]
+scalblnl                0x080017f1         Code  Gb  ldexp.o [4]
+scalbn                  0x080017f1         Code  Gb  ldexp.o [4]
+scalbnl                 0x080017f1         Code  Gb  ldexp.o [4]
+scale                   0x08000987   0x46  Code  Lc  xprintffull.o [3]
+sec_hand                0x200002d0    0x4  Data  Lc  xfail_s.o [3]
+spi_rx_event            0x2000026c    0x4  Data  Lc  es_wifi_io.o [1]
+spi_tx_event            0x20000270    0x4  Data  Lc  es_wifi_io.o [1]
+strchr                  0x080011b1         Code  Gb  strchr.o [5]
+strlen                  0x08001209         Code  Gb  strlen.o [5]
+uwTick                  0x200002cc    0x4  Data  Gb  stm32l4xx_hal.o [1]
+
+
+[1] = C:\Users\hosoai\Dropbox\Algyan\BeerLoverTank_STM32Iot_Azure\Projects\B-L475E-IOT01\Applications\Cloud\Azure\EWARM\B-L475E-IOT01\Obj
+[2] = command line
+[3] = dl7M_tlf.a
+[4] = m7M_tls.a
+[5] = rt7M_tl.a
+[6] = shb_l.a
+
+  17 222 bytes of readonly  code memory
+     286 bytes of readonly  data memory
+   8 921 bytes of readwrite data memory
+
+Errors: none
+Warnings: none

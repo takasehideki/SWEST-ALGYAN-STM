@@ -1,0 +1,7 @@
+az_tcpsocketconnection_c_STM32Cube.c:58:28:tcpsocketconnection_create	16	static
+az_tcpsocketconnection_c_STM32Cube.c:71:6:tcpsocketconnection_set_blocking	24	static
+az_tcpsocketconnection_c_STM32Cube.c:90:6:tcpsocketconnection_destroy	0	static
+az_tcpsocketconnection_c_STM32Cube.c:95:5:tcpsocketconnection_connect	16	static
+az_tcpsocketconnection_c_STM32Cube.c:116:6:tcpsocketconnection_close	0	static
+az_tcpsocketconnection_c_STM32Cube.c:121:5:tcpsocketconnection_send	0	static
+az_tcpsocketconnection_c_STM32Cube.c:136:5:tcpsocketconnection_receive	0	static

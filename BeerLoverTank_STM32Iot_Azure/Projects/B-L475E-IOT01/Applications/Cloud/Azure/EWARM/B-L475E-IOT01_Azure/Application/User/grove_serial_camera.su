@@ -1,0 +1,8 @@
+grove_serial_camera.c:234:13:_waitCmdAck	16	static
+grove_serial_camera.c:212:13:_clearRxBuf	16	static
+grove_serial_camera.c:219:25:_sendCommand.constprop	16	static
+grove_serial_camera.c:53:18:SerialCam_Initialize	40	static
+grove_serial_camera.c:75:18:SerialCam_PreCapture	24	static
+grove_serial_camera.c:92:18:SerialCam_Capture	32	static
+grove_serial_camera.c:138:18:SerialCam_GetData	24	static
+grove_serial_camera.c:205:18:SerialCam_CloseData	16	static

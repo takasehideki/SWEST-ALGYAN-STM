@@ -1,0 +1,2 @@
+az_platform_STM32Cube.c:26:33:platform_get_default_tlsio	0	static
+az_platform_STM32Cube.c:31:15:platform_get_platform_info	0	static

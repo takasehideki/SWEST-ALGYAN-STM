@@ -1,0 +1,14 @@
+* Import
+True Studio ファイルメニュー > Open Projects from File System
+X-CubeのProjectsフォルダを選択（EWARMのProjectファイルが見つかるところならどこでもいいかも）
+いくつか表示されるが、EWARMフォルダを選択
+
+* 設定
+デフォルトだとELF形式で出力されるので、binに変える（ELFでも転送できる？）
+プロジェクト・エクスプローラからプロジェクトを選択、右クリック＞プロパティ
+・C/C++Build > Settings > 
+　・Tool Settings
+　　Others > Output Format
+　　　Convert Build outputにチェックを入れ、FormatをBinaryに変更
+　・Build Artifact
+　Artifact Extentionをbinに変更

@@ -1,0 +1,3 @@
+az_tickcounter_STM32Cube.c:32:21:tickcounter_create	24	static
+az_tickcounter_STM32Cube.c:45:6:tickcounter_destroy	0	static
+az_tickcounter_STM32Cube.c:56:5:tickcounter_get_current_ms	24	static
