@@ -1,10 +1,9 @@
 tools/TrueSTUDIO/.metadata/.plugins/
 
-tools/TrueSTUDIO/stm32f401nucleo/*.o
-tools/TrueSTUDIO/stm32f401nucleo/*.a
-tools/TrueSTUDIO/stm32f401nucleo/asp.elf
-tools/TrueSTUDIO/stm32f401nucleo/asp.syms
-tools/TrueSTUDIO/stm32f401nucleo/kernel_cfg.*
-tools/TrueSTUDIO/stm32f401nucleo/cfg1_out.*
-tools/TrueSTUDIO/stm32f401nucleo/offset.h
+tools/TrueSTUDIO/stm32*/*.o
+tools/TrueSTUDIO/stm32*/*.a
+tools/TrueSTUDIO/stm32*/asp.*
+tools/TrueSTUDIO/stm32*/kernel_cfg.*
+tools/TrueSTUDIO/stm32*/cfg1_out.*
+tools/TrueSTUDIO/stm32*/offset.h
 
