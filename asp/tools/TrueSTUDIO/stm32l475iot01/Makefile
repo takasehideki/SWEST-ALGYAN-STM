@@ -48,7 +48,7 @@ all:
 #
 #  ターゲット略称の定義
 #
-TARGET = stm32l476nucleo64_gcc
+TARGET = stm32l475iot01_gcc
 
 #
 #  プログラミング言語の定義
