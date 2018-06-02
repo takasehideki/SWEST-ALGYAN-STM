@@ -1,0 +1,11 @@
+16:28:21 **** Clean-only build of configuration SPI-FLASH BOOT for project sapmle1 ****
+make clean 
+rm -f .a  
+rm -f *.o *.a 
+rm -f asp.elf asp.syms asp.srec asp.bin
+rm -f kernel_cfg.timestamp kernel_cfg.h kernel_cfg.c 
+rm -f cfg1_out.c cfg1_out.elf cfg1_out.syms cfg1_out.srec
+rm -f makeoffset.s offset.h
+
+16:28:21 Build Finished (took 332ms)
+
