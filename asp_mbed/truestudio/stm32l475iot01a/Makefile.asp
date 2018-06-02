@@ -37,7 +37,7 @@
 #  アの利用により直接的または間接的に生じたいかなる損害に関しても，そ
 #  の責任を負わない．
 # 
-#  $Id: Makefile 2728 2015-12-30 01:46:11Z ertl-honda $
+#  $Id: Makefile 2594 2014-01-02 07:08:54Z ertl-hiro $
 # 
 
 #
@@ -53,34 +53,30 @@ TARGET = stm32l475iot01a_gcc
 #
 #  プログラミング言語の定義
 #
-SRCLANG = c++
+SRCLANG = c
 ifeq ($(SRCLANG),c)
   LIBS = -lc
 endif
 ifeq ($(SRCLANG),c++)
   USE_CXX = true
-#  CXXLIBS = -lstdc++ -lm -lc
-#  CXXRTS = cxxrt.o newlibrt.o
+  CXXLIBS = -lstdc++ -lm -lc
+  CXXRTS = cxxrt.o newlibrt.o
 endif
 
 #
 #  ソースファイルのディレクトリの定義
 #
-# SRCDIR = ..
+#SRCDIR = ../../..
 
 #
 #  オブジェクトファイル名の拡張子の設定
 #
-ifneq ($(USE_TRUESTUDIO),true)
-OBJEXT = 
-else
 OBJEXT = elf
-endif
 
 #
 #  実行環境の定義（ターゲット依存に上書きされる場合がある）
 #
-DBGENV := 
+DBGENV := ROM
 
 #
 #  実行環境の判定
@@ -104,7 +100,7 @@ endif
 #  カーネルライブラリ（libkernel.a）のディレクトリ名
 #  （カーネルライブラリもmake対象にする時は，空に定義する）
 #
-# KERNEL_LIB =
+KERNEL_LIB = 
 
 #
 #  カーネルを関数単位でコンパイルするかどうかの定義
@@ -116,14 +112,11 @@ KERNEL_FUNCOBJS =
 #
 ENABLE_TRACE = 
 
-#EXECUTE_ON = RAM
-#EXECUTE_ON = ROM
-
 #
 #  ユーティリティプログラムの名称
 #
 PERL = /usr/bin/perl
-CFG = $(SRCDIR)/cfg/cfg/cfg
+CFG = "$(SRCDIR)/cfg/cfg/cfg"
 
 #
 #  オブジェクトファイル名の定義
@@ -161,7 +154,7 @@ CFG2_OUT_SRCS := kernel_cfg.h kernel_cfg.c $(CFG2_OUT_SRCS)
 #
 #  共通コンパイルオプションの定義
 #
-COPTS := $(COPTS) -g -O0 -ggdb
+COPTS := $(COPTS) -g 
 ifndef OMIT_WARNING_ALL
   COPTS := $(COPTS) -Wall
 endif
@@ -178,9 +171,9 @@ CFLAGS = $(COPTS) $(CDEFS) $(INCLUDES)
 #
 #  アプリケーションプログラムに関する定義
 #
-# APPLNAME = sample1
-# APPLDIR = 
-# APPL_CFG = $(APPLNAME).cfg
+#APPLNAME = sample1
+APPLDIR = 
+APPL_CFG = $(APPLNAME).cfg
 
 APPL_DIR = $(APPLDIR) $(SRCDIR)/library
 APPL_ASMOBJS =
@@ -193,11 +186,10 @@ else
   APPL_COBJS = $(APPLNAME).o 
 endif
 APPL_COBJS := $(APPL_COBJS) log_output.o vasyslog.o t_perror.o strerror.o
-# APPL_CFLAGS =
-# APPL_LIBS =
+APPL_CFLAGS =
+APPL_LIBS =
 ifdef APPLDIR
   INCLUDES := $(INCLUDES) $(foreach dir,$(APPLDIR),-I$(dir))
-  INCLUDE_PATHS :=  $(INCLUDE_PATHS)  $(foreach dir,$(APPLDIR),-I$(dir))
 endif
 
 #
@@ -205,8 +197,8 @@ endif
 #
 SYSSVC_DIR := $(SYSSVC_DIR) $(SRCDIR)/syssvc $(SRCDIR)/library
 SYSSVC_ASMOBJS := $(SYSSVC_ASMOBJS)
-SYSSVC_COBJS := $(SYSSVC_COBJS) banner.o syslog.o serial.o logtask.o $(CXXRTS)
-				 
+SYSSVC_COBJS := $(SYSSVC_COBJS) banner.o syslog.o serial.o logtask.o \
+				 $(CXXRTS)
 SYSSVC_CFLAGS := $(SYSSVC_CFLAGS)
 SYSSVC_LIBS := $(SYSSVC_LIBS)
 INCLUDES := $(INCLUDES)
@@ -242,8 +234,8 @@ endif
 #
 #  ターゲットファイル（複数を同時に選択してはならない）
 #
-#all: $(OBJFILE)
-all: $(OBJNAME).bin
+all: $(OBJFILE)
+#all: $(OBJNAME).bin
 #all: $(OBJNAME).srec
 
 ##### 以下は編集しないこと #####
@@ -272,7 +264,6 @@ endif
 #  ソースファイルのあるディレクトリに関する定義
 #
 vpath %.c $(KERNEL_DIR) $(SYSSVC_DIR) $(APPL_DIR)
-vpath %.cpp $(KERNEL_DIR) $(SYSSVC_DIR) $(APPL_DIR)
 vpath %.S $(KERNEL_DIR) $(SYSSVC_DIR) $(APPL_DIR)
 vpath %.cfg $(APPL_DIR)
 
@@ -335,11 +326,11 @@ kernel_cfg.timestamp: $(APPL_CFG) \
 	$(OBJCOPY) -O srec -S $(CFG1_OUT) cfg1_out.srec
 	$(CFG) --pass 2 --kernel asp $(INCLUDES) \
 				-T $(TARGETDIR)/target.tf $(CFG_TABS) $<
-ifneq ($(USE_TRUESTUDIO),true)
-	touch -r kernel_cfg.c kernel_cfg.timestamp
+ifeq ($(UNAME), Windows)
+	copy /B kernel_cfg.c +,,
+	echo  -n > kernel_cfg.timestamp
 else
-	cmd /c copy /B kernel_cfg.c +,,
-	cmd /c echo  -n > kernel_cfg.timestamp
+	touch -r kernel_cfg.c kernel_cfg.timestamp
 endif
 
 #
@@ -372,8 +363,7 @@ $(OBJFILE): $(APPL_CFG) kernel_cfg.timestamp $(ALL_OBJS) $(LIBS_DEP)
 #
 $(OBJNAME).bin: $(OBJFILE)
 	$(OBJCOPY) -O binary -S $(OBJFILE) $(OBJNAME).bin
-#	cp -X $(OBJNAME).bin /Volumes/MBED # for MacOSX
-	
+
 #
 #  Sレコードファイルの生成
 #
@@ -385,9 +375,6 @@ $(OBJNAME).srec: $(OBJFILE)
 #
 .PHONY: clean
 clean:
-ifneq ($(USE_TRUESTUDIO),true)
-	rm -f $(LIB).a $(ALL_OBJ) $(DEPS)
-	rm -f \#* *~ *.o $(CLEAN_FILES)
 	rm -f $(OBJFILE) $(OBJNAME).syms $(OBJNAME).srec $(OBJNAME).bin
 	rm -f kernel_cfg.timestamp $(CFG2_OUT_SRCS)
 	rm -f cfg1_out.c $(CFG1_OUT) cfg1_out.syms cfg1_out.srec
@@ -395,28 +382,13 @@ ifndef KERNEL_LIB
 	rm -f libkernel.a
 endif
 	rm -f makeoffset.s offset.h
-else
-	-rm -f $(LIB).a $(ALL_OBJ) $(DEPS)
-	-rm -f *.o *.a $(CLEAN_FILES)
-	-rm -f $(OBJFILE) $(OBJNAME).syms $(OBJNAME).srec $(OBJNAME).bin
-	-rm -f kernel_cfg.timestamp $(CFG2_OUT_SRCS)
-	-rm -f cfg1_out.c $(CFG1_OUT) cfg1_out.syms cfg1_out.srec
-ifndef KERNEL_LIB
-	-rm -f libkernel.a
-endif
-	-rm -f makeoffset.s offset.h
-endif
-
+	rm *.o 
+	rm -f $(CLEAN_FILES)
 
 .PHONY: cleankernel
 cleankernel:
-ifneq ($(USE_TRUESTUDIO),true)
 	rm -rf $(KERNEL_LIB_OBJS)
 	rm -f makeoffset.s offset.h
-else
-	-rm -rf $(KERNEL_LIB_OBJS)
-	-rm -f makeoffset.s offset.h
-endif
 
 .PHONY: cleandep
 cleandep:
@@ -428,13 +400,8 @@ cleandep:
 	rm -f Makefile.depend
 
 .PHONY: realclean
-ifneq ($(USE_TRUESTUDIO),true)
 realclean: cleandep clean
 	rm -f $(REALCLEAN_FILES)
-else
-realclean: cleandep clean
-	-rm -f $(REALCLEAN_FILES)
-endif
 
 #
 #  コンフィギュレータが生成したファイルのコンパイルルールと依存関係作成
@@ -451,10 +418,8 @@ CFG_CFLAGS = $(APPL_CFLAGS) $(SYSSVC_CFLAGS) $(KERNEL_CFLAGS)
 $(ALL_CFG_COBJS): %.o: %.c
 	$(CC) -c $(CFLAGS) $(CFG_CFLAGS) $<
 
-ifneq ($(USE_TRUESTUDIO),true)
-$(ALL_CFG_COBJS:.o=.s): %.s: %.c
-	$(CC) -S $(CFLAGS) $(CFG_CFLAGS) $<
-endif
+#$(ALL_CFG_COBJS:.o=.s): %.s: %.c
+#	$(CC) -S $(CFLAGS) $(CFG_CFLAGS) $<
 
 $(ALL_CFG_COBJS:.o=.d): %.d: %.c
 	@$(PERL) $(SRCDIR)/utils/makedep -C $(CC) $(MAKEDEP_OPTS) \
@@ -484,19 +449,13 @@ makeoffset.d: makeoffset.c
 gendepend:
 	@echo "Generating Makefile.depend."
 
-.PHONY: deparduino
-deparduino:
-	if [ -f arduino_app.h ]; then \
-		touch arduino_app.h; \
-	fi
-
 .PHONY: depend
 ifdef KERNEL_LIB
-depend: cleandep kernel_cfg.timestamp gendepend deparduino\
+depend: cleandep kernel_cfg.timestamp gendepend \
 		cfg1_out.depend cfg1_out.d \
 		$(ALL_OBJS:.o=.d)
 else
-depend: cleandep $(OFFSET_H) kernel_cfg.timestamp gendepend deparduino\
+depend: cleandep $(OFFSET_H) kernel_cfg.timestamp gendepend \
 		cfg1_out.depend cfg1_out.d \
 		$(KERNEL_AUX_COBJS:.o=.d) $(KERNEL_ASMOBJS:.o=.d) \
 		$(KERNEL_COBJS:.o=.d) $(KERNEL_LCSRCS:.c=.d) $(ALL_OBJS:.o=.d)
@@ -519,41 +478,6 @@ ifeq ($(TOOL),gcc)
   else
     GCC_TARGET_PREFIX =
   endif
-  CC = $(GCC_TARGET_PREFIX)gcc
-  CXX = $(GCC_TARGET_PREFIX)g++
-  AS = $(GCC_TARGET_PREFIX)as
-  LD = $(GCC_TARGET_PREFIX)ld
-  AR = $(GCC_TARGET_PREFIX)ar
-  NM = $(GCC_TARGET_PREFIX)nm
-  RANLIB = $(GCC_TARGET_PREFIX)ranlib
-  OBJCOPY = $(GCC_TARGET_PREFIX)objcopy
-  OBJDUMP = $(GCC_TARGET_PREFIX)objdump
-endif
-#
-#  Windowsの場合はフルパスにする
-#
-ifeq ($(UNAME),Windows)
-  GCC_PATH_WIN = C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.0.1\ARMTools\bin
-  GCC_TARGET_PREFIX = arm-atollic-eabi-
-  CC = "$(GCC_TARGET_PREFIX)gcc"
-  CXX = "$(GCC_PATH_WIN)\$(GCC_TARGET_PREFIX)g++"
-  AS = "$(GCC_PATH_WIN)\$(GCC_TARGET_PREFIX)as"
-  LD = "$(GCC_PATH_WIN)\$(GCC_TARGET_PREFIX)ld"
-  AR = "$(GCC_PATH_WIN)\$(GCC_TARGET_PREFIX)ar"
-  NM = "$(GCC_PATH_WIN)\$(GCC_TARGET_PREFIX)nm"
-  RANLIB = "$(GCC_PATH_WIN)\$(GCC_TARGET_PREFIX)ranlib"
-  OBJCOPY = "$(GCC_PATH_WIN)\$(GCC_TARGET_PREFIX)objcopy"
-  OBJDUMP = "$(GCC_PATH_WIN)\$(GCC_TARGET_PREFIX)objdump"
-else
-  CC = $(GCC_TARGET_PREFIX)gcc
-  CXX = $(GCC_TARGET_PREFIX)g++
-  AS = $(GCC_TARGET_PREFIX)as
-  LD = $(GCC_TARGET_PREFIX)ld
-  AR = $(GCC_TARGET_PREFIX)ar
-  NM = $(GCC_TARGET_PREFIX)nm
-  RANLIB = $(GCC_TARGET_PREFIX)ranlib
-  OBJCOPY = $(GCC_TARGET_PREFIX)objcopy
-  OBJDUMP = $(GCC_TARGET_PREFIX)objdump
 #
 #  Windowsの場合はフルパスにする
 #
@@ -588,6 +512,7 @@ else
   LINK = $(CC)
 endif
 
+
 #
 #  コンパイルルールの定義
 #
@@ -596,10 +521,8 @@ KERNEL_ALL_COBJS = $(KERNEL_COBJS) $(KERNEL_AUX_COBJS)
 $(KERNEL_ALL_COBJS): %.o: %.c
 	$(CC) -c $(CFLAGS) $(KERNEL_CFLAGS) $<
 
-ifneq ($(USE_TRUESTUDIO),true)
-$(KERNEL_ALL_COBJS:.o=.s): %.s: %.c
-	$(CC) -S $(CFLAGS) $(KERNEL_CFLAGS) $<
-endif
+#$(KERNEL_ALL_COBJS:.o=.s): %.s: %.c
+#	$(CC) -S $(CFLAGS) $(KERNEL_CFLAGS) $<
 
 $(KERNEL_LCOBJS): %.o:
 	$(CC) -DTOPPERS_$(*F) -o $@ -c $(CFLAGS) $(KERNEL_CFLAGS) $<
@@ -613,10 +536,8 @@ $(KERNEL_ASMOBJS): %.o: %.S
 $(SYSSVC_COBJS): %.o: %.c
 	$(CC) -c $(CFLAGS) $(SYSSVC_CFLAGS) $<
 
-ifneq ($(USE_TRUESTUDIO),true)
-$(SYSSVC_COBJS:.o=.s): %.s: %.c
-	$(CC) -S $(CFLAGS) $(SYSSVC_CFLAGS) $<
-endif
+#$(SYSSVC_COBJS:.o=.s): %.s: %.c
+#	$(CC) -S $(CFLAGS) $(SYSSVC_CFLAGS) $<
 
 $(SYSSVC_ASMOBJS): %.o: %.S
 	$(CC) -c $(CFLAGS) $(SYSSVC_CFLAGS) $<
@@ -624,21 +545,17 @@ $(SYSSVC_ASMOBJS): %.o: %.S
 $(APPL_COBJS): %.o: %.c
 	$(CC) -c $(CFLAGS) $(APPL_CFLAGS) $<
 
-ifneq ($(USE_TRUESTUDIO),true)
-$(APPL_COBJS:.o=.s): %.s: %.c
-	$(CC) -S $(CFLAGS) $(APPL_CFLAGS) $<
-endif
+#$(APPL_COBJS:.o=.s): %.s: %.c
+#	$(CC) -S $(CFLAGS) $(APPL_CFLAGS) $<
 
 $(APPL_CXXOBJS): %.o: %.cpp
-	$(CXX) -c $(CFLAGS) $(APPL_CXXFLAGS) $<
+	$(CXX) -c $(CFLAGS) $(APPL_CFLAGS) $<
 
-ifneq ($(USE_TRUESTUDIO),true)
 $(APPL_CXXOBJS:.o=.s): %.s: %.cpp
-	$(CXX) -S $(CFLAGS) $(APPL_CXXFLAGS) $<
-endif
+	$(CXX) -S $(CFLAGS) $(APPL_CFLAGS) $<
 
 $(APPL_ASMOBJS): %.o: %.S
-	$(CC) -c $(CFLAGS) $(APPL_CXXFLAGS) $<
+	$(CC) -c $(CFLAGS) $(APPL_CFLAGS) $<
 
 #
 #  依存関係作成ルールの定義

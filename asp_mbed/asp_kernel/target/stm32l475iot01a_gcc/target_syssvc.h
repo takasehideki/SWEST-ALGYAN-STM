@@ -9,7 +9,7 @@
  *              Imageing System Development Division RICOH COMPANY, LTD.
  *  Copyright (C) 2017-2017 by TOPPERS PROJECT Educational Working Group.
  * 
- *  上記著作権者は，以下の(1)〜(4)の条件を満たす場合に限り，本ソフトウェ
+ *  上記著作権者は，以下の(1)~(4)の条件を満たす場合に限り，本ソフトウェ
  *  ア（本ソフトウェアを改変したものを含む．以下同じ）を使用・複製・改
  *  変・再配布（以下，利用と呼ぶ）することを無償で許諾する．
  *  (1) 本ソフトウェアをソースコードの形で利用する場合には，上記の著作
@@ -83,7 +83,7 @@ extern  uint32_t SystemFrequency;
 /*
  *  起動メッセージのターゲットシステム名
  */
-#define TARGET_NAME    "stm32fl476-nucleo-64(Cortex-M4)"
+#define TARGET_NAME    "stm32l475-b-l475e-iot01a(Cortex-M4)"
 
 /*
  *  起動メッセージの著作権表示
