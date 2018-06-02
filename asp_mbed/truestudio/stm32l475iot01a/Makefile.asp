@@ -53,14 +53,14 @@ TARGET = stm32l475iot01a_gcc
 #
 #  プログラミング言語の定義
 #
-SRCLANG = c
+SRCLANG = c++
 ifeq ($(SRCLANG),c)
   LIBS = -lc
 endif
 ifeq ($(SRCLANG),c++)
   USE_CXX = true
-  CXXLIBS = -lstdc++ -lm -lc
-  CXXRTS = cxxrt.o newlibrt.o
+#  CXXLIBS = -lstdc++ -lm -lc
+#  CXXRTS = cxxrt.o newlibrt.o
 endif
 
 #
@@ -71,7 +71,11 @@ endif
 #
 #  オブジェクトファイル名の拡張子の設定
 #
+ifneq ($(USE_TRUESTUDIO),true)
+OBJEXT = 
+else
 OBJEXT = elf
+endif
 
 #
 #  実行環境の定義（ターゲット依存に上書きされる場合がある）
@@ -100,7 +104,7 @@ endif
 #  カーネルライブラリ（libkernel.a）のディレクトリ名
 #  （カーネルライブラリもmake対象にする時は，空に定義する）
 #
-KERNEL_LIB = 
+#KERNEL_LIB = 
 
 #
 #  カーネルを関数単位でコンパイルするかどうかの定義
@@ -116,7 +120,7 @@ ENABLE_TRACE =
 #  ユーティリティプログラムの名称
 #
 PERL = /usr/bin/perl
-CFG = "$(SRCDIR)/cfg/cfg/cfg"
+CFG = $(SRCDIR)/cfg/cfg/cfg
 
 #
 #  オブジェクトファイル名の定義
@@ -154,7 +158,7 @@ CFG2_OUT_SRCS := kernel_cfg.h kernel_cfg.c $(CFG2_OUT_SRCS)
 #
 #  共通コンパイルオプションの定義
 #
-COPTS := $(COPTS) -g 
+COPTS := $(COPTS) -g -O0 -ggdb
 ifndef OMIT_WARNING_ALL
   COPTS := $(COPTS) -Wall
 endif
@@ -172,14 +176,14 @@ CFLAGS = $(COPTS) $(CDEFS) $(INCLUDES)
 #  アプリケーションプログラムに関する定義
 #
 #APPLNAME = sample1
-APPLDIR = 
-APPL_CFG = $(APPLNAME).cfg
+#APPLDIR = 
+#APPL_CFG = $(APPLNAME).cfg
 
 APPL_DIR = $(APPLDIR) $(SRCDIR)/library
 APPL_ASMOBJS =
 ifdef USE_CXX
-#  APPL_CXXOBJS = $(APPLNAME).o 
-#  APPL_COBJS =
+  APPL_CXXOBJS = $(APPLNAME).o 
+  APPL_COBJS =
   APPL_CXXOBJS =
   APPL_COBJS = $(APPLNAME).o 
 else
@@ -264,6 +268,7 @@ endif
 #  ソースファイルのあるディレクトリに関する定義
 #
 vpath %.c $(KERNEL_DIR) $(SYSSVC_DIR) $(APPL_DIR)
+vpath %.cpp $(KERNEL_DIR) $(SYSSVC_DIR) $(APPL_DIR)
 vpath %.S $(KERNEL_DIR) $(SYSSVC_DIR) $(APPL_DIR)
 vpath %.cfg $(APPL_DIR)
 
@@ -375,6 +380,9 @@ $(OBJNAME).srec: $(OBJFILE)
 #
 .PHONY: clean
 clean:
+ifneq ($(USE_TRUESTUDIO),true)
+	rm -f $(LIB).a $(ALL_OBJ) $(DEPS)
+	rm -f \#* *~ *.o $(CLEAN_FILES)
 	rm -f $(OBJFILE) $(OBJNAME).syms $(OBJNAME).srec $(OBJNAME).bin
 	rm -f kernel_cfg.timestamp $(CFG2_OUT_SRCS)
 	rm -f cfg1_out.c $(CFG1_OUT) cfg1_out.syms cfg1_out.srec
@@ -382,8 +390,18 @@ ifndef KERNEL_LIB
 	rm -f libkernel.a
 endif
 	rm -f makeoffset.s offset.h
-	rm *.o 
-	rm -f $(CLEAN_FILES)
+else
+	-rm -f $(LIB).a $(ALL_OBJ) $(DEPS)
+	-rm -f *.o *.a $(CLEAN_FILES)
+	-rm -f $(OBJFILE) $(OBJNAME).syms $(OBJNAME).srec $(OBJNAME).bin
+	-rm -f kernel_cfg.timestamp $(CFG2_OUT_SRCS)
+	-rm -f cfg1_out.c $(CFG1_OUT) cfg1_out.syms cfg1_out.srec
+ifndef KERNEL_LIB
+	-rm -f libkernel.a
+endif
+	-rm -f makeoffset.s offset.h
+endif
+
 
 .PHONY: cleankernel
 cleankernel:
@@ -418,8 +436,10 @@ CFG_CFLAGS = $(APPL_CFLAGS) $(SYSSVC_CFLAGS) $(KERNEL_CFLAGS)
 $(ALL_CFG_COBJS): %.o: %.c
 	$(CC) -c $(CFLAGS) $(CFG_CFLAGS) $<
 
-#$(ALL_CFG_COBJS:.o=.s): %.s: %.c
-#	$(CC) -S $(CFLAGS) $(CFG_CFLAGS) $<
+ifneq ($(USE_TRUESTUDIO),true)
+$(ALL_CFG_COBJS:.o=.s): %.s: %.c
+	$(CC) -S $(CFLAGS) $(CFG_CFLAGS) $<
+endif
 
 $(ALL_CFG_COBJS:.o=.d): %.d: %.c
 	@$(PERL) $(SRCDIR)/utils/makedep -C $(CC) $(MAKEDEP_OPTS) \
@@ -521,8 +541,10 @@ KERNEL_ALL_COBJS = $(KERNEL_COBJS) $(KERNEL_AUX_COBJS)
 $(KERNEL_ALL_COBJS): %.o: %.c
 	$(CC) -c $(CFLAGS) $(KERNEL_CFLAGS) $<
 
-#$(KERNEL_ALL_COBJS:.o=.s): %.s: %.c
-#	$(CC) -S $(CFLAGS) $(KERNEL_CFLAGS) $<
+ifneq ($(USE_TRUESTUDIO),true)
+$(KERNEL_ALL_COBJS:.o=.s): %.s: %.c
+	$(CC) -S $(CFLAGS) $(KERNEL_CFLAGS) $<
+endif
 
 $(KERNEL_LCOBJS): %.o:
 	$(CC) -DTOPPERS_$(*F) -o $@ -c $(CFLAGS) $(KERNEL_CFLAGS) $<
@@ -536,8 +558,10 @@ $(KERNEL_ASMOBJS): %.o: %.S
 $(SYSSVC_COBJS): %.o: %.c
 	$(CC) -c $(CFLAGS) $(SYSSVC_CFLAGS) $<
 
-#$(SYSSVC_COBJS:.o=.s): %.s: %.c
-#	$(CC) -S $(CFLAGS) $(SYSSVC_CFLAGS) $<
+ifneq ($(USE_TRUESTUDIO),true)
+$(SYSSVC_COBJS:.o=.s): %.s: %.c
+	$(CC) -S $(CFLAGS) $(SYSSVC_CFLAGS) $<
+endif
 
 $(SYSSVC_ASMOBJS): %.o: %.S
 	$(CC) -c $(CFLAGS) $(SYSSVC_CFLAGS) $<
@@ -551,8 +575,10 @@ $(APPL_COBJS): %.o: %.c
 $(APPL_CXXOBJS): %.o: %.cpp
 	$(CXX) -c $(CFLAGS) $(APPL_CFLAGS) $<
 
+ifneq ($(USE_TRUESTUDIO),true)
 $(APPL_CXXOBJS:.o=.s): %.s: %.cpp
-	$(CXX) -S $(CFLAGS) $(APPL_CFLAGS) $<
+	$(CXX) -S $(CFLAGS) $(APPL_CXXFLAGS) $<
+endif
 
 $(APPL_ASMOBJS): %.o: %.S
 	$(CC) -c $(CFLAGS) $(APPL_CFLAGS) $<
