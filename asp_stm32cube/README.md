@@ -1,4 +1,4 @@
-# ASPカーネル+mbedパッケージ
+# ASPカーネル＋STM32Cube パッケージ
 
 ## 開発環境
 
@@ -33,8 +33,7 @@
 
 * truestudio/stm32l475iot01a をワークスペースとして開く
 * sample1等 を既存プロジェクトとしてインポート
-  * プロジェクト・エクスプローラー > sample1 > プロパティ  
-  -> C/C++ Build > Settings で  
+  * プロジェクト・エクスプローラー > sample1 > プロパティ -> C/C++ Build > Settings で  
     Board: B-L475E-IOT01A  
     コード配置：RAM  
   になっていることを確認
@@ -79,5 +78,5 @@ $ sudo apt install gcc-arm-none-eabi
 ### TrueSTUDIO
 
 Under construction,,,  
-まだうまく行っていません．
+まだうまくいってません．
 
