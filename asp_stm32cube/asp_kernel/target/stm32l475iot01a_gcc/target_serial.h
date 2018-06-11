@@ -55,48 +55,35 @@
 /*
  *  SIO用GPIOの設定
  */
-#define TADR_U1_GPIO_BASE  TADR_GPIOA_BASE
-#define TOFF_U1_APBNER     TOFF_RCC_APB1ENR1
-#define ENABLE_U1_PORT     RCC_APB1ENR1_USART2EN
-#define TOFF_U1_APBRSTR    TOFF_RCC_APB1RSTR1
-#define RESET_U1_BIT       RCC_APB1RSTR1_USART2RST
-#define ENABLE_U1_GPIO     RCC_AHB2ENR_GPIOAEN
-#define TADR_U2_GPIO_BASE  TADR_GPIOA_BASE
-#define TOFF_U2_APBNER     TOFF_RCC_APB2ENR
-#define ENABLE_U2_PORT     RCC_APB2ENR_USART1EN
-#define TOFF_U2_APBRSTR    TOFF_RCC_APB2RSTR
-#define RESET_U2_BIT       RCC_APB2RSTR_USART1RST
-#define ENABLE_U2_GPIO     RCC_AHB2ENR_GPIOAEN
-#define TX1_PINPOS         2
-#define RX1_PINPOS         3
-#define TX2_PINPOS         9
-#define RX2_PINPOS         10
+#define TADR_U1_GPIO_BASE  TADR_GPIOB_BASE
+#define TOFF_U1_APBNER     TOFF_RCC_APB2ENR
+#define ENABLE_U1_PORT     RCC_APB2ENR_USART1EN
+#define TOFF_U1_APBRSTR    TOFF_RCC_APB2RSTR
+#define RESET_U1_BIT       RCC_APB2RSTR_USART1RST
+#define ENABLE_U1_GPIO     RCC_AHB2ENR_GPIOBEN
+#define TX1_PINPOS         6
+#define RX1_PINPOS         7
 
 #define GPIO_U1_AF         0x07U		/* AF7: USART2 Alternate Function mapping */
-#define GPIO_U2_AF         0x07U		/* AF7: USART1 Alternate Function mapping */
 #define U1_GPIOSPEED       GPIO_OSPEEDER_OSPEEDR2
-#define U2_GPIOSPEED       GPIO_OSPEEDER_OSPEEDR2
-#define U1_SRCINDEX        2
-#define U2_SRCINDEX        0
+#define U1_SRCINDEX        0
+//#define U2_SRCINDEX        0
 
 /*
  *  SIOのベースアドレス
  */
-#define USART1_BASE        TADR_USART2_BASE
-#define USART2_BASE        TADR_USART1_BASE
+#define USART1_BASE        TADR_USART1_BASE
 
 /*
  *  シリアルI/Oポート数の定義
  */
-#define TNUM_SIOP       2			/* サポートするシリアルI/Oポートの数 */
+#define TNUM_SIOP       1			/* サポートするシリアルI/Oポートの数 */
 
 /*
  *  SIOの割込みハンドラのベクタ番号
  */
-#define INHNO_SIO1      IRQ_VECTOR_USART2
-#define INTNO_SIO1      IRQ_VECTOR_USART2
-#define INHNO_SIO2      IRQ_VECTOR_USART1
-#define INTNO_SIO2      IRQ_VECTOR_USART1
+#define INHNO_SIO1      IRQ_VECTOR_USART1
+#define INTNO_SIO1      IRQ_VECTOR_USART1
 
 #define INTPRI_SIO       -3        /* 割込み優先度 */
 #define INTATR_SIO       0         /* 割込み属性 */
