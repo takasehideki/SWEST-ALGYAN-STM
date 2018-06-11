@@ -65,6 +65,7 @@
 		<configuration configurationName="Debug">
 			<resource resourceType="PROJECT" workspacePath="/sample1"/>
 		</configuration>
+		<configuration configurationName="SPI-FLASH BOOT"/>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 </cproject>

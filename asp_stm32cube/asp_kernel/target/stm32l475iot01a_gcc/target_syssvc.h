@@ -7,7 +7,7 @@
  *              Graduate School of Information Science, Nagoya Univ., JAPAN
  *  Copyright (C) 2015-2016 by 3rd Designing Center
  *              Imageing System Development Division RICOH COMPANY, LTD.
- *  Copyright (C) 2016-2017 by TOPPERS PROJECT Educational Working Group.
+ *  Copyright (C) 2017-2017 by TOPPERS PROJECT Educational Working Group.
  * 
  *  上記著作権者は，以下の(1)~(4)の条件を満たす場合に限り，本ソフトウェ
  *  ア（本ソフトウェアを改変したものを含む．以下同じ）を使用・複製・改
@@ -38,70 +38,85 @@
  *  アの利用により直接的または間接的に生じたいかなる損害に関しても，そ
  *  の責任を負わない．
  * 
- *  @(#) $Id: target_serial.h 698 2017-07-27 08:03:59Z roi $
+ *  @(#) $Id: target_syssvc.h 698 2017-07-27 08:19:24Z roi $
  */
 
 /*
- *    シリアルI/Oデバイス（SIO）ドライバ
+ *  システムサービスのターゲット依存部（stm32l476-nucleo64用）
+ *
+ *  システムサービスのターゲット依存部のインクルードファイル．このファ
+ *  イルの内容は，コンポーネント記述ファイルに記述され，このファイルは
+ *  無くなる見込み．
  */
 
-#ifndef TOPPERS_TARGET_SERIAL_H
-#define TOPPERS_TARGET_SERIAL_H
+#ifndef TOPPERS_TARGET_SYSSVC_H
+#define TOPPERS_TARGET_SYSSVC_H
 
 /*
- *  チップ依存モジュール（stm32l476-nucleo64用）
+ *  ターゲットシステムのハードウェア資源の定義
  */
+#include "stm32l4xx.h"
 
 /*
- *  SIO用GPIOの設定
+ *  システムクロックの定義
  */
-#define TADR_U1_GPIO_BASE  TADR_GPIOA_BASE
-#define TOFF_U1_APBNER     TOFF_RCC_APB1ENR1
-#define ENABLE_U1_PORT     RCC_APB1ENR1_USART2EN
-#define TOFF_U1_APBRSTR    TOFF_RCC_APB1RSTR1
-#define RESET_U1_BIT       RCC_APB1RSTR1_USART2RST
-#define ENABLE_U1_GPIO     RCC_AHB2ENR_GPIOAEN
-#define TADR_U2_GPIO_BASE  TADR_GPIOA_BASE
-#define TOFF_U2_APBNER     TOFF_RCC_APB2ENR
-#define ENABLE_U2_PORT     RCC_APB2ENR_USART1EN
-#define TOFF_U2_APBRSTR    TOFF_RCC_APB2RSTR
-#define RESET_U2_BIT       RCC_APB2RSTR_USART1RST
-#define ENABLE_U2_GPIO     RCC_AHB2ENR_GPIOAEN
-#define TX1_PINPOS         2
-#define RX1_PINPOS         3
-#define TX2_PINPOS         9
-#define RX2_PINPOS         10
+extern  uint32_t SystemFrequency;
+#define SysFreHCLK          SystemFrequency	/* HCLK = MasterClock / 1 */
+#define SysFrePCLK1         SystemFrequency	/* PCLK1 = HCLK / 1 */
+#define SysFrePCLK2         SystemFrequency	/* PCLK2 = HCLK / 1 */
 
-#define GPIO_U1_AF         0x07U		/* AF7: USART2 Alternate Function mapping */
-#define GPIO_U2_AF         0x07U		/* AF7: USART1 Alternate Function mapping */
-#define U1_GPIOSPEED       GPIO_OSPEEDER_OSPEEDR2
-#define U2_GPIOSPEED       GPIO_OSPEEDER_OSPEEDR2
-#define U1_SRCINDEX        2
-#define U2_SRCINDEX        0
+#define SYS_CLOCK		    (SystemFrequency)
 
 /*
- *  SIOのベースアドレス
+ *  SRAM2領域定義
  */
-#define USART1_BASE        TADR_USART2_BASE
-#define USART2_BASE        TADR_USART1_BASE
+#define SRAM2_BASE          0x10000000	/* SRAM2 base address in the alias region */
+#define SRAM2_SIZE          (32*1024)	/* SRAM2 size */
 
 /*
- *  シリアルI/Oポート数の定義
+ *  トレースログに関する設定
  */
-#define TNUM_SIOP       2			/* サポートするシリアルI/Oポートの数 */
+#ifdef TOPPERS_ENABLE_TRACE
+#include "logtrace/trace_config.h"
+#endif /* TOPPERS_ENABLE_TRACE */
 
 /*
- *  SIOの割込みハンドラのベクタ番号
+ *  起動メッセージのターゲットシステム名
  */
-#define INHNO_SIO1      IRQ_VECTOR_USART2
-#define INTNO_SIO1      IRQ_VECTOR_USART2
-#define INHNO_SIO2      IRQ_VECTOR_USART1
-#define INTNO_SIO2      IRQ_VECTOR_USART1
+#define TARGET_NAME    "stm32fl476-nucleo-64(Cortex-M4)"
 
-#define INTPRI_SIO       -3        /* 割込み優先度 */
-#define INTATR_SIO       0         /* 割込み属性 */
+/*
+ *  起動メッセージの著作権表示
+ */
+#define TARGET_COPYRIGHT \
+"Copyright (C) 2018 by SWEST-ALGYAN-IOT\n" \
 
+/*
+ *  システムログの低レベル出力のための文字出力
+ *
+ *  ターゲット依存の方法で，文字cを表示/出力/保存する．
+ */
+extern void	target_fput_log(int8_t c);
 
-#include "arm_m_gcc/stm32l4xx/chip_serial.h"
+/*
+ *  サポートするシリアルポートの数
+ */
+#define TNUM_PORT        TNUM_SIOP
 
-#endif /* TOPPERS_TARGET_SERIAL_H */
+/*
+ *  ログタスクが使用するポートID
+ */
+#define LOGTASK_PORTID   SIO_PORTID
+
+/*
+ *  ボーレート
+ */
+#define BPS_SETTING		(115200)
+
+/*
+ *  システムログタスク関連の定数の定義
+ *
+ *  デフォルト値の通り．
+ */
+
+#endif /* TOPPERS_TARGET_SYSSVC_H */

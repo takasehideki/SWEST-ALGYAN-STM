@@ -9,7 +9,7 @@
  *              Imageing System Development Division RICOH COMPANY, LTD.
  *  Copyright (C) 2017-2017 by TOPPERS PROJECT Educational Working Group.
  * 
- *  上記著作権者は，以下の(1)〜(4)の条件を満たす場合に限り，本ソフトウェ
+ *  上記著作権者は，以下の(1)~(4)の条件を満たす場合に限り，本ソフトウェ
  *  ア（本ソフトウェアを改変したものを含む．以下同じ）を使用・複製・改
  *  変・再配布（以下，利用と呼ぶ）することを無償で許諾する．
  *  (1) 本ソフトウェアをソースコードの形で利用する場合には，上記の著作
@@ -45,7 +45,7 @@
 #include "stm32l4xx.h"
 
 /*
- *  初期化プログラム（stm32l476-nucleo64用）
+ *  初期化プログラム（stm32l475-iot01a用）
  */
 
 #define sil_modw_mem(addr, mask, val)	sil_wrw_mem((addr), ((sil_rew_mem(addr) & ~(mask)) | (val)))
@@ -59,7 +59,7 @@
 #define PWR_FLAG_TIMEOUT_VALUE     (50)			/* 50micro sec */
 #define CLOCKSWITCH_TIMEOUT_VALUE  (5000000U)	/* 5 s    */
 
-#define RCC_MSIRANGE               RCC_CR_MSIRANGE_6
+#define RCC_MSIRANGE               RCC_CR_MSIRANGE_11
 #define MAX_MSIRANGE               12
 
 #if !defined(MSI_RANGE)
@@ -74,14 +74,14 @@
 #endif /* HSI_VALUE */
 
 /* PLL_VCO = (HSE_VALUE or HSI_VALUE / PLL_M) * PLL_N */
-#define PLL_M      1
-#define PLL_N      40
+#define PLL_M      6
+#define PLL_N      20
 
 /* SYSCLK = PLL_VCO / PLL_P */
 #define PLL_P      7
 
 /* USB OTG FS, SDIO and RNG Clock =  PLL_VCO / PLLQ */
-#define PLL_Q      4
+#define PLL_Q      2
 
 /* I2SCLK =  PLLVCO / PLLR */                          
 #define PLL_R      2	/* Possible value between 2 and 7 */
@@ -238,12 +238,12 @@ RCC_SetFlashLatencyFromMSIRange(unsigned int msirange)
  *      AHB Prescaler                  = 1
  *      APB1 Prescaler                 = 1
  *      APB2 Prescaler                 = 1
- *      MSI Frequency(Hz)              = 4000000
- *      PLL_M                          = 1
- *      PLL_N                          = 40
+ *      MSI Frequency(Hz)              = 48000000
+ *      PLL_M                          = 6
+ *      PLL_N                          = 20
  *      PLL_R                          = 2
  *      PLL_P                          = 7
- *      PLL_Q                          = 4
+ *      PLL_Q                          = 2
  *      Flash Latency(WS)              = 4
  *  return  正常終了ならE_OKを返す
  */

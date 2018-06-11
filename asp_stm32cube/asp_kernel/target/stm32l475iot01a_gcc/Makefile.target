@@ -5,7 +5,7 @@
 #
 #  ボード名，プロセッサ名，開発環境名の定義
 #
-BOARD = stm32l476nucleo64_gcc
+BOARD = stm32l475iot01a_gcc
 CHIP  = stm32l4xx
 PRC   = arm_m
 TOOL  = gcc
