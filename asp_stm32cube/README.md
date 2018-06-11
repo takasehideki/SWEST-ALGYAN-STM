@@ -31,8 +31,41 @@
 
 ### ビルド
 
-* truestudio/stm32l476nucleo をワークスペースとして開く
-* 必要なら sample1 を既存プロジェクトとしてインポート
+* truestudio/stm32l475iot01a をワークスペースとして開く
+  * 必要なら sample1等 を既存プロジェクトとしてインポート
+* 普通にビルド
 
 ### デバッグ
+
+たぶん普通にできるはず
+
+* 注意点
+  * プロジェクト・エクスプローラー > sample1 > C/C++ Build > Settings  
+  で「コード配置：RAM」になっていることを確認
+
+
+## 参考：mbed online compilerからエクスポートしてビルド
+
+
+### mbed上の設定
+
+"Export toolchain: Make-GCC-ARM"でエクスポート
+
+### WSL
+
+* クロスコンパイラの入手
+```
+$ sudo add-apt-repository ppa:terry.guo/gcc-arm-embedded
+$ sudo gpg --keyserver ha.pool.sks-keyservers.net --recv-keys 6D1D8367A3421AFB
+$ sudo gpg --export --armor 6D1D8367A3421AFB | sudo apt-key add -
+$ sudo apt update
+$ sudo apt install gcc-arm-none-eabi
+```
+
+エクスポートしてきたZipを展開してそこでmakeでいいはず
+
+### TrueSTUDIO
+
+Under construction,,,  
+まだうまく行っていません．
 
