@@ -83,13 +83,13 @@ extern  uint32_t SystemFrequency;
 /*
  *  起動メッセージのターゲットシステム名
  */
-#define TARGET_NAME    "stm32l475-b-l475e-iot01a(Cortex-M4)"
+#define TARGET_NAME    "stm32fl476-nucleo-64(Cortex-M4)"
 
 /*
  *  起動メッセージの著作権表示
  */
 #define TARGET_COPYRIGHT \
-"Copyright (C) 2016-2017 by Education Working Group TOPPERS PROJECT\n" \
+"Copyright (C) 2018 by SWEST-ALGYAN-IOT\n" \
 
 /*
  *  システムログの低レベル出力のための文字出力
