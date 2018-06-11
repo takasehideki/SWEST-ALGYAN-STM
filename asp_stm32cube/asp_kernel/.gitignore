@@ -1,0 +1,9 @@
+tools/TrueSTUDIO/.metadata/.plugins/
+
+tools/TrueSTUDIO/stm32*/*.o
+tools/TrueSTUDIO/stm32*/*.a
+tools/TrueSTUDIO/stm32*/asp.*
+tools/TrueSTUDIO/stm32*/kernel_cfg.*
+tools/TrueSTUDIO/stm32*/cfg1_out.*
+tools/TrueSTUDIO/stm32*/offset.h
+
