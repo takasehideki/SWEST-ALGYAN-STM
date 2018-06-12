@@ -5,7 +5,7 @@
 * Atollic TrueSTUDIO for STM32 v9.0.1
   * http://download.atollic.com/TrueSTUDIO/installers/Atollic_TrueSTUDIO_for_STM32_windows_x86_v9.0.1_20180420-1214.exe
 
-## ASPカーネル (asp/)
+## ASPカーネル (asp_kernel/)
 
 ### 元ソース
 
@@ -16,16 +16,19 @@
 * コンフィギュレータ：1.9.6 Windows用バイナリ (リリース日2017-03-31)
   * http://toppers.jp/download.cgi/cfg-mingw-static-1_9_6.zip
 
-### 元ソース
-
-* 参考にしたリポジトリ
-  * Open-source Software Platform Based on TOPPERS/ASP Kernel, mbed and Arduino Library for Renesas GR-PEACH.
-  * https://github.com/ncesnagoya/asp-gr_peach_gcc-mbed
-
 ### 主な実装対象
 
 * target/stm32l475iot01a_gcc
   * copy from target/stm32l476nucleo_gcc
+
+## STM32Cubeライブラリ (xcube-lib/)
+
+### 元ソース
+
+* X-CUBE-AZURE (Software Version: 1.1.0)
+  * Microsoft Azure software expansion for STM32Cube
+  * http://www.st.com/ja/embedded-software/x-cube-azure.html
+
 
 ## TrueSTUDIO使い方
 
@@ -53,6 +56,11 @@ debug_asp.launchというのを置いておきます．
     * シリアルワイヤビューア：有効 にチェック
   * スタートアップスクリプト > ターゲットソフトウェア初期化スクリプト
     * tbreak main -> tbreak sta_ker
+
+## 開発の参考にしたリポジトリ
+
+* Open-source Software Platform Based on TOPPERS/ASP Kernel, mbed and Arduino Library for Renesas GR-PEACH.
+  * https://github.com/ncesnagoya/asp-gr_peach_gcc-mbed
 
 
 ## 参考：mbed online compilerからエクスポートしてビルド
