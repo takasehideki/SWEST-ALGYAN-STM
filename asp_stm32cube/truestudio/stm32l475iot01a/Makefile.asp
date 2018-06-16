@@ -498,21 +498,22 @@ ifeq ($(TOOL),gcc)
   else
     GCC_TARGET_PREFIX =
   endif
-#
-#  Windowsの場合はフルパスにする
-#
+
 ifeq ($(UNAME),Windows)
-  GCC_PATH_WIN = C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.0.1\ARMTools\bin
-  GCC_TARGET_PREFIX = arm-atollic-eabi-
+  ifdef GCC_PATH_WIN
+    GCC_TARGET_PREFIX = $(GCC_PATH_WIN)\arm-atollic-eabi-
+  else
+    GCC_TARGET_PREFIX = arm-atollic-eabi-
+  endif
   CC = "$(GCC_TARGET_PREFIX)gcc"
-  CXX = "$(GCC_PATH_WIN)\$(GCC_TARGET_PREFIX)g++"
-  AS = "$(GCC_PATH_WIN)\$(GCC_TARGET_PREFIX)as"
-  LD = "$(GCC_PATH_WIN)\$(GCC_TARGET_PREFIX)ld"
-  AR = "$(GCC_PATH_WIN)\$(GCC_TARGET_PREFIX)ar"
-  NM = "$(GCC_PATH_WIN)\$(GCC_TARGET_PREFIX)nm"
-  RANLIB = "$(GCC_PATH_WIN)\$(GCC_TARGET_PREFIX)ranlib"
-  OBJCOPY = "$(GCC_PATH_WIN)\$(GCC_TARGET_PREFIX)objcopy"
-  OBJDUMP = "$(GCC_PATH_WIN)\$(GCC_TARGET_PREFIX)objdump"
+  CXX = "$(GCC_TARGET_PREFIX)g++"
+  AS = "$(GCC_TARGET_PREFIX)as"
+  LD = "$(GCC_TARGET_PREFIX)ld"
+  AR = "$(GCC_TARGET_PREFIX)ar"
+  NM = "$(GCC_TARGET_PREFIX)nm"
+  RANLIB = "$(GCC_TARGET_PREFIX)ranlib"
+  OBJCOPY = "$(GCC_TARGET_PREFIX)objcopy"
+  OBJDUMP = "$(GCC_TARGET_PREFIX)objdump"
 else
   CC = $(GCC_TARGET_PREFIX)gcc
   CXX = $(GCC_TARGET_PREFIX)g++

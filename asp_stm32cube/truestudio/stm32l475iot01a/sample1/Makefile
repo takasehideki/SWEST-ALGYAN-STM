@@ -16,6 +16,12 @@ DEBUG = true
 OMIT_OPTIMIZATION = true
 
 #
+#  toolchainのPATHを明示的に指定する場合
+#  Windowsの場合はフルパスにする
+#
+#GCC_PATH_WIN = C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.0.1\ARMTools\bin
+
+#
 #  MBEDライブラリのディレクトリの定義
 #
 #MBED_LIB_DIR = ../../../mbed-lib
