@@ -45,8 +45,8 @@
 
 ### デバッグ
 
-debug_asp.launchというのを置いておきます．  
-プロジェクト・エクスプローラーの右クリックで「デバッグ > debug_asp」でできるはず
+debug_\*.launchというのを置いておきます．  
+プロジェクト・エクスプローラーの右クリックで「デバッグ > debug_\*」でできるはず
 
 * debug_asp.launch の主な設定内容（方法）
   * メニューから「デバッグ」を選択
@@ -56,6 +56,34 @@ debug_asp.launchというのを置いておきます．
     * シリアルワイヤビューア：有効 にチェック
   * スタートアップスクリプト > ターゲットソフトウェア初期化スクリプト
     * tbreak main -> tbreak sta_ker
+
+### 新しいプロジェクトの作り方
+
+* プロジェクト・エクスプローラー上で既存のプロジェクト（例：sample1/）をコピペ
+  * 以降の例：blinky/　# 適宜読み替えること
+  * プロジェクト名：blinky
+  * 「デフォルト・ロケーションの使用」はチェックを付けたまま
+  * 「コピーの問題」のエラーが出るが無視してよい（次で解消する）
+* asp_kernel/ のリンクを作る
+  * プロジェクト・エクスプローラー上のblinkyで右クリック > インポート
+  * 「ファイル・システム」を選択
+  * 「次のディレクトリから」：<gitrepo>/asp_kernel
+  * 下の asp_kernel/ にチェック
+  * 「拡張>>]をクリックし，「ワークスペースにリンクを作成」にチェック
+  * 終了
+* 各種ファイル名の変更
+  * sample1.[c,h,cfg]をblinky.[c,h,cfg]にリネーム
+  * Makefileの APPLNAME を blinky にする
+  * blinky.cfg を「#include blinky.h」にする
+  * blinky.c の「"#include "blinky.h"」を#includeの一番下にする
+  * あとは適宜ソースを修正する
+* デバッグ対象の変更
+  * debug_sample1.launch を debug_blinky.launch にリネーム
+  * debug_blinky.launch を右クリック > デバッグ > デバッグの構成
+  * 「組み込みC/C++ アプリケーション」の debug_blinky を選択する
+  * MainタブのProject: を blinky にする
+    * Browse... から Project Selection してもよい
+
 
 ## 開発の参考にしたリポジトリ
 
