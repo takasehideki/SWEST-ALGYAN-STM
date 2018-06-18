@@ -10,7 +10,7 @@ ALL_OBJ = $(ASM_OBJ) $(C_OBJ) $(CXX_OBJ)
 
 LIBRARY_PATHS = 
 LIBRARIES = 
-#LINKER_SCRIPT = $(XCUBE_LIB_DIR)/stm32l475xx_flash.ld
+LINKER_SCRIPT = $(XCUBE_LIB_DIR)/stm32l475xx_flash.ld
 
 ############################################################################### 
 ifneq ($(USE_TRUESTUDIO),true)
