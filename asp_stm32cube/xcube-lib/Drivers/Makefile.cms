@@ -1,0 +1,54 @@
+ASM_OBJ += $(XCUBE_LIB_DIR)/Drivers/CMSIS/Device/ST/STM32L4xx/Source/Templates/gcc/startup_stm32l475xx.o
+
+C_OBJ += $(XCUBE_LIB_DIR)/Drivers/CMSIS/Device/ST/STM32L4xx/Source/Templates/system_stm32l4xx.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_can.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_crc.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cryp.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cryp_ex.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dac.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dac_ex.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dfsdm.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash_ex.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_gpio.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_hash.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_hash_ex.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c_ex.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_iwdg.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lptim.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_nand.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_nor.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr_ex.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_qspi.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc_ex.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rng.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rtc.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rtc_ex.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi_ex.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sram.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim_ex.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart_ex.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_usart.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_wwdg.o \
+		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_fmc.o
+
+CXX_OBJ += 
+
+INCLUDE_PATHS += -I. \
+		-I$(XCUBE_LIB_DIR)/Drivers/CMSIS/Include \
+		-I$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Inc
+
+INCLUDE_PATHS += -I. \
+		-I$(XCUBE_LIB_DIR)/Drivers/CMSIS \
+		-I$(XCUBE_LIB_DIR)/Drivers/CMSIS/Device/ \
+		-I$(XCUBE_LIB_DIR)/Drivers/CMSIS/Device/ST \
+		-I$(XCUBE_LIB_DIR)/Drivers/CMSIS/Device/ST/STM32L4xx/Include 

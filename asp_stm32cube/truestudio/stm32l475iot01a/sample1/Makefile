@@ -8,12 +8,18 @@ all:
 #
 APPLDIR = .
 APPLNAME = sample1
-USE_CXX = true
+#USE_CXX = true
 APPL_CFG = $(APPLNAME).cfg
 USE_TRUESTUDIO = true
 
 DEBUG = true
 OMIT_OPTIMIZATION = true
+
+#
+#  toolchainのPATHを明示的に指定する場合
+#  Windowsの場合はフルパスにする
+#
+#GCC_PATH_WIN = C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.0.1\ARMTools\bin
 
 #
 #  MBEDライブラリのディレクトリの定義
