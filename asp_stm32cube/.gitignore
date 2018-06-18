@@ -8,3 +8,5 @@ truestudio/stm32*/*/kernel_cfg.*
 truestudio/stm32*/*/offset.h
 
 asp_kernel/tools/TrueSTUDIO/stm32*/.metadata/
+
+*.d
