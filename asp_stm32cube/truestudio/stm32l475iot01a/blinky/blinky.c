@@ -37,13 +37,13 @@
  *  アの利用により直接的または間接的に生じたいかなる損害に関しても，そ
  *  の責任を負わない．
  * 
- *  $Id: sample1.c 2416 2012-09-07 08:06:20Z ertl-hiro $
+ *  $Id: blinky.c takasehideki $
  */
 
 /* 
- *  サンプルプログラム(1)の本体
+ *  blinkyアプリの本体
  *
- *  ASPカーネルの基本的な動作を確認するためのサンプルプログラム．
+ *  TODO: アプリの説明の追加
  *
  *  プログラムの概要:
  *
@@ -113,6 +113,10 @@
 #include "kernel_cfg.h"
 #include "blinky.h"
 
+#include "stm32l4xx_hal.h"
+#include "stm32l475e_iot01.h"
+
+
 /*
  *  サービスコールのエラーのログ出力
  */
@@ -131,151 +135,17 @@ svc_perror(const char *file, int_t line, const char *expr, ER ercd)
  */
 char	message[3];
 
-/*
- *  ループ回数
- */
-ulong_t	task_loop;		/* タスク内でのループ回数 */
-ulong_t	tex_loop;		/* 例外処理ルーチン内でのループ回数 */
-
-/*
- *  並行実行されるタスク
- */
-void task(intptr_t exinf)
+void led_task(intptr_t exinf)
 {
-	volatile ulong_t	i;
-	int_t		n = 0;
-	int_t		tskno = (int_t) exinf;
-	const char	*graph[] = { "|", "  +", "    *" };
-	char		c;
+  //HAL_Init();
+	BSP_LED_Init(LED_GREEN);
+  //Periph_Config();
 
-	SVC_PERROR(ena_tex());
 	while (true) {
-		syslog(LOG_NOTICE, "task%d is running (%03d).   %s",
-										tskno, ++n, graph[tskno-1]);
-		for (i = 0; i < task_loop; i++);
-		c = message[tskno-1];
-		message[tskno-1] = 0;
-		switch (c) {
-		case 'e':
-			syslog(LOG_INFO, "#%d#ext_tsk()", tskno);
-			SVC_PERROR(ext_tsk());
-			assert(0);
-		case 's':
-			syslog(LOG_INFO, "#%d#slp_tsk()", tskno);
-			SVC_PERROR(slp_tsk());
-			break;
-		case 'S':
-			syslog(LOG_INFO, "#%d#tslp_tsk(10000)", tskno);
-			SVC_PERROR(tslp_tsk(10000));
-			break;
-		case 'd':
-			syslog(LOG_INFO, "#%d#dly_tsk(10000)", tskno);
-			SVC_PERROR(dly_tsk(10000));
-			break;
-		case 'y':
-			syslog(LOG_INFO, "#%d#dis_tex()", tskno);
-			SVC_PERROR(dis_tex());
-			break;
-		case 'Y':
-			syslog(LOG_INFO, "#%d#ena_tex()", tskno);
-			SVC_PERROR(ena_tex());
-			break;
-#ifdef CPUEXC1
-		case 'z':
-			syslog(LOG_NOTICE, "#%d#raise CPU exception", tskno);
-			RAISE_CPU_EXCEPTION;
-			break;
-		case 'Z':
-			SVC_PERROR(loc_cpu());
-			syslog(LOG_NOTICE, "#%d#raise CPU exception", tskno);
-			RAISE_CPU_EXCEPTION;
-			SVC_PERROR(unl_cpu());
-			break;
-#endif /* CPUEXC1 */
-		default:
-			break;
-		}
+    //msg_info("Blinky LED 10s\n");
+		syslog(LOG_NOTICE, "Blinky LED 10s");
+    Led_Blink(1000, 500, 10);
 	}
-}
-
-/*
- *  並行して実行されるタスク用のタスク例外処理ルーチン
- */
-void tex_routine(TEXPTN texptn, intptr_t exinf)
-{
-	volatile ulong_t	i;
-	int_t	tskno = (int_t) exinf;
-
-	syslog(LOG_NOTICE, "task%d receives exception 0x%04x.", tskno, texptn);
-	for (i = 0; i < tex_loop; i++);
-
-	if ((texptn & 0x8000U) != 0U) {
-		syslog(LOG_INFO, "#%d#ext_tsk()", tskno);
-		SVC_PERROR(ext_tsk());
-		assert(0);
-	}
-}
-
-/*
- *  CPU例外ハンドラ
- */
-#ifdef CPUEXC1
-
-void
-cpuexc_handler(void *p_excinf)
-{
-	ID		tskid;
-
-	syslog(LOG_NOTICE, "CPU exception handler (p_excinf = %08p).", p_excinf);
-	if (sns_ctx() != true) {
-		syslog(LOG_WARNING,
-					"sns_ctx() is not true in CPU exception handler.");
-	}
-	if (sns_dpn() != true) {
-		syslog(LOG_WARNING,
-					"sns_dpn() is not true in CPU exception handler.");
-	}
-	syslog(LOG_INFO, "sns_loc = %d sns_dsp = %d sns_tex = %d",
-									sns_loc(), sns_dsp(), sns_tex());
-	syslog(LOG_INFO, "xsns_dpn = %d xsns_xpn = %d",
-									xsns_dpn(p_excinf), xsns_xpn(p_excinf));
-
-	if (xsns_xpn(p_excinf)) {
-		syslog(LOG_NOTICE, "Sample program ends with exception.");
-		SVC_PERROR(ext_ker());
-		assert(0);
-	}
-
-	SVC_PERROR(iget_tid(&tskid));
-	SVC_PERROR(iras_tex(tskid, 0x8000U));
-}
-
-#endif /* CPUEXC1 */
-
-/*
- *  周期ハンドラ
- *
- *  HIGH_PRIORITY，MID_PRIORITY，LOW_PRIORITY の各優先度のレディキュー
- *  を回転させる．
- */
-void cyclic_handler(intptr_t exinf)
-{
-	SVC_PERROR(irot_rdq(HIGH_PRIORITY));
-	SVC_PERROR(irot_rdq(MID_PRIORITY));
-	SVC_PERROR(irot_rdq(LOW_PRIORITY));
-}
-
-/*
- *  アラームハンドラ
- *
- *  HIGH_PRIORITY，MID_PRIORITY，LOW_PRIORITY の各優先度のレディキュー
- *  を回転させる．
- */
-void alarm_handler(intptr_t exinf)
-{
-	SVC_PERROR(irot_rdq(HIGH_PRIORITY));
-	SVC_PERROR(irot_rdq(MID_PRIORITY));
-	SVC_PERROR(irot_rdq(LOW_PRIORITY));
 }
 
 /*
@@ -284,93 +154,14 @@ void alarm_handler(intptr_t exinf)
 void main_task(intptr_t exinf)
 {
 	char	c;
-	ID		tskid = TASK1;
-	int_t	tskno = 1;
-	ER_UINT	ercd;
-	PRI		tskpri;
-#ifndef TASK_LOOP
-	volatile ulong_t	i;
-	SYSTIM	stime1, stime2;
-#endif /* TASK_LOOP */
-#ifdef TOPPERS_SUPPORT_GET_UTM
-	SYSUTM	utime1, utime2;
-#endif /* TOPPERS_SUPPORT_GET_UTM */
 
 	SVC_PERROR(syslog_msk_log(LOG_UPTO(LOG_INFO), LOG_UPTO(LOG_EMERG)));
-	syslog(LOG_NOTICE, "Sample program starts (exinf = %d).", (int_t) exinf);
-
-	/*
-	 *  シリアルポートの初期化
-	 *
-	 *  システムログタスクと同じシリアルポートを使う場合など，シリアル
-	 *  ポートがオープン済みの場合にはここでE_OBJエラーになるが，支障は
-	 *  ない．
-	 */
-	ercd = serial_opn_por(TASK_PORTID);
-	if (ercd < 0 && MERCD(ercd) != E_OBJ) {
-		syslog(LOG_ERROR, "%s (%d) reported by `serial_opn_por'.",
-									itron_strerror(ercd), SERCD(ercd));
-	}
-	SVC_PERROR(serial_ctl_por(TASK_PORTID,
-							(IOCTL_CRLF | IOCTL_FCSND | IOCTL_FCRCV)));
-
-	/*
- 	 *  ループ回数の設定
-	 *
-	 *  並行実行されるタスク内での空ループの回数（task_loop）は，空ルー
-	 *  プの実行時間が約0.4秒になるように設定する．この設定のために，
-	 *  LOOP_REF回の空ループの実行時間を，その前後でget_timを呼ぶことで
-	 *  測定し，その測定結果から空ループの実行時間が0.4秒になるループ回
-	 *  数を求め，task_loopに設定する．
-	 *
-	 *  LOOP_REFは，デフォルトでは1,000,000に設定しているが，想定したよ
-	 *  り遅いプロセッサでは，サンプルプログラムの実行開始に時間がかか
-	 *  りすぎるという問題を生じる．逆に想定したより速いプロセッサでは，
-	 *  LOOP_REF回の空ループの実行時間が短くなり，task_loopに設定する値
-	 *  の誤差が大きくなるという問題がある．
-	 *
-	 *  そこで，そのようなターゲットでは，target_test.hで，LOOP_REFを適
-	 *  切な値に定義するのが望ましい．
-	 *
-	 *  また，task_loopの値を固定したい場合には，その値をTASK_LOOPにマ
-	 *  クロ定義する．TASK_LOOPがマクロ定義されている場合，上記の測定を
-	 *  行わずに，TASK_LOOPに定義された値を空ループの回数とする．
-	 *
-	 * ターゲットによっては，空ループの実行時間の1回目の測定で，本来よ
-	 * りも長めになるものがある．このようなターゲットでは，MEASURE_TWICE
-	 * をマクロ定義することで，1回目の測定結果を捨てて，2回目の測定結果
-	 * を使う．
-	 *
-	 *  タスク例外処理ルーチン内での空ループの回数（tex_loop）は，
-	 *  task_loopの4分の1の値（空ループの実行時間が0.1秒になるループ回
-	 *  数）に設定する．
-	 */
-#ifdef TASK_LOOP
-	task_loop = TASK_LOOP;
-#else /* TASK_LOOP */
-
-#ifdef MEASURE_TWICE
-	task_loop = LOOP_REF;
-	SVC_PERROR(get_tim(&stime1));
-	for (i = 0; i < task_loop; i++);
-	SVC_PERROR(get_tim(&stime2));
-#endif /* MEASURE_TWICE */
-
-	task_loop = LOOP_REF;
-	SVC_PERROR(get_tim(&stime1));
-	for (i = 0; i < task_loop; i++);
-	SVC_PERROR(get_tim(&stime2));
-	task_loop = LOOP_REF * 400UL / (stime2 - stime1);
-
-#endif /* TASK_LOOP */
-	tex_loop = task_loop / 4;
+	syslog(LOG_NOTICE, "Blinky program starts (exinf = %d).", (int_t) exinf);
 
 	/*
  	 *  タスクの起動
 	 */
-	SVC_PERROR(act_tsk(TASK1));
-	SVC_PERROR(act_tsk(TASK2));
-	SVC_PERROR(act_tsk(TASK3));
+	SVC_PERROR(act_tsk(LED_TASK));
 
 	/*
  	 *  メインループ
@@ -378,151 +169,6 @@ void main_task(intptr_t exinf)
 	do {
 		SVC_PERROR(serial_rea_dat(TASK_PORTID, &c, 1));
 		switch (c) {
-		case 'e':
-		case 's':
-		case 'S':
-		case 'd':
-		case 'y':
-		case 'Y':
-		case 'z':
-		case 'Z':
-			message[tskno-1] = c;
-			break;
-		case '1':
-			tskno = 1;
-			tskid = TASK1;
-			break;
-		case '2':
-			tskno = 2;
-			tskid = TASK2;
-			break;
-		case '3':
-			tskno = 3;
-			tskid = TASK3;
-			break;
-		case 'a':
-			syslog(LOG_INFO, "#act_tsk(%d)", tskno);
-			SVC_PERROR(act_tsk(tskid));
-			break;
-		case 'A':
-			syslog(LOG_INFO, "#can_act(%d)", tskno);
-			SVC_PERROR(ercd = can_act(tskid));
-			if (ercd >= 0) {
-				syslog(LOG_NOTICE, "can_act(%d) returns %d", tskno, ercd);
-			}
-			break;
-		case 't':
-			syslog(LOG_INFO, "#ter_tsk(%d)", tskno);
-			SVC_PERROR(ter_tsk(tskid));
-			break;
-		case '>':
-			syslog(LOG_INFO, "#chg_pri(%d, HIGH_PRIORITY)", tskno);
-			SVC_PERROR(chg_pri(tskid, HIGH_PRIORITY));
-			break;
-		case '=':
-			syslog(LOG_INFO, "#chg_pri(%d, MID_PRIORITY)", tskno);
-			SVC_PERROR(chg_pri(tskid, MID_PRIORITY));
-			break;
-		case '<':
-			syslog(LOG_INFO, "#chg_pri(%d, LOW_PRIORITY)", tskno);
-			SVC_PERROR(chg_pri(tskid, LOW_PRIORITY));
-			break;
-		case 'G':
-			syslog(LOG_INFO, "#get_pri(%d, &tskpri)", tskno);
-			SVC_PERROR(ercd = get_pri(tskid, &tskpri));
-			if (ercd >= 0) {
-				syslog(LOG_NOTICE, "priority of task %d is %d", tskno, tskpri);
-			}
-			break;
-		case 'w':
-			syslog(LOG_INFO, "#wup_tsk(%d)", tskno);
-			SVC_PERROR(wup_tsk(tskid));
-			break;
-		case 'W':
-			syslog(LOG_INFO, "#can_wup(%d)", tskno);
-			SVC_PERROR(ercd = can_wup(tskid));
-			if (ercd >= 0) {
-				syslog(LOG_NOTICE, "can_wup(%d) returns %d", tskno, ercd);
-			}
-			break;
-		case 'l':
-			syslog(LOG_INFO, "#rel_wai(%d)", tskno);
-			SVC_PERROR(rel_wai(tskid));
-			break;
-		case 'u':
-			syslog(LOG_INFO, "#sus_tsk(%d)", tskno);
-			SVC_PERROR(sus_tsk(tskid));
-			break;
-		case 'm':
-			syslog(LOG_INFO, "#rsm_tsk(%d)", tskno);
-			SVC_PERROR(rsm_tsk(tskid));
-			break;
-		case 'x':
-			syslog(LOG_INFO, "#ras_tex(%d, 0x0001U)", tskno);
-			SVC_PERROR(ras_tex(tskid, 0x0001U));
-			break;
-		case 'X':
-			syslog(LOG_INFO, "#ras_tex(%d, 0x0002U)", tskno);
-			SVC_PERROR(ras_tex(tskid, 0x0002U));
-			break;
-		case 'r':
-			syslog(LOG_INFO, "#rot_rdq(three priorities)");
-			SVC_PERROR(rot_rdq(HIGH_PRIORITY));
-			SVC_PERROR(rot_rdq(MID_PRIORITY));
-			SVC_PERROR(rot_rdq(LOW_PRIORITY));
-			break;
-		case 'c':
-			syslog(LOG_INFO, "#sta_cyc(1)");
-			SVC_PERROR(sta_cyc(CYCHDR1));
-			break;
-		case 'C':
-			syslog(LOG_INFO, "#stp_cyc(1)");
-			SVC_PERROR(stp_cyc(CYCHDR1));
-			break;
-		case 'b':
-			syslog(LOG_INFO, "#sta_alm(1, 5000)");
-			SVC_PERROR(sta_alm(ALMHDR1, 5000));
-			break;
-		case 'B':
-			syslog(LOG_INFO, "#stp_alm(1)");
-			SVC_PERROR(stp_alm(ALMHDR1));
-			break;
-
-		case 'V':
-#ifdef TOPPERS_SUPPORT_GET_UTM
-			SVC_PERROR(get_utm(&utime1));
-			SVC_PERROR(get_utm(&utime2));
-			syslog(LOG_NOTICE, "utime1 = %ld, utime2 = %ld",
-										(ulong_t) utime1, (ulong_t) utime2);
-#else /* TOPPERS_SUPPORT_GET_UTM */
-			syslog(LOG_NOTICE, "get_utm is not supported.");
-#endif /* TOPPERS_SUPPORT_GET_UTM */
-			break;
-
-		case 'v':
-			SVC_PERROR(syslog_msk_log(LOG_UPTO(LOG_INFO),
-										LOG_UPTO(LOG_EMERG)));
-			break;
-		case 'q':
-			SVC_PERROR(syslog_msk_log(LOG_UPTO(LOG_NOTICE),
-										LOG_UPTO(LOG_EMERG)));
-			break;
-
-#ifdef BIT_KERNEL
-		case ' ':
-			SVC_PERROR(loc_cpu());
-			{
-				extern ER	bit_kernel(void);
-
-				SVC_PERROR(ercd = bit_kernel());
-				if (ercd >= 0) {
-					syslog(LOG_NOTICE, "bit_kernel passed.");
-				}
-			}
-			SVC_PERROR(unl_cpu());
-			break;
-#endif /* BIT_KERNEL */
-
 		default:
 			break;
 		}
@@ -532,3 +178,53 @@ void main_task(intptr_t exinf)
 	SVC_PERROR(ext_ker());
 	assert(0);
 }
+
+
+/**
+  * @brief Set LED state
+  */
+void Led_SetState(bool_t on)
+{
+  if (on == true)
+  {
+    BSP_LED_On(LED_GREEN);
+  }
+  else
+  {
+    BSP_LED_Off(LED_GREEN);
+  }
+}
+
+/**
+ * @brief Blink LED for 'count' cycles of 'period' period and 'duty' ON duration.
+ * duty < 0 tells to start with an OFF state.
+ */ 
+void Led_Blink(int period, int duty, int count)
+{
+  if ( (duty > 0) && (period >= duty) )
+  {
+    /*  Shape:   ____
+                  on |_off__ */
+    do
+    {
+      Led_SetState(true);
+      HAL_Delay(duty);
+      Led_SetState(false);
+      HAL_Delay(period - duty);
+    } while (count--);
+  }
+  if ( (duty < 0) && (period >= -duty) )
+  {
+    /*  Shape:         ____
+                __off_| on   */
+    do
+    {
+      Led_SetState(false);
+      HAL_Delay(period + duty);
+      Led_SetState(true);
+      HAL_Delay(-duty);
+    } while (count--);
+  }
+}
+
+

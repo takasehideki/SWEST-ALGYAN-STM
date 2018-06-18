@@ -72,22 +72,17 @@
 #define	STACK_SIZE		4096		/* タスクのスタックサイズ */
 #endif /* STACK_SIZE */
 
-#ifndef LOOP_REF
-#define LOOP_REF		ULONG_C(1000000)	/* 速度計測用のループ回数 */
-#endif /* LOOP_REF */
-
 /*
  *  関数のプロトタイプ宣言
  */
 #ifndef TOPPERS_MACRO_ONLY
 
-extern void	task(intptr_t exinf);
+extern void	led_task(intptr_t exinf);
 extern void	main_task(intptr_t exinf);
-extern void	tex_routine(TEXPTN texptn, intptr_t exinf);
-#ifdef CPUEXC1
-extern void	cpuexc_handler(void *p_excinf);
-#endif /* CPUEXC1 */
-extern void	cyclic_handler(intptr_t exinf);
-extern void	alarm_handler(intptr_t exinf);
 
 #endif /* TOPPERS_MACRO_ONLY */
+
+void    Led_SetState(bool_t on);
+void    Led_Blink(int period, int duty, int count);
+
+
