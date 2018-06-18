@@ -30,7 +30,7 @@
   * http://www.st.com/ja/embedded-software/x-cube-azure.html
 
 
-## TrueSTUDIO使い方
+## TrueSTUDIOでの操作方法
 
 ### ビルド
 
@@ -67,9 +67,13 @@ debug_\*.launchというのを置いておきます．
 * asp_kernel/ のリンクを作る
   * プロジェクト・エクスプローラー上のblinkyで右クリック > インポート
   * 「ファイル・システム」を選択
-  * 「次のディレクトリから」：<gitrepo>/asp_kernel
-  * 下の asp_kernel/ にチェック
-  * 「拡張>>]をクリックし，「ワークスペースにリンクを作成」にチェック
+    * 「次のディレクトリから」：<gitrepo>/asp_kernel
+    * 下の asp_kernel/ にチェック
+    * 「拡張>>]をクリックし，「ワークスペースにリンクを作成」にチェック
+  * 「ファイル・システム」を選択
+    * 「次のディレクトリから」：<gitrepo>/xcube-lib
+    * 下の xcube-lib/ にチェック
+    * 「拡張>>]をクリックし，「ワークスペースにリンクを作成」にチェック
   * 終了
 * 各種ファイル名の変更
   * sample1.[c,h,cfg]をblinky.[c,h,cfg]にリネーム
