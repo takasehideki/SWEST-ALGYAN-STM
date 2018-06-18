@@ -9,7 +9,7 @@
  *              Imageing System Development Division RICOH COMPANY, LTD.
  *  Copyright (C) 2016-2017 by TOPPERS PROJECT Educational Working Group.
  * 
- *  上記著作権者は，以下の(1)〜(4)の条件を満たす場合に限り，本ソフトウェ
+ *  上記著作権者は，以下の(1)~(4)の条件を満たす場合に限り，本ソフトウェ
  *  ア（本ソフトウェアを改変したものを含む．以下同じ）を使用・複製・改
  *  変・再配布（以下，利用と呼ぶ）することを無償で許諾する．
  *  (1) 本ソフトウェアをソースコードの形で利用する場合には，上記の著作
@@ -54,7 +54,8 @@
 /*
  *  ターゲット依存部のハードウェア資源の定義
  */
-#include "stm32l4xx.h"
+//#include "stm32l4xx.h"
+#include "arch/arm_m_gcc/stm32l4xx/stm32l4xx.h"
 
 /*
  *  微少時間待ちのための定義（本来はSILのターゲット依存部）

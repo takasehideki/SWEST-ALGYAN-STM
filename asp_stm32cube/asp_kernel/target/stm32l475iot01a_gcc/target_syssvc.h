@@ -55,7 +55,8 @@
 /*
  *  ターゲットシステムのハードウェア資源の定義
  */
-#include "stm32l4xx.h"
+//#include "stm32l4xx.h"
+#include "arch/arm_m_gcc/stm32l4xx/stm32l4xx.h"
 
 /*
  *  システムクロックの定義
