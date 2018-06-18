@@ -1,0 +1,109 @@
+#
+#  XCUBEライブラリ用のmakefile
+#
+
+GCC_BIN =
+LIB = libxcube
+PROJECT = STM32L4_xcube
+
+ALL_OBJ = $(ASM_OBJ) $(C_OBJ) $(CXX_OBJ)
+
+LIBRARY_PATHS = 
+LIBRARIES = 
+#LINKER_SCRIPT = $(XCUBE_LIB_DIR)/stm32l475xx_flash.ld
+
+############################################################################### 
+ifneq ($(USE_TRUESTUDIO),true)
+AS      = $(GCC_BIN)arm-none-eabi-as
+CC      = $(GCC_BIN)arm-none-eabi-gcc
+CPP     = $(GCC_BIN)arm-none-eabi-g++
+LD      = $(GCC_BIN)arm-none-eabi-gcc
+OBJCOPY = $(GCC_BIN)arm-none-eabi-objcopy
+OBJDUMP = $(GCC_BIN)arm-none-eabi-objdump
+SIZE    = $(GCC_BIN)arm-none-eabi-size 
+AR = $(GCC_BIN)arm-none-eabi-ar
+NM = $(GCC_BIN)arm-none-eabi-nm
+RANLIB = $(GCC_BIN)arm-none-eabi-ranlib
+else
+  ifdef GCC_PATH_WIN
+    GCC_TARGET_PREFIX = $(GCC_PATH_WIN)\arm-atollic-eabi-
+  else
+    GCC_TARGET_PREFIX = arm-atollic-eabi-
+  endif
+  CC = "$(GCC_TARGET_PREFIX)gcc"
+  CPP = "$(GCC_TARGET_PREFIX)g++"
+  AS = "$(GCC_TARGET_PREFIX)as"
+  LD = "$(GCC_TARGET_PREFIX)ld"
+  AR = "$(GCC_TARGET_PREFIX)ar"
+  NM = "$(GCC_TARGET_PREFIX)nm"
+  RANLIB = "$(GCC_TARGET_PREFIX)ranlib"
+endif
+
+ifneq ($(USE_TRUESTUDIO),true)
+#CPU = -mcpu=cortex-a9 -mthumb -mthumb-interwork -marm -march=armv7-a -mfpu=vfpv3 -mfloat-abi=hard -mno-unaligned-access 
+CPU = -mcpu=cortex-m4 -mthumb -mthumb-interwork -marm -march=armv7-m -mfpu=fpv4-sp-d16 -mfloat-abi=softfp -mlittle-endian -mno-unaligned-access 
+else
+#CPU = -mcpu=cortex-a9 -mthumb -marm -march=armv7-a -mfpu=vfpv3 -mfloat-abi=hard -mno-unaligned-access 
+CPU = -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=softfp -mlittle-endian -mno-unaligned-access 
+endif
+
+CC_FLAGS = $(CPU) -c -g -fno-common -fmessage-length=0 -Wall -Wextra -Wno-unused-parameter -Wno-missing-field-initializers
+CC_FLAGS += -fno-exceptions -fno-builtin -ffunction-sections -fdata-sections -fno-delete-null-pointer-checks -fomit-frame-pointer
+CC_FLAGS += -MMD -MP
+
+CC_SYMBOLS = -DTOPPERS_CORTEX_M4 -D__TARGET_ARCH_THUMB=4 -D__TARGET_FPU_FPV4_SP -DTOPPERS_FPU_ENABLE -DTOPPERS_FPU_LAZYSTACKING -DTOPPERS_FPU_CONTEXT  -DROM
+CC_SYMBOLS += -DSTM32L475xx -DUSE_HAL_DRIVER -DSENSOR -DENABLE_IOT_INFO -DENABLE_IOT_ERROR -DENABLE_IOT_WARNING -DDONT_USE_UPLOADTOBLOB -DAZURE -DUSE_MBED_TLS -DEINVAL=22 -DENOMEM=12 -DUSE_WIFI 
+CC_SYMBOLS += -DUSE_XCUBE_WITH_TOPPERS
+#CC_SYMBOLS += -DSTM32L475xx -DUSE_HAL_DRIVER -DSENSOR -DMBEDTLS_CONFIG_FILE=<az_mbedtls_config.h> -DENABLE_IOT_INFO -DENABLE_IOT_ERROR -DENABLE_IOT_WARNING -DDONT_USE_UPLOADTOBLOB -DAZURE -DUSE_MBED_TLS -DEINVAL=22 -DENOMEM=12 -DUSE_WIFI 
+
+#LD_FLAGS = $(CPU) -Wl,--gc-sections --specs=nano.specs -u _printf_float -u _scanf_float -Wl,--wrap,main -Wl,-Map=$(PROJECT).map,--cref
+#LD_FLAGS = $(CPU) -Wl,--gc-sections -nostartfiles --specs=nano.specs -u _printf_float -u _scanf_float -Wl,-Map=$(PROJECT).map,--cref
+# LD_SYS_LIBS = -lstdc++ -lsupc++ -lm -lc -lgcc -lnosys
+#LD_SYS_LIBS = -lstdc++ -lsupc++ -lm -lc -lc -lgcc -lnosys
+
+ifeq ($(DEBUG), true)
+  CC_FLAGS += -DDEBUG -O0 -ggdb
+  ASM_FLAGS += -DDEBUG -O0 -ggdb 
+else
+  CC_FLAGS += -DNDEBUG -Os
+endif
+
+.PHONY: all
+
+all: $(LIB).a
+
+$(ASM_OBJ): %.o: %.S
+	$(CC) $(CPU) $(ASM_FLAGS) -c -x assembler-with-cpp -o $@ $<
+
+$(C_OBJ): %.o: %.c
+	$(CC) $(CC_FLAGS) $(CC_SYMBOLS) -std=gnu99   $(INCLUDE_PATHS) -o $@ $<
+
+$(CXX_OBJ): %.o: %.cpp
+	$(CPP) $(CC_FLAGS) $(CC_SYMBOLS) -std=gnu++98 -fno-rtti $(INCLUDE_PATHS) -o $@ $<
+
+$(LIB).a: $(ALL_OBJ)
+	rm -f $(LIB).a
+	$(AR) -rcs $(LIB).a $(ALL_OBJ)
+	$(RANLIB) $(LIB).a
+
+#
+#  ASPカーネルのビルドに関するその他のオプション
+#
+CLEAN_FILES += $(PROJECT).map $(APPLNAME).d
+DEPS = $(ALL_OBJ:.o=.d)
+-include $(DEPS)
+
+APPL_CFLAGS =
+APPL_LIBS = libxcube.a
+APPL_DIR = .
+
+INCLUDES += $(INCLUDE_PATHS) # XCUBEライブラリのヘッダファイルをアプリで使う
+COPTS +=  -mfpu=fpv4-sp-d16 -mfloat-abi=softfp
+CDEFS += -DTOPPERS_OMIT_BSS_INIT -DTOPPERS_OMIT_DATA_INIT # ASPのスタートアップルーチンでは初期化処理は不要
+#CDEFS += -DGRPEACH
+
+APPL_CFLAGS += $(CC_FLAGS) $(CC_SYMBOLS)
+APPL_CXXFLAGS += $(CC_FLAGS) $(CC_SYMBOLS) -std=gnu++98 -fno-rtti
+CXXLIBS += $(LD_SYS_LIBS)
+LDFLAGS += $(LD_FLAGS)
+LDSCRIPT = $(LINKER_SCRIPT)

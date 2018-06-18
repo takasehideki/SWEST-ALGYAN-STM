@@ -53,7 +53,7 @@ TARGET = stm32l475iot01a_gcc
 #
 #  プログラミング言語の定義
 #
-SRCLANG = c++
+SRCLANG = c
 ifeq ($(SRCLANG),c)
   LIBS = -lc
 endif
@@ -184,16 +184,15 @@ APPL_ASMOBJS =
 ifdef USE_CXX
   APPL_CXXOBJS = $(APPLNAME).o 
   APPL_COBJS =
-  APPL_CXXOBJS =
-  APPL_COBJS = $(APPLNAME).o 
 else
   APPL_COBJS = $(APPLNAME).o 
 endif
 APPL_COBJS := $(APPL_COBJS) log_output.o vasyslog.o t_perror.o strerror.o
-APPL_CFLAGS =
-APPL_LIBS =
+#APPL_CFLAGS =
+#APPL_LIBS =
 ifdef APPLDIR
-  INCLUDES := $(INCLUDES) $(foreach dir,$(APPLDIR),-I$(dir))
+  #INCLUDES := $(INCLUDES) $(foreach dir,$(APPLDIR),-I$(dir))
+  INCLUDE_PATHS :=  $(INCLUDE_PATHS)  $(foreach dir,$(APPLDIR),-I$(dir))
 endif
 
 #

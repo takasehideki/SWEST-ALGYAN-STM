@@ -8,7 +8,7 @@ all:
 #
 APPLDIR = .
 APPLNAME = sample1
-USE_CXX = true
+#USE_CXX = true
 APPL_CFG = $(APPLNAME).cfg
 USE_TRUESTUDIO = true
 
