@@ -328,6 +328,7 @@ __weak uint32_t HAL_GetTick(void)
   */
 __weak void HAL_Delay(uint32_t Delay)
 {
+#ifndef USE_XCUBE_WITH_TOPPERS
   uint32_t tickstart = HAL_GetTick();
   uint32_t wait = Delay;
 
@@ -340,6 +341,9 @@ __weak void HAL_Delay(uint32_t Delay)
   while((HAL_GetTick() - tickstart) < wait)
   {
   }
+#else /* USE_XCUBE_WITH_TOPPERS */
+  dly_tsk(Delay);
+#endif /* USE_XCUBE_WITH_TOPPERS */
 }
 
 /**
