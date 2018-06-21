@@ -1,110 +1,110 @@
-# ASPƒJ[ƒlƒ‹{STM32Cube ƒpƒbƒP[ƒW
+# ASPã‚«ãƒ¼ãƒãƒ«ï¼‹STM32Cube ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸
 
-## ŠJ”­ŠÂ‹«
+## é–‹ç™ºç’°å¢ƒ
 
 * Atollic TrueSTUDIO for STM32 v9.0.1
   * http://download.atollic.com/TrueSTUDIO/installers/Atollic_TrueSTUDIO_for_STM32_windows_x86_v9.0.1_20180420-1214.exe
 
-## ASPƒJ[ƒlƒ‹ (asp_kernel/)
+## ASPã‚«ãƒ¼ãƒãƒ« (asp_kernel/)
 
-### Œ³ƒ\[ƒX
+### å…ƒã‚½ãƒ¼ã‚¹
 
-* ƒ^[ƒQƒbƒg”ñˆË‘¶•”F1.9.3 (ƒŠƒŠ[ƒX“ú2017-04-29)
+* ã‚¿ãƒ¼ã‚²ãƒƒãƒˆéä¾å­˜éƒ¨ï¼š1.9.3 (ãƒªãƒªãƒ¼ã‚¹æ—¥2017-04-29)
   * http://toppers.jp/download.cgi/asp-1.9.3.tar.gz
-* ƒ^[ƒQƒbƒgˆË‘¶•”F1.9.4 (ƒŠƒŠ[ƒX“ú2017-08-28)
+* ã‚¿ãƒ¼ã‚²ãƒƒãƒˆä¾å­˜éƒ¨ï¼š1.9.4 (ãƒªãƒªãƒ¼ã‚¹æ—¥2017-08-28)
   * http://toppers.jp/download.cgi/asp_arch_arm_m4_gcc-1.9.4.tar.gz
-* ƒRƒ“ƒtƒBƒMƒ…ƒŒ[ƒ^F1.9.6 Windows—pƒoƒCƒiƒŠ (ƒŠƒŠ[ƒX“ú2017-03-31)
+* ã‚³ãƒ³ãƒ•ã‚£ã‚®ãƒ¥ãƒ¬ãƒ¼ã‚¿ï¼š1.9.6 Windowsç”¨ãƒã‚¤ãƒŠãƒª (ãƒªãƒªãƒ¼ã‚¹æ—¥2017-03-31)
   * http://toppers.jp/download.cgi/cfg-mingw-static-1_9_6.zip
 
-### å‚ÈÀ‘•‘ÎÛ
+### ä¸»ãªå®Ÿè£…å¯¾è±¡
 
 * target/stm32l475iot01a_gcc
   * copy from target/stm32l476nucleo_gcc
 
-## STM32Cubeƒ‰ƒCƒuƒ‰ƒŠ (xcube-lib/)
+## STM32Cubeãƒ©ã‚¤ãƒ–ãƒ©ãƒª (xcube-lib/)
 
-### Œ³ƒ\[ƒX
+### å…ƒã‚½ãƒ¼ã‚¹
 
 * X-CUBE-AZURE (Software Version: 1.1.0)
   * Microsoft Azure software expansion for STM32Cube
   * http://www.st.com/ja/embedded-software/x-cube-azure.html
 
 
-## TrueSTUDIO‚Å‚Ì‘€ì•û–@
+## TrueSTUDIOã§ã®æ“ä½œæ–¹æ³•
 
-### ƒrƒ‹ƒh
+### ãƒ“ãƒ«ãƒ‰
 
-* truestudio/stm32l475iot01a ‚ğƒ[ƒNƒXƒy[ƒX‚Æ‚µ‚ÄŠJ‚­
-* sample1“™ ‚ğŠù‘¶ƒvƒƒWƒFƒNƒg‚Æ‚µ‚ÄƒCƒ“ƒ|[ƒg
-  * ƒvƒƒWƒFƒNƒgEƒGƒNƒXƒvƒ[ƒ‰[ > sample1 > ƒvƒƒpƒeƒB -> C/C++ Build > Settings ‚Å  
+* truestudio/stm32l475iot01a ã‚’ãƒ¯ãƒ¼ã‚¯ã‚¹ãƒšãƒ¼ã‚¹ã¨ã—ã¦é–‹ã
+* sample1ç­‰ ã‚’æ—¢å­˜ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã¨ã—ã¦ã‚¤ãƒ³ãƒãƒ¼ãƒˆ
+  * ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆãƒ»ã‚¨ã‚¯ã‚¹ãƒ—ãƒ­ãƒ¼ãƒ©ãƒ¼ > sample1 > ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ -> C/C++ Build > Settings ã§  
     Board: B-L475E-IOT01A  
-    ƒR[ƒh”z’uFRAM  
-  ‚É‚È‚Á‚Ä‚¢‚é‚±‚Æ‚ğŠm”F
-* •’Ê‚Éƒrƒ‹ƒh
+    ã‚³ãƒ¼ãƒ‰é…ç½®ï¼šRAM  
+  ã«ãªã£ã¦ã„ã‚‹ã“ã¨ã‚’ç¢ºèª
+* æ™®é€šã«ãƒ“ãƒ«ãƒ‰
 
 
-### ƒfƒoƒbƒO
+### ãƒ‡ãƒãƒƒã‚°
 
-debug_\*.launch‚Æ‚¢‚¤‚Ì‚ğ’u‚¢‚Ä‚¨‚«‚Ü‚·D  
-ƒvƒƒWƒFƒNƒgEƒGƒNƒXƒvƒ[ƒ‰[‚Ì‰EƒNƒŠƒbƒN‚ÅuƒfƒoƒbƒO > debug_\*v‚Å‚Å‚«‚é‚Í‚¸
+debug_\*.launchã¨ã„ã†ã®ã‚’ç½®ã„ã¦ãŠãã¾ã™ï¼  
+ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆãƒ»ã‚¨ã‚¯ã‚¹ãƒ—ãƒ­ãƒ¼ãƒ©ãƒ¼ã®å³ã‚¯ãƒªãƒƒã‚¯ã§ã€Œãƒ‡ãƒãƒƒã‚° > debug_\*ã€ã§ã§ãã‚‹ã¯ãš
 
-* debug_asp.launch ‚Ìå‚Èİ’è“à—ei•û–@j
-  * ƒƒjƒ…[‚©‚çuƒfƒoƒbƒOv‚ğ‘I‘ğ
-  * ÀsƒoƒCƒiƒŠFasp.elf
-  * uƒfƒoƒbƒKvƒ^ƒu‚É‚Ä
-    * ƒfƒoƒbƒOƒvƒ[ƒuFST-LINK
-    * ƒVƒŠƒAƒ‹ƒƒCƒ„ƒrƒ…[ƒAF—LŒø ‚Éƒ`ƒFƒbƒN
-  * ƒXƒ^[ƒgƒAƒbƒvƒXƒNƒŠƒvƒg > ƒ^[ƒQƒbƒgƒ\ƒtƒgƒEƒFƒA‰Šú‰»ƒXƒNƒŠƒvƒg
+* debug_asp.launch ã®ä¸»ãªè¨­å®šå†…å®¹ï¼ˆæ–¹æ³•ï¼‰
+  * ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‹ã‚‰ã€Œãƒ‡ãƒãƒƒã‚°ã€ã‚’é¸æŠ
+  * å®Ÿè¡Œãƒã‚¤ãƒŠãƒªï¼šasp.elf
+  * ã€Œãƒ‡ãƒãƒƒã‚¬ã€ã‚¿ãƒ–ã«ã¦
+    * ãƒ‡ãƒãƒƒã‚°ãƒ—ãƒ­ãƒ¼ãƒ–ï¼šST-LINK
+    * ã‚·ãƒªã‚¢ãƒ«ãƒ¯ã‚¤ãƒ¤ãƒ“ãƒ¥ãƒ¼ã‚¢ï¼šæœ‰åŠ¹ ã«ãƒã‚§ãƒƒã‚¯
+  * ã‚¹ã‚¿ãƒ¼ãƒˆã‚¢ãƒƒãƒ—ã‚¹ã‚¯ãƒªãƒ—ãƒˆ > ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢åˆæœŸåŒ–ã‚¹ã‚¯ãƒªãƒ—ãƒˆ
     * tbreak main -> tbreak sta_ker
 
-### V‚µ‚¢ƒvƒƒWƒFƒNƒg‚Ìì‚è•û
+### æ–°ã—ã„ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®ä½œã‚Šæ–¹
 
-* ƒvƒƒWƒFƒNƒgEƒGƒNƒXƒvƒ[ƒ‰[ã‚ÅŠù‘¶‚ÌƒvƒƒWƒFƒNƒgi—áFsample1/j‚ğƒRƒsƒy
-  * ˆÈ~‚Ì—áFblinky/@# “K‹X“Ç‚İ‘Ö‚¦‚é‚±‚Æ
-  * ƒvƒƒWƒFƒNƒg–¼Fblinky
-  * uƒfƒtƒHƒ‹ƒgEƒƒP[ƒVƒ‡ƒ“‚Ìg—pv‚Íƒ`ƒFƒbƒN‚ğ•t‚¯‚½‚Ü‚Ü
-  * uƒRƒs[‚Ì–â‘èv‚ÌƒGƒ‰[‚ªo‚é‚ª–³‹‚µ‚Ä‚æ‚¢iŸ‚Å‰ğÁ‚·‚éj
-* asp_kernel/ ‚ÌƒŠƒ“ƒN‚ğì‚é
-  * ƒvƒƒWƒFƒNƒgEƒGƒNƒXƒvƒ[ƒ‰[ã‚Ìblinky‚Å‰EƒNƒŠƒbƒN > ƒCƒ“ƒ|[ƒg
-  * uƒtƒ@ƒCƒ‹EƒVƒXƒeƒ€v‚ğ‘I‘ğ
-    * uŸ‚ÌƒfƒBƒŒƒNƒgƒŠ‚©‚çvF<gitrepo>/asp_kernel
-    * ‰º‚Ì asp_kernel/ ‚Éƒ`ƒFƒbƒN
-    * uŠg’£>>]‚ğƒNƒŠƒbƒN‚µCuƒ[ƒNƒXƒy[ƒX‚ÉƒŠƒ“ƒN‚ğì¬v‚Éƒ`ƒFƒbƒN
-  * uƒtƒ@ƒCƒ‹EƒVƒXƒeƒ€v‚ğ‘I‘ğ
-    * uŸ‚ÌƒfƒBƒŒƒNƒgƒŠ‚©‚çvF<gitrepo>/xcube-lib
-    * ‰º‚Ì xcube-lib/ ‚Éƒ`ƒFƒbƒN
-    * uŠg’£>>]‚ğƒNƒŠƒbƒN‚µCuƒ[ƒNƒXƒy[ƒX‚ÉƒŠƒ“ƒN‚ğì¬v‚Éƒ`ƒFƒbƒN
-  * I—¹
-* Šeíƒtƒ@ƒCƒ‹–¼‚Ì•ÏX
-  * sample1.[c,h,cfg]‚ğblinky.[c,h,cfg]‚ÉƒŠƒl[ƒ€
-  * Makefile‚Ì APPLNAME ‚ğ blinky ‚É‚·‚é
-  * blinky.cfg ‚ğu#include blinky.hv‚É‚·‚é
-  * blinky.c ‚Ìu"#include "blinky.h"v‚ğ#include‚Ìˆê”Ô‰º‚É‚·‚é
-  * ‚ ‚Æ‚Í“K‹Xƒ\[ƒX‚ğC³‚·‚é
-* ƒfƒoƒbƒO‘ÎÛ‚Ì•ÏX
-  * debug_sample1.launch ‚ğ debug_blinky.launch ‚ÉƒŠƒl[ƒ€
-  * debug_blinky.launch ‚ğ‰EƒNƒŠƒbƒN > ƒfƒoƒbƒO > ƒfƒoƒbƒO‚Ì\¬
-  * u‘g‚İ‚İC/C++ ƒAƒvƒŠƒP[ƒVƒ‡ƒ“v‚Ì debug_blinky ‚ğ‘I‘ğ‚·‚é
-  * Mainƒ^ƒu‚ÌProject: ‚ğ blinky ‚É‚·‚é
-    * Browse... ‚©‚ç Project Selection ‚µ‚Ä‚à‚æ‚¢
+* ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆãƒ»ã‚¨ã‚¯ã‚¹ãƒ—ãƒ­ãƒ¼ãƒ©ãƒ¼ä¸Šã§æ—¢å­˜ã®ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆï¼ˆä¾‹ï¼šblinky/ï¼‰ã‚’ã‚³ãƒ”ãƒš
+  * ä»¥é™ã®ä¾‹ï¼šhoge/ã€€# é©å®œèª­ã¿æ›¿ãˆã‚‹ã“ã¨
+  * ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆåï¼šhoge
+  * ã€Œãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ»ãƒ­ã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã®ä½¿ç”¨ã€ã¯ãƒã‚§ãƒƒã‚¯ã‚’ä»˜ã‘ãŸã¾ã¾
+  * ã€Œã‚³ãƒ”ãƒ¼ã®å•é¡Œã€ã®ã‚¨ãƒ©ãƒ¼ãŒå‡ºã‚‹ãŒç„¡è¦–ã—ã¦ã‚ˆã„ï¼ˆæ¬¡ã§è§£æ¶ˆã™ã‚‹ï¼‰
+* (ç„¡ã‘ã‚Œã°) asp_kernel/ ã¨ xcube-lib/ ã®ãƒªãƒ³ã‚¯ã‚’ä½œã‚‹
+  * ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆãƒ»ã‚¨ã‚¯ã‚¹ãƒ—ãƒ­ãƒ¼ãƒ©ãƒ¼ä¸Šã®blinkyã§å³ã‚¯ãƒªãƒƒã‚¯ > ã‚¤ãƒ³ãƒãƒ¼ãƒˆ
+  * ã€Œãƒ•ã‚¡ã‚¤ãƒ«ãƒ»ã‚·ã‚¹ãƒ†ãƒ ã€ã‚’é¸æŠ
+    * ã€Œæ¬¡ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‹ã‚‰ã€ï¼š<gitrepo>/asp_kernel
+    * ä¸‹ã® asp_kernel/ ã«ãƒã‚§ãƒƒã‚¯
+    * ã€Œæ‹¡å¼µ>>]ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ï¼Œã€Œãƒ¯ãƒ¼ã‚¯ã‚¹ãƒšãƒ¼ã‚¹ã«ãƒªãƒ³ã‚¯ã‚’ä½œæˆã€ã«ãƒã‚§ãƒƒã‚¯
+  * ã€Œãƒ•ã‚¡ã‚¤ãƒ«ãƒ»ã‚·ã‚¹ãƒ†ãƒ ã€ã‚’é¸æŠ
+    * ã€Œæ¬¡ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‹ã‚‰ã€ï¼š<gitrepo>/xcube-lib
+    * ä¸‹ã® xcube-lib/ ã«ãƒã‚§ãƒƒã‚¯
+    * ã€Œæ‹¡å¼µ>>]ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ï¼Œã€Œãƒ¯ãƒ¼ã‚¯ã‚¹ãƒšãƒ¼ã‚¹ã«ãƒªãƒ³ã‚¯ã‚’ä½œæˆã€ã«ãƒã‚§ãƒƒã‚¯
+  * çµ‚äº†
+* å„ç¨®ãƒ•ã‚¡ã‚¤ãƒ«åã®å¤‰æ›´
+  * blinky.[c,h,cfg]ã‚’hoge.[c,h,cfg]ã«ãƒªãƒãƒ¼ãƒ 
+  * Makefileã® APPLNAME ã‚’ hoge ã«ã™ã‚‹
+  * blinky.cfg ã‚’ã€Œ#include hoge.hã€ã«ã™ã‚‹
+  * blinky.c ã®ã€Œ"#include "hoge.h"ã€ã‚’#includeã®ä¸€ç•ªä¸‹ã«ã™ã‚‹
+  * ã‚ã¨ã¯é©å®œã‚½ãƒ¼ã‚¹ã‚’ä¿®æ­£ã™ã‚‹
+* ãƒ‡ãƒãƒƒã‚°å¯¾è±¡ã®å¤‰æ›´
+  * debug_blinky.launch ã‚’ debug_hoge.launch ã«ãƒªãƒãƒ¼ãƒ 
+  * debug_hoge.launch ã‚’å³ã‚¯ãƒªãƒƒã‚¯ > ãƒ‡ãƒãƒƒã‚° > ãƒ‡ãƒãƒƒã‚°ã®æ§‹æˆ
+  * ã€Œçµ„ã¿è¾¼ã¿C/C++ ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã€ã® debug_hoge ã‚’é¸æŠã™ã‚‹
+  * Mainã‚¿ãƒ–ã®Project: ã‚’ hoge ã«ã™ã‚‹
+    * Browse... ã‹ã‚‰ Project Selection ã—ã¦ã‚‚ã‚ˆã„
 
 
-## ŠJ”­‚ÌQl‚É‚µ‚½ƒŠƒ|ƒWƒgƒŠ
+## é–‹ç™ºã®å‚è€ƒã«ã—ãŸãƒªãƒã‚¸ãƒˆãƒª
 
 * Open-source Software Platform Based on TOPPERS/ASP Kernel, mbed and Arduino Library for Renesas GR-PEACH.
   * https://github.com/ncesnagoya/asp-gr_peach_gcc-mbed
 
 
-## QlFmbed online compiler‚©‚çƒGƒNƒXƒ|[ƒg‚µ‚Äƒrƒ‹ƒh
+## å‚è€ƒï¼šmbed online compilerã‹ã‚‰ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆã—ã¦ãƒ“ãƒ«ãƒ‰
 
 
-### mbedã‚Ìİ’è
+### mbedä¸Šã®è¨­å®š
 
-"Export toolchain: Make-GCC-ARM"‚ÅƒGƒNƒXƒ|[ƒg
+"Export toolchain: Make-GCC-ARM"ã§ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆ
 
 ### WSL
 
-* ƒNƒƒXƒRƒ“ƒpƒCƒ‰‚Ì“üè
+* ã‚¯ãƒ­ã‚¹ã‚³ãƒ³ãƒ‘ã‚¤ãƒ©ã®å…¥æ‰‹
 ```
 $ sudo add-apt-repository ppa:terry.guo/gcc-arm-embedded
 $ sudo gpg --keyserver ha.pool.sks-keyservers.net --recv-keys 6D1D8367A3421AFB
@@ -113,10 +113,10 @@ $ sudo apt update
 $ sudo apt install gcc-arm-none-eabi
 ```
 
-ƒGƒNƒXƒ|[ƒg‚µ‚Ä‚«‚½Zip‚ğ“WŠJ‚µ‚Ä‚»‚±‚Åmake‚Å‚¢‚¢‚Í‚¸
+ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆã—ã¦ããŸZipã‚’å±•é–‹ã—ã¦ãã“ã§makeã§ã„ã„ã¯ãš
 
 ### TrueSTUDIO
 
 Under construction,,,  
-‚Ü‚¾‚¤‚Ü‚­‚¢‚Á‚Ä‚Ü‚¹‚ñD
+ã¾ã ã†ã¾ãã„ã£ã¦ã¾ã›ã‚“ï¼
 
