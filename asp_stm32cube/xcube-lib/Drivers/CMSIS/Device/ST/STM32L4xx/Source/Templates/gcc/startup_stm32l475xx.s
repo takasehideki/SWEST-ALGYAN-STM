@@ -107,11 +107,18 @@ LoopFillZerobss:
 	bcc	FillZerobss
 
 /* Call the clock system intitialization function.*/
-    bl  SystemInit
+//    bl  SystemInit
 /* Call static constructors */
-    bl __libc_init_array
+/*
+ * Removed due to following link error
+ *  c:/program files (x86)/atollic/truestudio for stm32 9.0.1/armtools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/softfp\libc.a(lib_a-init.o): In function `__libc_init_array':
+ *  init.c:(.text.__libc_init_array+0x14): undefined reference to `_init'
+ */
+//    bl __libc_init_array
 /* Call the application's entry point.*/
-	bl	main
+//  bl	main
+/* Call TOPPERS kernel _start */
+    bl  _kernel__start
 
 LoopForever:
     b LoopForever
@@ -141,7 +148,6 @@ Infinite_Loop:
  	.section	.isr_vector,"a",%progbits
 	.type	g_pfnVectors, %object
 	.size	g_pfnVectors, .-g_pfnVectors
-
 
 g_pfnVectors:
 	.word	_estack

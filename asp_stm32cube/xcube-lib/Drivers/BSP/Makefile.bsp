@@ -31,7 +31,6 @@ C_OBJ += $(XCUBE_LIB_DIR)/Drivers/BSP/Components/es_wifi/es_wifi.o \
 CXX_OBJ += 
 
 INCLUDE_PATHS += -I. \
-		-I$(XCUBE_LIB_DIR)/Drivers/BSP \
 		-I$(XCUBE_LIB_DIR)/Drivers/BSP/B-L475E-IOT01 
 
 INCLUDE_PATHS += -I$(XCUBE_LIB_DIR)/Drivers/BSP/Components/es_wifi \

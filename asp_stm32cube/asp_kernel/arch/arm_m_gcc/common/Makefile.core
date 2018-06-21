@@ -65,6 +65,9 @@ else ifeq ($(ARM_ARCH),ARMV6M)
 	KERNEL_ASMOBJS := $(KERNEL_ASMOBJS) core_support_v6m.o
 	CDEFS := $(CDEFS) -D__TARGET_ARCH_THUMB=3
 endif
+ifeq ($(USE_XCUBE_LIB),true)
+	KERNEL_ASMOBJS := $(KERNEL_ASMOBJS) start.o
+endif
 
 #
 #  FPU¤ÎÀßÄê

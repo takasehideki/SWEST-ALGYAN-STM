@@ -1,4 +1,8 @@
 /*
+ * NOTE: This file is copied from following path
+ *  \STM32CubeExpansion_Cloud_AZURE_V1.1.0\Projects\B-L475E-IOT01\Applications\Cloud\Azure\SW4STM32\B-L475E-IOT01
+ */
+/*
 *****************************************************************************
 **
 
@@ -29,6 +33,13 @@
 *****************************************************************************
 */
 
+/* Definitions for TOPPERS/ASP */
+PROVIDE(hardware_init_hook = 0);
+PROVIDE(software_init_hook = 0);
+PROVIDE(software_term_hook = 0);
+/*STARTUP(start.o)*/
+PROVIDE(g_pfnVectors = _kernel_inh_tbl);
+
 /* Entry Point */
 ENTRY(Reset_Handler)
 
@@ -36,6 +47,8 @@ ENTRY(Reset_Handler)
 _estack = 0x20018000;    /* end of RAM */
 /* Generate a link error if heap and stack don't fit into RAM */
 _Min_Heap_Size = 0x13000;      /* required amount of heap  */
+_Min_Stack_Size = 0x2000; /* required amount of stack */
+_Min_Heap_Size = 0x10000;      /* required amount of heap  */
 _Min_Stack_Size = 0x2000; /* required amount of stack */
 
 /* Specify the memory areas */
@@ -134,12 +147,15 @@ SECTIONS
 
   /* used by the startup to initialize data */
   _sidata = LOADADDR(.data);
+  __idata_start = _sidata;
+  __idata_end = _sidata;
 
   /* Initialized data sections goes into RAM, load LMA copy after code */
   .data : 
   {
     . = ALIGN(8);
     _sdata = .;        /* create a global symbol at data start */
+    __data_start = _sdata;
     *(.data)           /* .data sections */
     *(.data*)          /* .data* sections */
 
@@ -154,6 +170,7 @@ SECTIONS
   {
     /* This is used by the startup in order to initialize the .bss secion */
     _sbss = .;         /* define a global symbol at bss start */
+    __bss_start = _sbss;
     __bss_start__ = _sbss;
     *(.bss)
     *(.bss*)
@@ -161,6 +178,7 @@ SECTIONS
 
     . = ALIGN(4);
     _ebss = .;         /* define a global symbol at bss end */
+    __bss_end = _ebss;
     __bss_end__ = _ebss;
   } >RAM
 

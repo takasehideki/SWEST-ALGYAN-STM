@@ -1,7 +1,8 @@
 MEMORY
 {
-    ROM (rx) : ORIGIN = 0x08000000, LENGTH = 1024K
-    RAM (rwx) : ORIGIN = 0x20000000, LENGTH = 96K
+    ROM   (rx)  : ORIGIN = 0x08000000, LENGTH = 0x00080000
+    RAM   (rwx) : ORIGIN = 0x20000000, LENGTH = 0x00018000
+    SRAM2 (rwx) : ORIGIN = 0x10000000, LENGTH = 0x00008000
 }
 
 OUTPUT_FORMAT("elf32-littlearm", "elf32-bigarm","elf32-littlearm") 
@@ -10,7 +11,12 @@ OUTPUT_ARCH(arm)
 PROVIDE(hardware_init_hook = 0);
 PROVIDE(software_init_hook = 0);
 PROVIDE(software_term_hook = 0);
-STARTUP(start.o)
+
+PROVIDE(g_pfnVectors = _kernel_inh_tbl);
+
+/*STARTUP(start.o)*/
+/*STARTUP(startup_stm32l475xx.o)*/
+ENTRY(Reset_Handler)
 
 SECTIONS
 {

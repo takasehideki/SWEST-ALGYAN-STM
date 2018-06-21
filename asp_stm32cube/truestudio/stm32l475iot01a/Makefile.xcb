@@ -10,7 +10,10 @@ ALL_OBJ = $(ASM_OBJ) $(C_OBJ) $(CXX_OBJ)
 
 LIBRARY_PATHS = 
 LIBRARIES = 
-LINKER_SCRIPT = $(XCUBE_LIB_DIR)/stm32l475xx_flash.ld
+ifeq ($(USE_XCUBE_LIB),true)
+#LINKER_SCRIPT = $(XCUBE_LIB_DIR)/stm32l475xx_flash.ld
+LINKER_SCRIPT = $(XCUBE_LIB_DIR)/STM32L475VGTx_FLASH.ld
+endif
 
 ############################################################################### 
 ifneq ($(USE_TRUESTUDIO),true)
@@ -53,10 +56,11 @@ CC_FLAGS += -MMD -MP
 
 CC_SYMBOLS = -DTOPPERS_CORTEX_M4 -D__TARGET_ARCH_THUMB=4 -D__TARGET_FPU_FPV4_SP -DTOPPERS_FPU_ENABLE -DTOPPERS_FPU_LAZYSTACKING -DTOPPERS_FPU_CONTEXT  -DROM
 CC_SYMBOLS += -DSTM32L475xx -DUSE_HAL_DRIVER -DSENSOR -DENABLE_IOT_INFO -DENABLE_IOT_ERROR -DENABLE_IOT_WARNING -DDONT_USE_UPLOADTOBLOB -DAZURE -DUSE_MBED_TLS -DEINVAL=22 -DENOMEM=12 -DUSE_WIFI 
-CC_SYMBOLS += -DUSE_XCUBE_WITH_TOPPERS
 #CC_SYMBOLS += -DSTM32L475xx -DUSE_HAL_DRIVER -DSENSOR -DMBEDTLS_CONFIG_FILE=<az_mbedtls_config.h> -DENABLE_IOT_INFO -DENABLE_IOT_ERROR -DENABLE_IOT_WARNING -DDONT_USE_UPLOADTOBLOB -DAZURE -DUSE_MBED_TLS -DEINVAL=22 -DENOMEM=12 -DUSE_WIFI 
+CC_SYMBOLS += -DUSE_XCUBE_WITH_TOPPERS
 
 #LD_FLAGS = $(CPU) -Wl,--gc-sections --specs=nano.specs -u _printf_float -u _scanf_float -Wl,--wrap,main -Wl,-Map=$(PROJECT).map,--cref
+LD_FLAGS = $(CPU) -Wl,--gc-sections -Wl,-Map=$(PROJECT).map,--cref
 #LD_FLAGS = $(CPU) -Wl,--gc-sections -nostartfiles --specs=nano.specs -u _printf_float -u _scanf_float -Wl,-Map=$(PROJECT).map,--cref
 # LD_SYS_LIBS = -lstdc++ -lsupc++ -lm -lc -lgcc -lnosys
 #LD_SYS_LIBS = -lstdc++ -lsupc++ -lm -lc -lc -lgcc -lnosys
@@ -100,10 +104,11 @@ APPL_DIR = .
 INCLUDES += $(INCLUDE_PATHS) # XCUBEライブラリのヘッダファイルをアプリで使う
 COPTS +=  -mfpu=fpv4-sp-d16 -mfloat-abi=softfp
 CDEFS += -DTOPPERS_OMIT_BSS_INIT -DTOPPERS_OMIT_DATA_INIT # ASPのスタートアップルーチンでは初期化処理は不要
-#CDEFS += -DGRPEACH
 
 APPL_CFLAGS += $(CC_FLAGS) $(CC_SYMBOLS)
 APPL_CXXFLAGS += $(CC_FLAGS) $(CC_SYMBOLS) -std=gnu++98 -fno-rtti
 CXXLIBS += $(LD_SYS_LIBS)
 LDFLAGS += $(LD_FLAGS)
+ifeq ($(USE_XCUBE_LIB),true)
 LDSCRIPT = $(LINKER_SCRIPT)
+endif

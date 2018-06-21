@@ -22,6 +22,12 @@ OMIT_OPTIMIZATION = true
 #GCC_PATH_WIN = C:\Program Files (x86)\Atollic\TrueSTUDIO for STM32 9.0.1\ARMTools\bin
 
 #
+#  XCUBEライブラリの使用の定義
+#  使用しない場合はコメントアウトにする
+#
+USE_XCUBE_LIB = true
+
+#
 #  XCUBEライブラリのディレクトリの定義
 #
 XCUBE_LIB_DIR = ../../../xcube-lib
@@ -40,8 +46,11 @@ include $(XCUBE_LIB_DIR)/Drivers/BSP/Makefile.bsp
 #
 #  XCUBEライブラリのコンフィギュレーション設定用のヘッダファイル
 #
-INCLUDE_PATHS += -Ixcube-lib-conf \
+INCLUDE_PATHS += -Ixcube-lib-conf 
 
+#
+#  XCUBEライブラリ
+#
 include ../Makefile.xcb
 
 #

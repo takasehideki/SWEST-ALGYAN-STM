@@ -44,11 +44,9 @@ C_OBJ += $(XCUBE_LIB_DIR)/Drivers/CMSIS/Device/ST/STM32L4xx/Source/Templates/sys
 CXX_OBJ += 
 
 INCLUDE_PATHS += -I. \
-		-I$(XCUBE_LIB_DIR)/Drivers/CMSIS/Include \
-		-I$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Inc
+		-I$(XCUBE_LIB_DIR)/Drivers/CMSIS/Device/ST/STM32L4xx/Include 
 
 INCLUDE_PATHS += -I. \
-		-I$(XCUBE_LIB_DIR)/Drivers/CMSIS \
-		-I$(XCUBE_LIB_DIR)/Drivers/CMSIS/Device/ \
-		-I$(XCUBE_LIB_DIR)/Drivers/CMSIS/Device/ST \
-		-I$(XCUBE_LIB_DIR)/Drivers/CMSIS/Device/ST/STM32L4xx/Include 
+		-I$(XCUBE_LIB_DIR)/Drivers/CMSIS/Include \
+		-I$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Inc 
+

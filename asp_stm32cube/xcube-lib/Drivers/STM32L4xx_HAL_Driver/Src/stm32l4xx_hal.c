@@ -176,8 +176,10 @@ HAL_StatusTypeDef HAL_Init(void)
   /* Set Interrupt Group Priority */
   HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
 
+#ifndef USE_XCUBE_WITH_TOPPERS
   /* Use SysTick as time base source and configure 1ms tick (default clock after Reset is MSI) */
   HAL_InitTick(TICK_INT_PRIORITY);
+#endif /* USE_XCUBE_WITH_TOPPERS */
 
   /* Init the low level hardware */
   HAL_MspInit();
@@ -312,7 +314,13 @@ __weak void HAL_IncTick(void)
   */
 __weak uint32_t HAL_GetTick(void)
 {
+#ifndef USE_XCUBE_WITH_TOPPERS
   return uwTick;
+#else /* USE_XCUBE_WITH_TOPPERS */
+  uint32_t systim;
+  get_tim(&systim);
+  return (systim);
+#endif /* USE_XCUBE_WITH_TOPPERS */
 }
 
 /**

@@ -55,7 +55,7 @@ TARGET = stm32l475iot01a_gcc
 #
 SRCLANG = c
 ifeq ($(SRCLANG),c)
-  LIBS = -lc
+#  LIBS = -lc
 endif
 ifeq ($(SRCLANG),c++)
   USE_CXX = true

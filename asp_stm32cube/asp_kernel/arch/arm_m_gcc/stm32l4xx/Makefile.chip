@@ -34,11 +34,15 @@ SYSSVC_COBJS := $(SYSSVC_COBJS) chip_serial.o
 #
 #  リンカスクリプトの定義
 #
+ifneq ($(USE_XCUBE_LIB),true)
 ifeq ($(DBGENV),RAM)
 LDSCRIPT = $(SRCDIR)/target/$(BOARD)/stm32l4xx_ram.ld
-COPTS := $(COPTS) -DTOPPERS_RAM_EXEC
 else
 LDSCRIPT = $(SRCDIR)/target/$(BOARD)/stm32l4xx_rom.ld
+endif
+endif
+ifeq ($(DBGENV),RAM)
+COPTS := $(COPTS) -DTOPPERS_RAM_EXEC
 endif
 
 #
@@ -48,6 +52,7 @@ endif
 #  スタートアップモジュールの名前をHIDDEN_OBJSに定義する．
 #  また，LDFLAGSに-nostdlibを追加している．
 #
+ifneq ($(USE_XCUBE_LIB),true)
 HIDDEN_OBJS = start.o
 
 $(HIDDEN_OBJS): %.o: %.S
@@ -58,6 +63,7 @@ $(HIDDEN_OBJS:.o=.d): %.d: %.S
 		-O "$(CFLAGS) $(KERNEL_CFLAGS)" $< >> Makefile.depend
 
 LDFLAGS := -nostdlib $(LDFLAGS)
+endif
 
 #
 #  コア依存部のインクルード
