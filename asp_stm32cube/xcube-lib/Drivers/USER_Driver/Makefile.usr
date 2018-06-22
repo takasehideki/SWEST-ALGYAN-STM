@@ -1,0 +1,6 @@
+C_OBJ += $(XCUBE_LIB_DIR)/Drivers/USER_Driver/grove_serial_camera.o
+
+CXX_OBJ += 
+
+INCLUDE_PATHS += -I. \
+		-I$(XCUBE_LIB_DIR)/Drivers/USER_Driver

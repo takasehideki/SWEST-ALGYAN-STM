@@ -42,6 +42,7 @@ SRCDIR = ../../../asp_kernel
 #
 include $(XCUBE_LIB_DIR)/Drivers/Makefile.cms
 include $(XCUBE_LIB_DIR)/Drivers/BSP/Makefile.bsp
+include $(XCUBE_LIB_DIR)/Drivers/USER_Driver/Makefile.usr
 
 #
 #  XCUBEライブラリのコンフィギュレーション設定用のヘッダファイル
