@@ -1,3 +1,5 @@
 *.o
 *.html
 *.js
+*.pbi
+*.pbi.xcl
