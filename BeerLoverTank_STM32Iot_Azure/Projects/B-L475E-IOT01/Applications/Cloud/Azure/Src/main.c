@@ -306,6 +306,28 @@ static void Cam_UART_Init(void) {
 	UART_ADVFEATURE_DMADISABLEONERROR_INIT;
 	cam_uart.AdvancedInit.DMADisableonRxError =
 	UART_ADVFEATURE_DMA_DISABLEONRXERROR;
+
+	  /* Enable GPIO clock */
+	__HAL_RCC_GPIOA_CLK_ENABLE();
+
+	  /* Enable USART clock */
+	__HAL_RCC_UART4_CLK_ENABLE();
+
+	/* Configure USART Tx as alternate function */
+	GPIO_InitTypeDef gpio_init_structure;
+	gpio_init_structure.Pin = GPIO_PIN_0;
+	gpio_init_structure.Mode = GPIO_MODE_AF_PP;
+	gpio_init_structure.Speed = GPIO_SPEED_FREQ_HIGH;
+	gpio_init_structure.Pull = GPIO_NOPULL;
+	gpio_init_structure.Alternate = GPIO_AF8_UART4;
+	HAL_GPIO_Init(GPIOA, &gpio_init_structure);
+
+	/* Configure USART Rx as alternate function */
+	gpio_init_structure.Pin = GPIO_PIN_1;
+        gpio_init_structure.Mode = GPIO_MODE_AF_PP;
+	gpio_init_structure.Alternate = GPIO_AF8_UART4;
+	HAL_GPIO_Init(GPIOA, &gpio_init_structure);
+
 	if (HAL_UART_Init(&cam_uart) != HAL_OK) {
 		Error_Handler();
 	}
