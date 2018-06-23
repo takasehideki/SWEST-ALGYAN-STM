@@ -243,7 +243,7 @@ static SERIAL_CAM_Error _sendCommand(uint8_t cmdId, uint8_t param1, uint8_t para
 static BOOL _waitCmdAck(uint8_t cmdId){
 	uint8_t resp[6] = {0x00, 0x00,0x00,0x00,0x00,0x00};
 	HAL_StatusTypeDef status;
-	if ((status=HAL_UART_Receive(m_uart, resp, sizeof(resp), HAL_MAX_DELAY)) != HAL_OK) {
+	if ((status=HAL_UART_Receive(m_uart, resp, 6, HAL_MAX_DELAY)) != HAL_OK) {
         msg_error("init receive error : %d\r\n", status);
 		return FALSE;
 	}

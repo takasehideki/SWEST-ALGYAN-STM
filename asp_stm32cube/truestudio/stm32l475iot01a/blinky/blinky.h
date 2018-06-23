@@ -84,5 +84,5 @@ extern void	main_task(intptr_t exinf);
 
 void    Led_SetState(bool_t on);
 void    Led_Blink(int period, int duty, int count);
-
+void    cam_test(void);
 

@@ -46,6 +46,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "grove_serial_camera.h"
+#include "l9110s_motor_driver.h"
 
 extern void iothub_client_XCube_sample_run(void);
 
@@ -53,6 +54,8 @@ extern void iothub_client_XCube_sample_run(void);
 RTC_HandleTypeDef hrtc;
 RNG_HandleTypeDef hrng;
 net_hnd_t hnet; /* Is initialized by cloud_main(). */
+TIM_HandleTypeDef htim2;
+TIM_HandleTypeDef htim3;
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private defines -----------------------------------------------------------*/
@@ -70,8 +73,15 @@ void SPI_WIFI_ISR(void);
 
 static void Console_UART_Init(void);
 static void Cam_UART_Init(void);
+static void MX_TIM2_Init(void);
+static void MX_TIM3_Init(void);
+void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
+
+static void Tank_Init(void);
 static void RTC_Init(void);
 static void Button_ISR(void);
+static void tank_test(void);
+static void cam_test(void);
 static void cloud_test(void const *arg);
 
 /* Private functions ---------------------------------------------------------*/
@@ -103,35 +113,20 @@ int main(void) {
 	/* UART console init */
 	Console_UART_Init();
 	Cam_UART_Init();
-	msg_info("Hello\n");
+//	MX_TIM2_Init();
+//	MX_TIM3_Init();
 
-	if(SerialCam_Initialize(&cam_uart)!=SERIAL_CAM_OK){
-		msg_error("initialize error");
+	Tank_Init();
+
+	/* test code */
+    cam_test();
+	while (1) {
+//		tank_test();
+//		HAL_GPIO_WritePin(GPIOA, 15, GPIO_PIN_RESET);
+//		HAL_GPIO_WritePin(GPIOA, 2, GPIO_PIN_SET);
+//		HAL_GPIO_WritePin(GPIOB, 1, GPIO_PIN_SET);
+//		HAL_GPIO_WritePin(GPIOB, 4, GPIO_PIN_RESET);
 	}
-	uint8_t pktBuf[PIC_PKT_LEN];
-	for(int i=0;i<10;i++){
-		msg_info("Take Picture! %d\n", i);
-		if(SerialCam_PreCapture()!=SERIAL_CAM_OK){
-			msg_error("precapture error");
-		}
-		uint16_t picLength;
-		if(SerialCam_Capture(&picLength)!=SERIAL_CAM_OK){
-			msg_error("initialize error");
-		}
-		msg_info("total size : %d", picLength);
-		uint8_t totalFrame = (picLength) / (PIC_PKT_LEN - 6);
-		if ((picLength % (PIC_PKT_LEN - 6)) != 0) {
-			totalFrame += 1;
-		}
-
-		for(int frameCnt=0; frameCnt<totalFrame; frameCnt++){
-			SerialCam_GetData(pktBuf, PIC_PKT_LEN, frameCnt);
-			HAL_UART_Receive(&console_uart, &pktBuf[4], PIC_PKT_LEN-6, 100); // strip head 4 byte and tail 2byte
-		}
-		SerialCam_CloseData();
-		HAL_Delay(5000);
-	}
-
 
 #ifdef FIREWALL_MBEDLIB
 	firewall_init();
@@ -298,21 +293,123 @@ static void Console_UART_Init(void) {
 
 /* UART4 init function  for camera */
 static void Cam_UART_Init(void) {
-	  cam_uart.Instance = UART4;
-	  cam_uart.Init.BaudRate = 115200;
-	  cam_uart.Init.WordLength = UART_WORDLENGTH_8B;
-	  cam_uart.Init.StopBits = UART_STOPBITS_1;
-	  cam_uart.Init.Parity = UART_PARITY_NONE;
-	  cam_uart.Init.Mode = UART_MODE_TX_RX;
-	  cam_uart.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-	  cam_uart.Init.OverSampling = UART_OVERSAMPLING_16;
-	  cam_uart.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
-	  cam_uart.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_DMADISABLEONERROR_INIT;
-	  cam_uart.AdvancedInit.DMADisableonRxError = UART_ADVFEATURE_DMA_DISABLEONRXERROR;
-	  if (HAL_UART_Init(&cam_uart) != HAL_OK)
-	  {
-	    Error_Handler();
-	  }
+	cam_uart.Instance = UART4;
+	cam_uart.Init.BaudRate = 115200;
+	cam_uart.Init.WordLength = UART_WORDLENGTH_8B;
+	cam_uart.Init.StopBits = UART_STOPBITS_1;
+	cam_uart.Init.Parity = UART_PARITY_NONE;
+	cam_uart.Init.Mode = UART_MODE_TX_RX;
+	cam_uart.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+	cam_uart.Init.OverSampling = UART_OVERSAMPLING_16;
+	cam_uart.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+	cam_uart.AdvancedInit.AdvFeatureInit =
+	UART_ADVFEATURE_DMADISABLEONERROR_INIT;
+	cam_uart.AdvancedInit.DMADisableonRxError =
+	UART_ADVFEATURE_DMA_DISABLEONRXERROR;
+	if (HAL_UART_Init(&cam_uart) != HAL_OK) {
+		Error_Handler();
+	}
+}
+
+/* TIM2 init function */
+static void MX_TIM2_Init(void) {
+
+	TIM_MasterConfigTypeDef sMasterConfig;
+	TIM_OC_InitTypeDef sConfigOC;
+
+	htim2.Instance = TIM2;
+	htim2.Init.Prescaler = 0;
+	htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+	htim2.Init.Period = 0;
+	htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+	if (HAL_TIM_PWM_Init(&htim2) != HAL_OK) {
+		_Error_Handler(__FILE__, __LINE__);
+	}
+
+	sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+	sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+	if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig)
+			!= HAL_OK) {
+		_Error_Handler(__FILE__, __LINE__);
+	}
+
+	sConfigOC.OCMode = TIM_OCMODE_PWM1;
+	sConfigOC.Pulse = 0;
+	sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+	sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+	if (HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_1)
+			!= HAL_OK) {
+		_Error_Handler(__FILE__, __LINE__);
+	}
+
+	if (HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_4)
+			!= HAL_OK) {
+		_Error_Handler(__FILE__, __LINE__);
+	}
+
+	HAL_TIM_MspPostInit(&htim2);
+
+}
+
+/* TIM3 init function */
+static void MX_TIM3_Init(void) {
+
+	TIM_MasterConfigTypeDef sMasterConfig;
+	TIM_OC_InitTypeDef sConfigOC;
+
+	htim3.Instance = TIM3;
+	htim3.Init.Prescaler = 0;
+	htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+	htim3.Init.Period = 0;
+	htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+	if (HAL_TIM_OC_Init(&htim3) != HAL_OK) {
+		_Error_Handler(__FILE__, __LINE__);
+	}
+
+	if (HAL_TIM_PWM_Init(&htim3) != HAL_OK) {
+		_Error_Handler(__FILE__, __LINE__);
+	}
+
+	sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+	sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+	if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig)
+			!= HAL_OK) {
+		_Error_Handler(__FILE__, __LINE__);
+	}
+
+	sConfigOC.OCMode = TIM_OCMODE_TIMING;
+	sConfigOC.Pulse = 0;
+	sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+	sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+	if (HAL_TIM_OC_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_1) != HAL_OK) {
+		_Error_Handler(__FILE__, __LINE__);
+	}
+
+	sConfigOC.OCMode = TIM_OCMODE_PWM1;
+	if (HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_4)
+			!= HAL_OK) {
+		_Error_Handler(__FILE__, __LINE__);
+	}
+
+	HAL_TIM_MspPostInit(&htim3);
+
+}
+
+static void Tank_Init() {
+	/* motor driver init
+	 *  Left Motor : GPIOA
+	 *   Forward : CN1-PIN2(PA15)
+	 *   Back : CN1-PIN3(PA2)
+	 *  Right Motor : GPIOB
+	 *   Forward : CN3-PIN6(PB1)
+	 *   Back : CN3-PIN7(PB4)
+	 */
+	__HAL_RCC_GPIOA_CLK_ENABLE();
+	__HAL_RCC_GPIOB_CLK_ENABLE();
+	l9110s_Init(GPIOA, GPIO_PIN_15, GPIO_PIN_2,
+	GPIOB, GPIO_PIN_1, GPIO_PIN_4);
 }
 
 #if (defined(__GNUC__) && !defined(__CC_ARM))
@@ -374,6 +471,59 @@ static void RTC_Init(void) {
 	}
 }
 
+static void cam_test() {
+	if (SerialCam_Initialize(&cam_uart) != SERIAL_CAM_OK) {
+		msg_error("initialize error");
+	}
+	uint8_t pktBuf[PIC_PKT_LEN];
+	for (int i = 0; i < 10; i++) {
+		msg_info("Take Picture! %d\n", i);
+		if (SerialCam_PreCapture() != SERIAL_CAM_OK) {
+			msg_error("precapture error");
+		}
+		uint16_t picLength;
+		if (SerialCam_Capture(&picLength) != SERIAL_CAM_OK) {
+			msg_error("initialize error");
+		}
+		msg_info("total size : %d", picLength);
+		uint8_t totalFrame = (picLength) / (PIC_PKT_LEN - 6);
+		if ((picLength % (PIC_PKT_LEN - 6)) != 0) {
+			totalFrame += 1;
+		}
+
+		for (int frameCnt = 0; frameCnt < totalFrame; frameCnt++) {
+			SerialCam_GetData(pktBuf, PIC_PKT_LEN, frameCnt);
+			HAL_UART_Receive(&console_uart, &pktBuf[4], PIC_PKT_LEN - 6, 100); // strip head 4 byte and tail 2byte
+		}
+		SerialCam_CloseData();
+		HAL_Delay(5000);
+	}
+}
+
+static void tank_test() {
+	l9110s_Drive(1, 1);
+	msg_info("forward");
+	HAL_Delay(1000);
+	l9110s_Drive(-1, -1);
+	msg_info("back");
+	HAL_Delay(1000);
+	l9110s_Drive(1, -1);
+	msg_info("left s");
+	HAL_Delay(1000);
+	l9110s_Drive(-1, 1);
+	msg_info("right s");
+	HAL_Delay(1000);
+	l9110s_Drive(1, 0);
+	msg_info("left");
+	HAL_Delay(1000);
+	l9110s_Drive(0, 1);
+	msg_info("right");
+	HAL_Delay(1000);
+	l9110s_Drive(0, 0);
+	msg_info("stop");
+	HAL_Delay(1000);
+}
+
 static void cloud_test(void const *arg) {
 	iothub_client_XCube_sample_run();
 }
@@ -416,4 +566,13 @@ void Error_Handler(void) {
 	}
 }
 
+void _Error_Handler(char *file, int line)
+{
+  /* USER CODE BEGIN Error_Handler_Debug */
+  /* User can add his own implementation to report the HAL error return state */
+  while(1)
+  {
+  }
+  /* USER CODE END Error_Handler_Debug */
+}
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

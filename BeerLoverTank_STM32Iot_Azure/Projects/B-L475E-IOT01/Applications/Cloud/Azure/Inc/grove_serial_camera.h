@@ -8,8 +8,8 @@
   ******************************************************************************/
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __VL53L0X_PLATFORM_H
-#define __VL53L0X_PLATFORM_H
+#ifndef __GROVE_SERIAL_CAMERA_H
+#define __GROVE_SERIAL_CAMERA_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -49,4 +49,4 @@ SERIAL_CAM_Error SerialCam_CloseData(void);
 }
 #endif
 
-#endif /* __VL53L0X_PLATFORM_H */
+#endif /* __GROVE_SERIAL_CAMERA_H */

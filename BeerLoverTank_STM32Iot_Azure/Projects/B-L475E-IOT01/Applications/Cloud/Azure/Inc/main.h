@@ -89,6 +89,15 @@
 extern int mbedtls_hardware_poll( void *data, unsigned char *output, size_t len, size_t *olen );
 #endif /* USE_MBED_TLS */
 
+#define LEFT_BACK_Pin GPIO_PIN_3
+#define LEFT_BACK_GPIO_Port GPIOA
+#define LEFT_FORWARD_Pin GPIO_PIN_15
+#define LEFT_FORWARD_GPIO_Port GPIOA
+#define RIGHT_FORWARD_Pin GPIO_PIN_1
+#define RIGHT_FORWARD_GPIO_Port GPIOB
+#define RIGHT_BACK_Pin GPIO_PIN_4
+#define RIGHT_BACK_GPIO_Port GPIOB
+
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
@@ -104,6 +113,7 @@ enum {BP_NOT_PUSHED=0, BP_SINGLE_PUSH, BP_MULTIPLE_PUSH};
 
 /* Exported functions --------------------------------------------------------*/
 void    Error_Handler(void);
+void _Error_Handler(char *file, int line);
 uint8_t Button_WaitForPush(uint32_t timeout);
 uint8_t Button_WaitForMultiPush(uint32_t timeout);
 void    Led_SetState(bool on);
