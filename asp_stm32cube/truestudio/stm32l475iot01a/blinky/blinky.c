@@ -81,7 +81,7 @@ char	message[3];
 
 void led_task(intptr_t exinf)
 {
-  //HAL_Init();
+  HAL_Init();
 	BSP_LED_Init(LED_GREEN);
   //Periph_Config();
 
@@ -89,6 +89,10 @@ void led_task(intptr_t exinf)
     //msg_info("Blinky LED 10s\n");
 		syslog(LOG_NOTICE, "Blinky LED 10s");
     Led_Blink(1000, 500, 10);
+		syslog(LOG_NOTICE, "Blinky LED 1");
+    dly_tsk(1000);
+		syslog(LOG_NOTICE, "Blinky LED 2");
+    dly_tsk(1000);
 	}
 }
 
@@ -98,9 +102,18 @@ void led_task(intptr_t exinf)
 void main_task(intptr_t exinf)
 {
 	char	c;
+	ER_UINT	ercd;
 
 	SVC_PERROR(syslog_msk_log(LOG_UPTO(LOG_INFO), LOG_UPTO(LOG_EMERG)));
 	syslog(LOG_NOTICE, "Blinky program starts (exinf = %d).", (int_t) exinf);
+
+	ercd = serial_opn_por(TASK_PORTID);
+	if (ercd < 0 && MERCD(ercd) != E_OBJ) {
+		syslog(LOG_ERROR, "%s (%d) reported by `serial_opn_por'.",
+									itron_strerror(ercd), SERCD(ercd));
+	}
+	SVC_PERROR(serial_ctl_por(TASK_PORTID,
+							(IOCTL_CRLF | IOCTL_FCSND | IOCTL_FCRCV)));
 
 	/*
  	 *  タスクの起動

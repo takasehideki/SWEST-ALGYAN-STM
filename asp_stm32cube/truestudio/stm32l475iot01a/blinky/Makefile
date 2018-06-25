@@ -48,6 +48,9 @@ include $(XCUBE_LIB_DIR)/Drivers/BSP/Makefile.bsp
 #
 INCLUDE_PATHS += -Ixcube-lib-conf 
 
+#C_OBJ += xcube-lib-src/stm32l4xx_hal_msp.o \
+
+
 #
 #  XCUBEライブラリ
 #
