@@ -38,7 +38,8 @@ PROVIDE(hardware_init_hook = 0);
 PROVIDE(software_init_hook = 0);
 PROVIDE(software_term_hook = 0);
 /*STARTUP(start.o)*/
-PROVIDE(g_pfnVectors = _kernel_inh_tbl);
+PROVIDE(g_pfnVectors = _kernel_exc_tbl);
+PROVIDE(_kernel__start = Reset_Handler);
 
 /* Entry Point */
 ENTRY(Reset_Handler)
