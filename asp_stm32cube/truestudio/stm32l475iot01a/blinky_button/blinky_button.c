@@ -37,11 +37,11 @@
  *  アの利用により直接的または間接的に生じたいかなる損害に関しても，そ
  *  の責任を負わない．
  * 
- *  $Id: blinky.c takasehideki $
+ *  $Id: blinky_button.c takasehideki $
  */
 
 /* 
- *  blinkyアプリの本体
+ *  blinky_buttonアプリの本体
  *
  *  プログラムの概要: 
  *
@@ -55,7 +55,7 @@
 #include "syssvc/serial.h"
 #include "syssvc/syslog.h"
 #include "kernel_cfg.h"
-#include "blinky.h"
+#include "blinky_button.h"
 
 #include "stm32l4xx_hal.h"
 #include "stm32l475e_iot01.h"
@@ -105,7 +105,7 @@ void main_task(intptr_t exinf)
 	ER_UINT	ercd;
 
 	SVC_PERROR(syslog_msk_log(LOG_UPTO(LOG_INFO), LOG_UPTO(LOG_EMERG)));
-	syslog(LOG_NOTICE, "Blinky program starts (exinf = %d).", (int_t) exinf);
+	syslog(LOG_NOTICE, "BlinkyButton program starts (exinf = %d).", (int_t) exinf);
 
 	ercd = serial_opn_por(TASK_PORTID);
 	if (ercd < 0 && MERCD(ercd) != E_OBJ) {

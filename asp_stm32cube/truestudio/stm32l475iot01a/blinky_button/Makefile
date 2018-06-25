@@ -7,7 +7,7 @@ all:
 #  アプリケーションファイル
 #
 APPLDIR = .
-APPLNAME = blinky
+APPLNAME = blinky_button
 #USE_CXX = true
 APPL_CFG = $(APPLNAME).cfg
 USE_TRUESTUDIO = true

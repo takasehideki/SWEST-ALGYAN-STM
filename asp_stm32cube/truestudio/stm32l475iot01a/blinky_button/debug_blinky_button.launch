@@ -38,11 +38,11 @@
 <intAttribute key="org.eclipse.cdt.launch.ATTR_BUILD_BEFORE_LAUNCH_ATTR" value="2"/>
 <stringAttribute key="org.eclipse.cdt.launch.DEBUGGER_REGISTER_GROUPS" value=""/>
 <stringAttribute key="org.eclipse.cdt.launch.PROGRAM_NAME" value="asp.elf"/>
-<stringAttribute key="org.eclipse.cdt.launch.PROJECT_ATTR" value="blinky"/>
+<stringAttribute key="org.eclipse.cdt.launch.PROJECT_ATTR" value="blinky_button"/>
 <booleanAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_AUTO_ATTR" value="false"/>
 <stringAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_ID_ATTR" value=""/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/blinky"/>
+<listEntry value="/blinky_button"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="4"/>

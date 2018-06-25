@@ -37,7 +37,7 @@
  *  アの利用により直接的または間接的に生じたいかなる損害に関しても，そ
  *  の責任を負わない．
  *
- *  $Id: blinky.c takasehideki $
+ *  $Id: blinky_button.c takasehideki $
  */
 
 /*
