@@ -119,7 +119,6 @@ LoopFillZerobss:
 //  bl	main
 /* Call TOPPERS kernel _start */
     bl  _kernel__start
-    //bl  sta_ker
 
 
 LoopForever:
