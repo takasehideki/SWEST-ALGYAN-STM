@@ -3,6 +3,7 @@ truestudio/stm32*/.metadata/
 truestudio/stm32*/*/*.o
 truestudio/stm32*/*/*.a
 truestudio/stm32*/*/asp.*
+truestudio/stm32*/*/STM32L4_xcube.map
 truestudio/stm32*/*/cfg1_out.*
 truestudio/stm32*/*/kernel_cfg.*
 truestudio/stm32*/*/offset.h
