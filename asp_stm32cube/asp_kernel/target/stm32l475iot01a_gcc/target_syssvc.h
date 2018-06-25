@@ -84,7 +84,7 @@ extern  uint32_t SystemFrequency;
 /*
  *  起動メッセージのターゲットシステム名
  */
-#define TARGET_NAME    "stm32fl476-nucleo-64(Cortex-M4)"
+#define TARGET_NAME    "stm32l475iot01(Cortex-M4)"
 
 /*
  *  起動メッセージの著作権表示
