@@ -11,8 +11,8 @@ ALL_OBJ = $(ASM_OBJ) $(C_OBJ) $(CXX_OBJ)
 LIBRARY_PATHS = 
 LIBRARIES = 
 ifeq ($(USE_XCUBE_LIB),true)
-#LINKER_SCRIPT = $(XCUBE_LIB_DIR)/stm32l475xx_flash.ld
-LINKER_SCRIPT = $(XCUBE_LIB_DIR)/STM32L475VGTx_FLASH.ld
+LINKER_SCRIPT = $(XCUBE_LIB_DIR)/stm32l475xx_flash.ld
+#LINKER_SCRIPT = $(XCUBE_LIB_DIR)/STM32L475VGTx_FLASH.ld
 endif
 
 ############################################################################### 
@@ -43,27 +43,29 @@ else
 endif
 
 ifneq ($(USE_TRUESTUDIO),true)
-#CPU = -mcpu=cortex-a9 -mthumb -mthumb-interwork -marm -march=armv7-a -mfpu=vfpv3 -mfloat-abi=hard -mno-unaligned-access 
 CPU = -mcpu=cortex-m4 -mthumb -mthumb-interwork -marm -march=armv7-m -mfpu=fpv4-sp-d16 -mfloat-abi=softfp -mlittle-endian -mno-unaligned-access 
 else
-#CPU = -mcpu=cortex-a9 -mthumb -marm -march=armv7-a -mfpu=vfpv3 -mfloat-abi=hard -mno-unaligned-access 
-CPU = -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=softfp -mlittle-endian -mno-unaligned-access 
+CPU = -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard
 endif
 
-CC_FLAGS = $(CPU) -c -g -fno-common -fmessage-length=0 -Wall -Wextra -Wno-unused-parameter -Wno-missing-field-initializers
-CC_FLAGS += -fno-exceptions -fno-builtin -ffunction-sections -fdata-sections -fno-delete-null-pointer-checks -fomit-frame-pointer
+FPU_ABI = hard
+
+#CC_FLAGS = $(CPU) -c -g -fno-common -fmessage-length=0 -Wall -Wextra -Wno-unused-parameter -Wno-missing-field-initializers
+#CC_FLAGS += -fno-exceptions -fno-builtin -ffunction-sections -fdata-sections -fno-delete-null-pointer-checks -fomit-frame-pointer
+CC_FLAGS = $(CPU) -c -g -fmessage-length=0 -Wall -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -ffunction-sections
 CC_FLAGS += -MMD -MP
 
 CC_SYMBOLS = -DTOPPERS_CORTEX_M4 -D__TARGET_ARCH_THUMB=4 -D__TARGET_FPU_FPV4_SP -DTOPPERS_FPU_ENABLE -DTOPPERS_FPU_LAZYSTACKING -DTOPPERS_FPU_CONTEXT  -DROM
-CC_SYMBOLS += -DSTM32L475xx -DUSE_HAL_DRIVER -DSENSOR -DENABLE_IOT_INFO -DENABLE_IOT_ERROR -DENABLE_IOT_WARNING -DDONT_USE_UPLOADTOBLOB -DAZURE -DUSE_MBED_TLS -DEINVAL=22 -DENOMEM=12 -DUSE_WIFI 
-#CC_SYMBOLS += -DSTM32L475xx -DUSE_HAL_DRIVER -DSENSOR -DMBEDTLS_CONFIG_FILE=<az_mbedtls_config.h> -DENABLE_IOT_INFO -DENABLE_IOT_ERROR -DENABLE_IOT_WARNING -DDONT_USE_UPLOADTOBLOB -DAZURE -DUSE_MBED_TLS -DEINVAL=22 -DENOMEM=12 -DUSE_WIFI 
+#CC_SYMBOLS += -DSTM32L475xx -DUSE_HAL_DRIVER -DSENSOR -DENABLE_IOT_INFO -DENABLE_IOT_ERROR -DENABLE_IOT_WARNING -DDONT_USE_UPLOADTOBLOB -DAZURE -DUSE_MBED_TLS -DEINVAL=22 -DENOMEM=12 -DUSE_WIFI
+#CC_SYMBOLS += -DSTM32L475xx -DUSE_HAL_DRIVER '-DEINVAL=-1' '-DENOMEM=EINVAL' '-DMBEDTLS_CONFIG_FILE=<az_mbedtls_config.h>' -DENABLE_IOT_ERROR -DENABLE_IOT_INFO -DENABLE_IOT_WARNING -DSENSOR -DUSE_MBED_TLS -DUSE_WIFI -DAZURE
+CC_SYMBOLS += -DSTM32L475xx -DUSE_HAL_DRIVER '-DEINVAL=-1' '-DENOMEM=EINVAL' -DENABLE_IOT_ERROR -DENABLE_IOT_INFO -DENABLE_IOT_WARNING -DSENSOR -DUSE_MBED_TLS -DUSE_WIFI -DAZURE
 CC_SYMBOLS += -DUSE_XCUBE_WITH_TOPPERS
 
-#LD_FLAGS = $(CPU) -Wl,--gc-sections --specs=nano.specs -u _printf_float -u _scanf_float -Wl,--wrap,main -Wl,-Map=$(PROJECT).map,--cref
-LD_FLAGS = $(CPU) -Wl,--gc-sections -Wl,-Map=$(PROJECT).map,--cref
+#LD_FLAGS = $(CPU) -Wl,--gc-sections -Wl,-Map=$(PROJECT).map,--cref
 #LD_FLAGS = $(CPU) -Wl,--gc-sections -nostartfiles --specs=nano.specs -u _printf_float -u _scanf_float -Wl,-Map=$(PROJECT).map,--cref
-# LD_SYS_LIBS = -lstdc++ -lsupc++ -lm -lc -lgcc -lnosys
-#LD_SYS_LIBS = -lstdc++ -lsupc++ -lm -lc -lc -lgcc -lnosys
+LD_FLAGS = $(CPU) -specs=nosys.specs -specs=nano.specs -u _printf_float -u _scanf_float -Wl,-Map=$(PROJECT).map,--cref
+#LD_SYS_LIBS = -lstdc++ -lsupc++ -lm -lc -lgcc -lnosys
+LD_SYS_LIBS = -lm -lc -lgcc -lnosys
 
 ifeq ($(DEBUG), true)
   CC_FLAGS += -DDEBUG -O0 -ggdb
@@ -102,7 +104,7 @@ APPL_LIBS = libxcube.a
 APPL_DIR = .
 
 INCLUDES += $(INCLUDE_PATHS) # XCUBEライブラリのヘッダファイルをアプリで使う
-COPTS +=  -mfpu=fpv4-sp-d16 -mfloat-abi=softfp
+#COPTS +=  -mfpu=fpv4-sp-d16 -mfloat-abi=softfp
 CDEFS += -DTOPPERS_OMIT_BSS_INIT -DTOPPERS_OMIT_DATA_INIT # ASPのスタートアップルーチンでは初期化処理は不要
 
 APPL_CFLAGS += $(CC_FLAGS) $(CC_SYMBOLS)
