@@ -20,7 +20,7 @@ endif
 #
 #  クロック設定定義
 #
-#MSI_RANGE = 6
+#MSI_RANGE = 11
 
 #
 #  FPUの方式
