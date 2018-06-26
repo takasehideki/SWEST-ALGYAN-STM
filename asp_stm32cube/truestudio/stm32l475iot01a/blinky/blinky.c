@@ -82,18 +82,17 @@ char	message[3];
 void led_task(intptr_t exinf)
 {
   HAL_Init();
-	BSP_LED_Init(LED_GREEN);
-  //Periph_Config();
+  BSP_LED_Init(LED_GREEN);
 
-	while (true) {
+  while (true) {
     //msg_info("Blinky LED 10s\n");
-		syslog(LOG_NOTICE, "Blinky LED 10s");
+    syslog(LOG_NOTICE, "Blinky LED 1");
+    dly_tsk(1000);
+    syslog(LOG_NOTICE, "Blinky LED 10s");
     Led_Blink(1000, 500, 10);
-		syslog(LOG_NOTICE, "Blinky LED 1");
+    syslog(LOG_NOTICE, "Blinky LED 2");
     dly_tsk(1000);
-		syslog(LOG_NOTICE, "Blinky LED 2");
-    dly_tsk(1000);
-	}
+  }
 }
 
 /*
@@ -101,45 +100,45 @@ void led_task(intptr_t exinf)
  */
 void main_task(intptr_t exinf)
 {
-	char	c;
-	ER_UINT	ercd;
+  char	c;
+  ER_UINT	ercd;
 
-	SVC_PERROR(syslog_msk_log(LOG_UPTO(LOG_INFO), LOG_UPTO(LOG_EMERG)));
-	syslog(LOG_NOTICE, "Blinky program starts (exinf = %d).", (int_t) exinf);
+  SVC_PERROR(syslog_msk_log(LOG_UPTO(LOG_INFO), LOG_UPTO(LOG_EMERG)));
+  syslog(LOG_NOTICE, "Blinky program starts (exinf = %d).", (int_t) exinf);
 
-	ercd = serial_opn_por(TASK_PORTID);
-	if (ercd < 0 && MERCD(ercd) != E_OBJ) {
-		syslog(LOG_ERROR, "%s (%d) reported by `serial_opn_por'.",
-									itron_strerror(ercd), SERCD(ercd));
-	}
-	SVC_PERROR(serial_ctl_por(TASK_PORTID,
-							(IOCTL_CRLF | IOCTL_FCSND | IOCTL_FCRCV)));
+  ercd = serial_opn_por(TASK_PORTID);
+  if (ercd < 0 && MERCD(ercd) != E_OBJ) {
+    syslog(LOG_ERROR, "%s (%d) reported by `serial_opn_por'.",
+        itron_strerror(ercd), SERCD(ercd));
+  }
+  SVC_PERROR(serial_ctl_por(TASK_PORTID,
+        (IOCTL_CRLF | IOCTL_FCSND | IOCTL_FCRCV)));
 
-	/*
- 	 *  タスクの起動
-	 */
-	SVC_PERROR(act_tsk(LED_TASK));
+  /*
+   *  タスクの起動
+   */
+  SVC_PERROR(act_tsk(LED_TASK));
 
-	/*
- 	 *  メインループ
-	 */
-	do {
-		SVC_PERROR(serial_rea_dat(TASK_PORTID, &c, 1));
-		switch (c) {
-		default:
-			break;
-		}
-	} while (c != '\003' && c != 'Q');
+  /*
+   *  メインループ
+   */
+  do {
+    SVC_PERROR(serial_rea_dat(TASK_PORTID, &c, 1));
+    switch (c) {
+      default:
+        break;
+    }
+  } while (c != '\003' && c != 'Q');
 
-	syslog(LOG_NOTICE, "Sample program ends.");
-	SVC_PERROR(ext_ker());
-	assert(0);
+  syslog(LOG_NOTICE, "Sample program ends.");
+  SVC_PERROR(ext_ker());
+  assert(0);
 }
 
 
 /**
-  * @brief Set LED state
-  */
+ * @brief Set LED state
+ */
 void Led_SetState(bool_t on)
 {
   if (on == true)
@@ -161,7 +160,7 @@ void Led_Blink(int period, int duty, int count)
   if ( (duty > 0) && (period >= duty) )
   {
     /*  Shape:   ____
-                  on |_off__ */
+        on |_off__ */
     do
     {
       Led_SetState(true);
@@ -173,7 +172,7 @@ void Led_Blink(int period, int duty, int count)
   if ( (duty < 0) && (period >= -duty) )
   {
     /*  Shape:         ____
-                __off_| on   */
+        __off_| on   */
     do
     {
       Led_SetState(false);

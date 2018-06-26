@@ -85,4 +85,7 @@ extern void	main_task(intptr_t exinf);
 void    Led_SetState(bool_t on);
 void    Led_Blink(int period, int duty, int count);
 
+enum {BP_NOT_PUSHED=0, BP_SINGLE_PUSH, BP_MULTIPLE_PUSH};
+
+
 
