@@ -358,11 +358,9 @@ $(OBJFILE): $(APPL_CFG) kernel_cfg.timestamp $(ALL_OBJS) $(LIBS_DEP)
 			$(APPL_OBJS) $(SYSSVC_OBJS) $(CFG_OBJS) $(ALL_LIBS) $(END_OBJS)
 	$(NM) -n $(OBJFILE) > $(OBJNAME).syms
 	$(OBJCOPY) -O srec -S $(OBJFILE) $(OBJNAME).srec
-ifneq ($(USE_XCUBE_LIB),true)
 	$(CFG) --pass 3 --kernel asp $(INCLUDES) \
 				--rom-image $(OBJNAME).srec --symbol-table $(OBJNAME).syms \
 				-T $(TARGETDIR)/target_check.tf $(CFG_TABS) $<
-endif
 
 #
 #  バイナリファイルの生成
