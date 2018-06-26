@@ -37,12 +37,14 @@
 PROVIDE(hardware_init_hook = 0);
 PROVIDE(software_init_hook = 0);
 PROVIDE(software_term_hook = 0);
-/*STARTUP(start.o)*/
-PROVIDE(g_pfnVectors = _kernel_exc_tbl);
+
+STARTUP(start.o)
+/*STARTUP(startup_stm32l475xx.o)
 PROVIDE(_kernel__start = Reset_Handler);
+PROVIDE(Reset_Handler = _kernel_vector_table);*/
 
 /* Entry Point */
-ENTRY(Reset_Handler)
+/*ENTRY(Reset_Handler)*/
 
 /* Highest address of the user mode stack */
 _estack = 0x20018000;    /* end of RAM */

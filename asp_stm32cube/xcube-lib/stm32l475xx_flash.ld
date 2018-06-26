@@ -12,11 +12,11 @@ PROVIDE(hardware_init_hook = 0);
 PROVIDE(software_init_hook = 0);
 PROVIDE(software_term_hook = 0);
 
-PROVIDE(g_pfnVectors = _kernel_inh_tbl);
 
-/*STARTUP(start.o)*/
-/*STARTUP(startup_stm32l475xx.o)*/
-ENTRY(Reset_Handler)
+STARTUP(start.o)
+/*STARTUP(startup_stm32l475xx.o)
+PROVIDE(g_pfnVectors = _kernel_inh_tbl);
+ENTRY(Reset_Handler)*/
 
 SECTIONS
 {
