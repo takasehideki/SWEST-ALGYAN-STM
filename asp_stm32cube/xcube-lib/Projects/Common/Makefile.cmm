@@ -1,0 +1,10 @@
+ASM_OBJ += 
+
+C_OBJ += 
+
+CXX_OBJ += 
+
+INCLUDE_PATHS += -I. 
+
+
+

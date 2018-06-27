@@ -1,9 +1,6 @@
-#ASM_OBJ += $(XCUBE_LIB_DIR)/Drivers/CMSIS/Device/ST/STM32L4xx/Source/startup_stm32l475xx.o 
 ASM_OBJ += 
 
-C_OBJ += $(XCUBE_LIB_DIR)/Drivers/CMSIS/Device/ST/STM32L4xx/Source/system_stm32l4xx.o \
-		$(XCUBE_LIB_DIR)/Drivers/CMSIS/Device/ST/STM32L4xx/Source/syscalls.o \
-		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.o \
+C_OBJ += $(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.o \
 		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_can.o \
 		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.o \
 		$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_crc.o \
@@ -46,10 +43,5 @@ C_OBJ += $(XCUBE_LIB_DIR)/Drivers/CMSIS/Device/ST/STM32L4xx/Source/system_stm32l
 CXX_OBJ += 
 
 INCLUDE_PATHS += -I. \
-		-I$(XCUBE_LIB_DIR)/Drivers/CMSIS/Device/ST/STM32L4xx/Source \
-		-I$(XCUBE_LIB_DIR)/Drivers/CMSIS/Device/ST/STM32L4xx/Include 
-
-INCLUDE_PATHS += -I. \
-		-I$(XCUBE_LIB_DIR)/Drivers/CMSIS/Include \
 		-I$(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Inc 
 

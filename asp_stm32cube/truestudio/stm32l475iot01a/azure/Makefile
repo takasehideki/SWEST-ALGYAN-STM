@@ -40,13 +40,16 @@ SRCDIR = ../../../asp_kernel
 #
 #  XCUBEライブラリのビルド
 #
-include $(XCUBE_LIB_DIR)/Drivers/Makefile.cms
+include $(XCUBE_LIB_DIR)/Drivers/CMSIS/Makefile.cms
+include $(XCUBE_LIB_DIR)/Drivers/STM32L4xx_HAL_Driver/Makefile.hal
 include $(XCUBE_LIB_DIR)/Drivers/BSP/Makefile.bsp
+include $(XCUBE_LIB_DIR)/Projects/B-L475E-IOT01/Applications/Cloud/Azure/Makefile.app
+include $(XCUBE_LIB_DIR)/Projects/Common/Makefile.cmm
 
 #
 #  XCUBEライブラリのコンフィギュレーション設定用のヘッダファイル
 #
-INCLUDE_PATHS += -Ixcube-lib-conf 
+#INCLUDE_PATHS += -Ixcube-lib-conf 
 
 #
 #  XCUBEライブラリ用の割込み定義
