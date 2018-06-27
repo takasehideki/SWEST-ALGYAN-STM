@@ -81,7 +81,9 @@ char	message[3];
 
 void led_task(intptr_t exinf)
 {
+  /* 内部では何もしていないので書かなくてもよい */
   HAL_Init();
+  /* オンボードLED(LD2)を使用できるように初期化 */
   BSP_LED_Init(LED_GREEN);
 
   while (true) {
