@@ -14,8 +14,8 @@ PROVIDE(software_term_hook = 0);
 
 
 STARTUP(start.o)
-/*STARTUP(startup_stm32l475xx.o)
 PROVIDE(g_pfnVectors = _kernel_inh_tbl);
+/*STARTUP(startup_stm32l475xx.o)
 ENTRY(Reset_Handler)*/
 
 SECTIONS

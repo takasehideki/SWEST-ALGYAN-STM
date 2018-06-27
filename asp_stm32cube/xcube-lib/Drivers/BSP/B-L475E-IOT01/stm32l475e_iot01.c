@@ -270,9 +270,11 @@ void BSP_PB_Init(Button_TypeDef Button, ButtonMode_TypeDef ButtonMode)
     
     HAL_GPIO_Init(BUTTON_PORT[Button], &gpio_init_structure);
     
+#ifndef USE_XCUBE_WITH_TOPPERS
     /* Enable and set Button EXTI Interrupt to the lowest priority */
     HAL_NVIC_SetPriority((IRQn_Type)(BUTTON_IRQn[Button]), 0x0F, 0x00);
     HAL_NVIC_EnableIRQ((IRQn_Type)(BUTTON_IRQn[Button]));
+#endif /* USE_XCUBE_WITH_TOPPERS */
   }
 }
 
