@@ -52,6 +52,9 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
+/*
+ *  TOPEPRSコンフィギュレータ（cfg1_out, kernel_cfg）の対応のための記述
+ */
 #if defined(TOPPERS_CFG1_OUT) || defined(TOPPERS_KERNEL_CFG_H)
 #include "arch/arm_m_gcc/stm32l4xx/stm32l4xx.h"
 #else
@@ -76,11 +79,17 @@ void EXTI15_10_IRQHandler(void);
 void EXTI1_IRQHandler(void);
 
 
-#ifndef TOPPERS_MACRO_ONLY
-void myBSP_PB_Init_ISR(void);
-void myBSP_PB_DeInit_ISR(void);
+/*
+ *  以降，TOPPERS対応の記述
+ */
 
-#endif /* TOPPERS_MACRO_ONLY */
+/* 
+ *  ExternalLine[15:10]割込みハンドラ登録のための定数
+ */
+#define INHNO_EXTI15_10     56    /* 割込みハンドラ番号 */
+#define INTNO_EXTI15_10     56    /* 割込み番号 */
+#define INTPRI_EXTI15_10    (-15) /* 割込み優先度 */
+#define INTATR_EXTI15_10    0U    /* 割込み属性 */
 
 
 #ifdef __cplusplus

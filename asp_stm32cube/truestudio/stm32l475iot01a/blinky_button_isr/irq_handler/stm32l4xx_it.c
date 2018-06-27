@@ -181,12 +181,3 @@ void EXTI1_IRQHandler(void)
 }
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
-
-void myBSP_PB_Init_ISR(void) {
-  //BSP_PB_Init(BUTTON_USER, BUTTON_MODE_EXTI);
-  BSP_PB_Init(BUTTON_USER, BUTTON_MODE_GPIO);
-}
-
-void myBSP_PB_DeInit_ISR(void) {
-  BSP_PB_DeInit(BUTTON_USER);
-}

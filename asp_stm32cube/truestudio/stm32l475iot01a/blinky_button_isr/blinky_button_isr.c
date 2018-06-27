@@ -84,16 +84,16 @@ static void Button_ISR(void);
 
 void led_task(intptr_t exinf)
 {
+  /* 内部では何もしていないので書かなくてもよい */
   HAL_Init();
+  /* オンボードLED(LD2)を使用できるように初期化 */
   BSP_LED_Init(LED_GREEN);
-  /* ATT_INI内で初期化しているので記述不要 */
-  //BSP_PB_Init(BUTTON_USER, BUTTON_MODE_EXTI);
+  /* USER Push-SWを割込みモードで使用できるように初期化 */
+  BSP_PB_Init(BUTTON_USER, BUTTON_MODE_EXTI);
 
   while (true) {
-    syslog(LOG_NOTICE, "delay 1s");
-    dly_tsk(1000);
-    if (!BSP_PB_GetState(BUTTON_USER)) {
-    //if (Button_WaitForPush(100) != BP_NOT_PUSHED) {
+    syslog(LOG_NOTICE, "Wait for interrupt upto 1s");
+    if (Button_WaitForPush(1000) != BP_NOT_PUSHED) {
       //msg_info("Blinky LED 10s\n");
       syslog(LOG_NOTICE, "Blinky LED 10s");
       Led_Blink(1000, 500, 10);
