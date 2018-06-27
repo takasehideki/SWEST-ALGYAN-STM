@@ -49,6 +49,12 @@ include $(XCUBE_LIB_DIR)/Drivers/BSP/Makefile.bsp
 INCLUDE_PATHS += -Ixcube-lib-conf 
 
 #
+#  XCUBEライブラリ用の割込み定義
+#
+C_OBJ += irq_handler/stm32l4xx_it.o
+INCLUDE_PATHS += -Iirq_handler
+
+#
 #  XCUBEライブラリ
 #
 include ../Makefile.xcb

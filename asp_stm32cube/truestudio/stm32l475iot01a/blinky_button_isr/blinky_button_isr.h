@@ -87,5 +87,6 @@ void    Led_Blink(int period, int duty, int count);
 
 enum {BP_NOT_PUSHED=0, BP_SINGLE_PUSH, BP_MULTIPLE_PUSH};
 
+uint8_t Button_WaitForPush(uint32_t timeout);
 
 

@@ -78,16 +78,22 @@ svc_perror(const char *file, int_t line, const char *expr, ER ercd)
  */
 char	message[3];
 
+static volatile uint8_t button_flags = 0;
+static void Button_ISR(void);
+
+
 void led_task(intptr_t exinf)
 {
   HAL_Init();
   BSP_LED_Init(LED_GREEN);
-  BSP_PB_Init(BUTTON_USER, BUTTON_MODE_GPIO);
+  /* ATT_INI内で初期化しているので記述不要 */
+  //BSP_PB_Init(BUTTON_USER, BUTTON_MODE_EXTI);
 
   while (true) {
     syslog(LOG_NOTICE, "delay 1s");
     dly_tsk(1000);
     if (!BSP_PB_GetState(BUTTON_USER)) {
+    //if (Button_WaitForPush(100) != BP_NOT_PUSHED) {
       //msg_info("Blinky LED 10s\n");
       syslog(LOG_NOTICE, "Blinky LED 10s");
       Led_Blink(1000, 500, 10);
@@ -182,4 +188,61 @@ void Led_Blink(int period, int duty, int count)
     } while (count--);
   }
 }
+
+/**
+ * @brief Update button ISR status
+ */
+static void Button_ISR(void)
+{
+  button_flags++;
+}
+
+
+/**
+ * @brief Waiting for button to be pushed
+ */
+uint8_t Button_WaitForPush(uint32_t delay)
+{
+  uint32_t time_out = HAL_GetTick()+delay;
+  do
+  {
+    if (button_flags > 1)
+    {   
+      button_flags = 0;
+      return BP_MULTIPLE_PUSH;
+    }
+
+    if (button_flags == 1)
+    {
+      button_flags = 0;
+      return BP_SINGLE_PUSH;
+    }
+  }
+  while( HAL_GetTick() < time_out);
+  return BP_NOT_PUSHED;
+}
+
+/**
+ * @brief  EXTI line detection callback.
+ * @param  GPIO_Pin: Specifies the port pin connected to corresponding EXTI line.
+ * @retval None
+ */
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+  switch (GPIO_Pin)
+  {
+    case (GPIO_PIN_13):
+      {
+        Button_ISR();
+        break;
+      }
+
+    default:
+      {
+        break;
+      }
+  }
+}
+
+
 

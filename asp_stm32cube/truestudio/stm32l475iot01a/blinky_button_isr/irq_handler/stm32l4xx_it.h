@@ -52,7 +52,11 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32l4xx_hal.h"
+#if defined(TOPPERS_CFG1_OUT) || defined(TOPPERS_KERNEL_CFG_H)
+#include "arch/arm_m_gcc/stm32l4xx/stm32l4xx.h"
+#else
+#include "stm32l475e_iot01.h"
+#endif
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
@@ -70,10 +74,20 @@ void PendSV_Handler(void);
 void SysTick_Handler(void);
 void EXTI15_10_IRQHandler(void);
 void EXTI1_IRQHandler(void);
+
+
+#ifndef TOPPERS_MACRO_ONLY
+void myBSP_PB_Init_ISR(void);
+void myBSP_PB_DeInit_ISR(void);
+
+#endif /* TOPPERS_MACRO_ONLY */
+
+
 #ifdef __cplusplus
 }
 #endif
 
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
 #endif /* __STM32L4xx_IT_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
