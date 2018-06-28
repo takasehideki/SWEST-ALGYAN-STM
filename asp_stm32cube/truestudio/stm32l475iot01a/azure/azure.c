@@ -169,6 +169,15 @@ void led_task(intptr_t exinf)
 
 void azure_task(intptr_t exinf)
 {
+  syslog(LOG_NOTICE, "Azure program starts (exinf = %d).", (int_t) exinf);
+
+  /* 内部では何もしていないので書かなくてもよい */
+  HAL_Init();
+  /* オンボードLED(LD2)を使用できるように初期化 */
+  BSP_LED_Init(LED_GREEN);
+  /* USER Push-SWを割込みモードで使用できるように初期化 */
+  BSP_PB_Init(BUTTON_USER, BUTTON_MODE_EXTI);
+
   /* RNG init function */
   hrng.Instance = RNG;
   if (HAL_RNG_Init(&hrng) != HAL_OK)
