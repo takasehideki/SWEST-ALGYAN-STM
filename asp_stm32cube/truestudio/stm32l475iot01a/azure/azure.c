@@ -57,9 +57,6 @@
 #include "kernel_cfg.h"
 #include "azure.h"
 
-#include "stm32l4xx_hal.h"
-#include "stm32l475e_iot01.h"
-
 /*
  *  サービスコールのエラーのログ出力
  */
@@ -74,12 +71,81 @@ svc_perror(const char *file, int_t line, const char *expr, ER ercd)
 #define	SVC_PERROR(expr)	svc_perror(__FILE__, __LINE__, #expr, (expr))
 
 /*
- *  並行実行されるタスクへのメッセージ領域
+ *  メインタスク
  */
-char	message[3];
+void main_task(intptr_t exinf)
+{
+  char	c;
+  ER_UINT	ercd;
 
+  SVC_PERROR(syslog_msk_log(LOG_UPTO(LOG_INFO), LOG_UPTO(LOG_EMERG)));
+  syslog(LOG_NOTICE, "BlinkyButtonISR program starts (exinf = %d).", (int_t) exinf);
+
+  /* ここでシリアルオープンしたら後々に死ぬ可能性あり */
+  ercd = serial_opn_por(TASK_PORTID);
+  if (ercd < 0 && MERCD(ercd) != E_OBJ) {
+    syslog(LOG_ERROR, "%s (%d) reported by `serial_opn_por'.",
+        itron_strerror(ercd), SERCD(ercd));
+  }
+  SVC_PERROR(serial_ctl_por(TASK_PORTID,
+        (IOCTL_CRLF | IOCTL_FCSND | IOCTL_FCRCV)));
+
+  /*
+   *  タスクの起動
+   */
+  SVC_PERROR(act_tsk(LED_TASK));
+  //SVC_PERROR(act_tsk(AZURE_TASK));
+
+  /*
+   *  メインループ
+   */
+  do {
+    SVC_PERROR(serial_rea_dat(TASK_PORTID, &c, 1));
+    switch (c) {
+      default:
+        break;
+    }
+  } while (c != '\003' && c != 'Q');
+
+  syslog(LOG_NOTICE, "Sample program ends.");
+  SVC_PERROR(ext_ker());
+  assert(0);
+}
+
+
+/*
+ *  ここからAzureアプリの記述
+ */
+/* Includes ------------------------------------------------------------------*/
+#include "main.h"
+
+
+extern void iothub_client_XCube_sample_run(void);
+
+/* Global variables ---------------------------------------------------------*/
+RTC_HandleTypeDef hrtc;
+RNG_HandleTypeDef hrng;
+net_hnd_t         hnet; /* Is initialized by cloud_main(). */
+
+/* Private typedef -----------------------------------------------------------*/
+/* Private defines -----------------------------------------------------------*/
+
+/* Private macros ------------------------------------------------------------*/
+/* Private variables ---------------------------------------------------------*/
+/* TOPPERS側でUSART1を使えるようにしてるから要らないはず */
+//static UART_HandleTypeDef console_uart;
 static volatile uint8_t button_flags = 0;
+
+/* Private function prototypes -----------------------------------------------*/
+/* startupで初期化できているはずなので要らないはず */
+//static void SystemClock_Config(void);
+void SPI_WIFI_ISR(void);
+
+/* TOPPERS側でUSART1を使えるようにしてるから要らないはず */
+//static void Console_UART_Init(void);
+static void RTC_Init(void);
 static void Button_ISR(void);
+static void cloud_test(void const *arg);
 
 
 void led_task(intptr_t exinf)
@@ -101,51 +167,35 @@ void led_task(intptr_t exinf)
   }
 }
 
-/*
- *  メインタスク
- */
-void main_task(intptr_t exinf)
+void azure_task(intptr_t exinf)
 {
-  char	c;
-  ER_UINT	ercd;
-
-  SVC_PERROR(syslog_msk_log(LOG_UPTO(LOG_INFO), LOG_UPTO(LOG_EMERG)));
-  syslog(LOG_NOTICE, "BlinkyButtonISR program starts (exinf = %d).", (int_t) exinf);
-
-  ercd = serial_opn_por(TASK_PORTID);
-  if (ercd < 0 && MERCD(ercd) != E_OBJ) {
-    syslog(LOG_ERROR, "%s (%d) reported by `serial_opn_por'.",
-        itron_strerror(ercd), SERCD(ercd));
+  /* RNG init function */
+  hrng.Instance = RNG;
+  if (HAL_RNG_Init(&hrng) != HAL_OK)
+  {
+    Error_Handler();
   }
-  SVC_PERROR(serial_ctl_por(TASK_PORTID,
-        (IOCTL_CRLF | IOCTL_FCSND | IOCTL_FCRCV)));
 
-  /*
-   *  タスクの起動
-   */
-  SVC_PERROR(act_tsk(LED_TASK));
+  /* RTC init */
+  RTC_Init();
+  /* UART console init */
+  //Console_UART_Init();  
 
-  /*
-   *  メインループ
-   */
-  do {
-    SVC_PERROR(serial_rea_dat(TASK_PORTID, &c, 1));
-    switch (c) {
-      default:
-        break;
-    }
-  } while (c != '\003' && c != 'Q');
+#ifdef FIREWALL_MBEDLIB
+  firewall_init();
+#endif
 
-  syslog(LOG_NOTICE, "Sample program ends.");
-  SVC_PERROR(ext_ker());
-  assert(0);
+  msg_info("Hello\n");
+
+  cloud_test(0);
 }
+
 
 
 /**
  * @brief Set LED state
  */
-void Led_SetState(bool_t on)
+void Led_SetState(bool on)
 {
   if (on == true)
   {
@@ -197,7 +247,6 @@ static void Button_ISR(void)
   button_flags++;
 }
 
-
 /**
  * @brief Waiting for button to be pushed
  */
@@ -223,6 +272,54 @@ uint8_t Button_WaitForPush(uint32_t delay)
 }
 
 /**
+ * @brief Waiting for button to be pushed
+ */
+uint8_t Button_WaitForMultiPush(uint32_t delay)
+{
+  HAL_Delay(delay);
+  if (button_flags > 1)
+  {
+    button_flags = 0;
+    return BP_MULTIPLE_PUSH;
+  }
+
+  if (button_flags == 1)
+  {
+    button_flags = 0;
+    return BP_SINGLE_PUSH;
+  }
+  return BP_NOT_PUSHED;
+}
+
+/**
+ * @brief RTC init function
+ */
+static void RTC_Init(void)
+{
+  /**Initialize RTC Only */
+  hrtc.Instance = RTC;
+  hrtc.Init.HourFormat = RTC_HOURFORMAT_24;
+  hrtc.Init.AsynchPrediv = 127;
+  hrtc.Init.SynchPrediv = 255;
+  hrtc.Init.OutPut = RTC_OUTPUT_DISABLE;
+#ifdef RTC_OUTPUT_REMAP_NONE
+  hrtc.Init.OutPutRemap = RTC_OUTPUT_REMAP_NONE;
+#endif
+  hrtc.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
+  hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
+  if (HAL_RTC_Init(&hrtc) != HAL_OK)
+  {
+    Error_Handler();
+  }
+}
+
+static void cloud_test(void const *arg)
+{
+  iothub_client_XCube_sample_run();
+}
+
+
+/**
  * @brief  EXTI line detection callback.
  * @param  GPIO_Pin: Specifies the port pin connected to corresponding EXTI line.
  * @retval None
@@ -237,6 +334,12 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
         break;
       }
 
+    case (GPIO_PIN_1):
+      {
+        SPI_WIFI_ISR();
+        break;
+      }
+
     default:
       {
         break;
@@ -244,5 +347,24 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   }
 }
 
+void SPI3_IRQHandler(void)
+{
+  HAL_SPI_IRQHandler(&hspi);
+}
+/**
+ * @brief  This function is executed in case of error occurrence.
+ * @param  None
+ * @retval None
+ */
 
+void Error_Handler(void)
+{
+  while(1)
+  {
+    BSP_LED_Toggle(LED_GREEN);
+    HAL_Delay(200);
+  }
+}
+
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 

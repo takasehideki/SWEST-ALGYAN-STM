@@ -47,14 +47,14 @@
 /*
  *  ターゲット依存の定義
  */
-#include "target_test.h"
+//#include "target_test.h"
 
 /*
  *  各タスクの優先度の定義
  */
 
 #define MAIN_PRIORITY	5		/* メインタスクの優先度 */
-								/* HIGH_PRIORITYより高くすること */
+/* HIGH_PRIORITYより高くすること */
 
 #define HIGH_PRIORITY	9		/* 並行実行されるタスクの優先度 */
 #define MID_PRIORITY	10
@@ -78,15 +78,20 @@
 #ifndef TOPPERS_MACRO_ONLY
 
 extern void	led_task(intptr_t exinf);
+extern void	azure_task(intptr_t exinf);
 extern void	main_task(intptr_t exinf);
 
 #endif /* TOPPERS_MACRO_ONLY */
 
-void    Led_SetState(bool_t on);
-void    Led_Blink(int period, int duty, int count);
+/* SPI3割込み用の記述 */
+void SPI3_IRQHandler(void);
+#define INHNO_SPI3     67    /* 割込みハンドラ番号 */
+#define INTNO_SPI3     67    /* 割込み番号 */
+#define INTPRI_SPI3    (-15) /* 割込み優先度 */
+#define INTATR_SPI3    0U    /* 割込み属性 */
 
-enum {BP_NOT_PUSHED=0, BP_SINGLE_PUSH, BP_MULTIPLE_PUSH};
 
-uint8_t Button_WaitForPush(uint32_t timeout);
-
-
+/*
+ *  元々のmain.hの記述をここに書くとビルドが通らないので
+ *  main.hにコピペして書くこと
+ */
