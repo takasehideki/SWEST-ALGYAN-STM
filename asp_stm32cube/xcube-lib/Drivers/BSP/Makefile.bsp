@@ -1,32 +1,24 @@
 ASM_OBJ += 
 
-C_OBJ += $(XCUBE_LIB_DIR)/Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01.o \
-		$(XCUBE_LIB_DIR)/Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_accelero.o \
-		$(XCUBE_LIB_DIR)/Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_gyro.o \
-		$(XCUBE_LIB_DIR)/Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_hsensor.o \
-		$(XCUBE_LIB_DIR)/Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_magneto.o \
-		$(XCUBE_LIB_DIR)/Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_psensor.o \
-		$(XCUBE_LIB_DIR)/Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_tsensor.o 
-
-#		$(XCUBE_LIB_DIR)/Drivers/BSP/B-L475-IOT01/stm32l475e_iot01_qspi.o \
-
-C_OBJ += $(XCUBE_LIB_DIR)/Drivers/BSP/Components/es_wifi/es_wifi.o \
-		$(XCUBE_LIB_DIR)/Drivers/BSP/Components/hts221/hts221.o \
-		$(XCUBE_LIB_DIR)/Drivers/BSP/Components/lis3mdl/lis3mdl.o \
-		$(XCUBE_LIB_DIR)/Drivers/BSP/Components/lps22hb/lps22hb.o \
-		$(XCUBE_LIB_DIR)/Drivers/BSP/Components/lsm6dsl/lsm6dsl.o \
-		$(XCUBE_LIB_DIR)/Drivers/BSP/Components/vl53l0x/vl53l0x_api.o \
-		$(XCUBE_LIB_DIR)/Drivers/BSP/Components/vl53l0x/vl53l0x_api_calibration.o \
-		$(XCUBE_LIB_DIR)/Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.o \
-		$(XCUBE_LIB_DIR)/Drivers/BSP/Components/vl53l0x/vl53l0x_api_ranging.o \
-		$(XCUBE_LIB_DIR)/Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.o \
-		$(XCUBE_LIB_DIR)/Drivers/BSP/Components/vl53l0x/vl53l0x_platform_log.o 
-
-#		$(XCUBE_LIB_DIR)/Drivers/BSP/Components/adv7533/adv7533.o \
-#		$(XCUBE_LIB_DIR)/Drivers/BSP/Components/mfxstm32l152/mfxstm32l152.o \
-#		$(XCUBE_LIB_DIR)/Drivers/BSP/Components/otm8009a/otm8009a.o \
-#		$(XCUBE_LIB_DIR)/Drivers/BSP/Components/spirit1/spirit1.o \
-#		$(XCUBE_LIB_DIR)/Drivers/BSP/Components/st7789h2/st7789h2.o \
+C_OBJ += \
+		${XCUBE_LIB_DIR}/Drivers/BSP/Components/vl53l0x/vl53l0x_api.o \
+		${XCUBE_LIB_DIR}/Drivers/BSP/Components/vl53l0x/vl53l0x_api_calibration.o \
+		${XCUBE_LIB_DIR}/Drivers/BSP/Components/vl53l0x/vl53l0x_api_core.o \
+		${XCUBE_LIB_DIR}/Drivers/BSP/Components/vl53l0x/vl53l0x_api_ranging.o \
+		${XCUBE_LIB_DIR}/Drivers/BSP/Components/vl53l0x/vl53l0x_api_strings.o \
+		${XCUBE_LIB_DIR}/Drivers/BSP/Components/vl53l0x/vl53l0x_platform_log.o \
+		${XCUBE_LIB_DIR}/Drivers/BSP/Components/lsm6dsl/lsm6dsl.o \
+		${XCUBE_LIB_DIR}/Drivers/BSP/Components/lps22hb/lps22hb.o \
+		${XCUBE_LIB_DIR}/Drivers/BSP/Components/lis3mdl/lis3mdl.o \
+		${XCUBE_LIB_DIR}/Drivers/BSP/Components/hts221/hts221.o \
+		${XCUBE_LIB_DIR}/Drivers/BSP/Components/es_wifi/es_wifi.o \
+		${XCUBE_LIB_DIR}/Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01.o \
+		${XCUBE_LIB_DIR}/Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_accelero.o \
+		${XCUBE_LIB_DIR}/Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_gyro.o \
+		${XCUBE_LIB_DIR}/Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_hsensor.o \
+		${XCUBE_LIB_DIR}/Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_magneto.o \
+		${XCUBE_LIB_DIR}/Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_psensor.o \
+		${XCUBE_LIB_DIR}/Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01_tsensor.o \
 
 CXX_OBJ += 
 

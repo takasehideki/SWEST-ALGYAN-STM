@@ -1,10 +1,38 @@
 ASM_OBJ += 
 
-C_OBJ += 
+C_OBJ += \
+		${XCUBE_LIB_DIR}/Projects/Common/Shared/Src/STM32CubeRTCInterface.o \
+		${XCUBE_LIB_DIR}/Projects/Common/Shared/Src/cloud.o \
+		${XCUBE_LIB_DIR}/Projects/Common/Shared/Src/entropy_hardware_poll.o \
+		${XCUBE_LIB_DIR}/Projects/Common/Shared/Src/heap.o \
+		${XCUBE_LIB_DIR}/Projects/Common/Shared/Src/http_util.o \
+		${XCUBE_LIB_DIR}/Projects/Common/Shared/Src/iot_flash_config.o \
+		${XCUBE_LIB_DIR}/Projects/Common/Shared/Src/mbedtls_net.o \
+		${XCUBE_LIB_DIR}/Projects/Common/Shared/Src/net.o \
+		${XCUBE_LIB_DIR}/Projects/Common/Shared/Src/net_tcp_wifi.o \
+		${XCUBE_LIB_DIR}/Projects/Common/Shared/Src/net_tls_mbedtls.o \
+		${XCUBE_LIB_DIR}/Projects/Common/Shared/Src/rfu.o \
+		${XCUBE_LIB_DIR}/Projects/Common/Shared/Src/sensors_data.o \
+		${XCUBE_LIB_DIR}/Projects/Common/Shared/Src/timedate.o \
+		${XCUBE_LIB_DIR}/Projects/Common/Shared/Src/timingSystem.o \
+		${XCUBE_LIB_DIR}/Projects/Common/Shared/Src/wifi_net.o \
+		${XCUBE_LIB_DIR}/Projects/Common/Azure/Src/AzureXcubeSample.o \
+		${XCUBE_LIB_DIR}/Projects/Common/Azure/Src/az_platform_STM32Cube.o \
+		${XCUBE_LIB_DIR}/Projects/Common/Azure/Src/az_socketio_mbed.o \
+		${XCUBE_LIB_DIR}/Projects/Common/Azure/Src/az_tcpsocketconnection_c_STM32Cube.o \
+		${XCUBE_LIB_DIR}/Projects/Common/Azure/Src/az_threadapi_STM32Cube.o \
+		${XCUBE_LIB_DIR}/Projects/Common/Azure/Src/az_tickcounter_STM32Cube.o \
+		${XCUBE_LIB_DIR}/Projects/Common/Azure/Src/az_tlsio_mbedtls.o \
+		${XCUBE_LIB_DIR}/Projects/Common/Azure/Src/azure_base64.o \
+		${XCUBE_LIB_DIR}/Projects/Common/Azure/Src/azure_sha1.o \
+		${XCUBE_LIB_DIR}/Projects/Common/Azure/Src/azure_version.o \
+
 
 CXX_OBJ += 
 
-INCLUDE_PATHS += -I. 
+INCLUDE_PATHS += -I. \
+		-I$(XCUBE_LIB_DIR)/Projects/Common/Azure/Inc \
+		-I$(XCUBE_LIB_DIR)/Projects/Common/Shared/Inc
 
 
 
