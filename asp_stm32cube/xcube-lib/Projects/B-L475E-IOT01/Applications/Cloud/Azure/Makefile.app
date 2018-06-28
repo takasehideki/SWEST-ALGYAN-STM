@@ -11,8 +11,9 @@ C_OBJ += \
 		${XCUBE_LIB_DIR}/Projects/B-L475E-IOT01/Applications/Cloud/Azure/Src/vl53l0x_platform.o \
 		${XCUBE_LIB_DIR}/Projects/B-L475E-IOT01/Applications/Cloud/Azure/Src/vl53l0x_proximity.o \
 
+
 #		${XCUBE_LIB_DIR}/Projects/B-L475E-IOT01/Applications/Cloud/Azure/Src/main.o \
-		${XCUBE_LIB_DIR}/Projects/B-L475E-IOT01/Applications/Cloud/Azure/Src/stm32l4xx_it.o \
+#		${XCUBE_LIB_DIR}/Projects/B-L475E-IOT01/Applications/Cloud/Azure/Src/stm32l4xx_it.o \
 
 CXX_OBJ += 
 

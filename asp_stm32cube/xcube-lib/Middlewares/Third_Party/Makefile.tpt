@@ -94,6 +94,9 @@ C_OBJ += \
 		$(XCUBE_LIB_DIR)/Middlewares/Third_Party/azure-iot-sdk-c/iothub_client/src/iothubtransport_mqtt_common.o \
 		$(XCUBE_LIB_DIR)/Middlewares/Third_Party/azure-iot-sdk-c/iothub_client/src/iothubtransportmqtt.o \
 		$(XCUBE_LIB_DIR)/Middlewares/Third_Party/azure-iot-sdk-c/deps/parson/parson.o \
+
+
+C_OBJ += \
 		$(XCUBE_LIB_DIR)/Middlewares/Third_Party/azure-iot-sdk-c/c-utility/adapters/agenttime.o \
 		$(XCUBE_LIB_DIR)/Middlewares/Third_Party/azure-iot-sdk-c/c-utility/src/buffer.o \
 		$(XCUBE_LIB_DIR)/Middlewares/Third_Party/azure-iot-sdk-c/c-utility/src/connection_string_parser.o \
@@ -118,12 +121,14 @@ C_OBJ += \
 		$(XCUBE_LIB_DIR)/Middlewares/Third_Party/azure-iot-sdk-c/c-utility/src/xlogging.o \
 		$(XCUBE_LIB_DIR)/Middlewares/Third_Party/azure-iot-sdk-c/c-utility/src/singlylinkedlist.o \
 
+
 C_OBJ += \
 		$(XCUBE_LIB_DIR)/Middlewares/Third_Party/azure-iot-sdk-c/c-utility/src/httpheaders.o \
 		$(XCUBE_LIB_DIR)/Middlewares/Third_Party/azure-iot-sdk-c/c-utility/src/httpapiex.o \
 		$(XCUBE_LIB_DIR)/Middlewares/Third_Party/azure-iot-sdk-c/c-utility/src/httpapiexsas.o \
 		$(XCUBE_LIB_DIR)/Middlewares/Third_Party/azure-iot-sdk-c/iothub_client/src/blob.o \
 		$(XCUBE_LIB_DIR)/Middlewares/Third_Party/azure-iot-sdk-c/c-utility/adapters/httpapi_compact.o \
+
 
 CXX_OBJ += 
 

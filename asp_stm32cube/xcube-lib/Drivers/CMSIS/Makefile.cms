@@ -8,7 +8,6 @@ C_OBJ += $(XCUBE_LIB_DIR)/Drivers/CMSIS/Device/ST/STM32L4xx/Source/system_stm32l
 CXX_OBJ += 
 
 INCLUDE_PATHS += -I. \
-		-I$(XCUBE_LIB_DIR)/Drivers/CMSIS/Device/ST/STM32L4xx/Source \
 		-I$(XCUBE_LIB_DIR)/Drivers/CMSIS/Device/ST/STM32L4xx/Include \
 		-I$(XCUBE_LIB_DIR)/Drivers/CMSIS/Include 
 
