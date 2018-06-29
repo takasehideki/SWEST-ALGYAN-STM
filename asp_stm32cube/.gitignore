@@ -11,3 +11,5 @@ truestudio/stm32*/*/offset.h
 asp_kernel/tools/TrueSTUDIO/stm32*/.metadata/
 
 *.d
+
+truestudio/stm32*/*/static_netinfo.h
