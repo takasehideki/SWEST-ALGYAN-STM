@@ -179,10 +179,10 @@ HAL_StatusTypeDef HAL_Init(void)
 
   /* Use SysTick as time base source and configure 1ms tick (default clock after Reset is MSI) */
   HAL_InitTick(TICK_INT_PRIORITY);
+#endif /* USE_XCUBE_WITH_TOPPERS */
 
   /* Init the low level hardware */
   HAL_MspInit();
-#endif /* USE_XCUBE_WITH_TOPPERS */
 
   /* Return function status */
   return HAL_OK;

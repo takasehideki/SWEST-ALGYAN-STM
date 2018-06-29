@@ -62,7 +62,8 @@ CC_SYMBOLS += -DUSE_XCUBE_WITH_TOPPERS
 
 #LD_FLAGS = $(CPU) -Wl,--gc-sections -Wl,-Map=$(PROJECT).map,--cref
 #LD_FLAGS = $(CPU) -Wl,--gc-sections -nostartfiles --specs=nano.specs -u _printf_float -u _scanf_float -Wl,-Map=$(PROJECT).map,--cref
-LD_FLAGS = $(CPU) -specs=nosys.specs -specs=nano.specs -u _printf_float -u _scanf_float -Wl,-Map=$(PROJECT).map,--cref
+#LD_FLAGS = $(CPU) -specs=nosys.specs -specs=nano.specs -u _printf_float -u _scanf_float -Wl,-Map=$(PROJECT).map,--cref
+LD_FLAGS = $(CPU) -specs=nano.specs -Wl,-Map=$(PROJECT).map,--cref
 #LD_SYS_LIBS = -lstdc++ -lsupc++ -lm -lc -lgcc -lnosys
 LD_SYS_LIBS = -lm -lc -lgcc -lnosys
 

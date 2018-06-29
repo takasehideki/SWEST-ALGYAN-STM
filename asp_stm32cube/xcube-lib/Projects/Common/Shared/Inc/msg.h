@@ -72,11 +72,19 @@
  * Macro to expose function, line number as well as desired log message.
  */
 #ifdef MSG_DEBUG
+#ifndef USE_XCUBE_WITH_TOPPERS
 #define msg_debug(...)    \
 	{\
 	printf("DEBUG:   %s L#%d ", __func__, __LINE__);  \
 	printf(__VA_ARGS__); \
 	}
+#else
+#define msg_debug(...)    \
+	{\
+	syslog((unsigned int)(5), "DEBUG:   %s L#%d ", __func__, __LINE__);  \
+	syslog(__VA_ARGS__); \
+	}
+#endif
 #else
 #define msg_debug(...)
 #endif
@@ -88,10 +96,17 @@
  * Macro to expose desired log message.  Info messages do not include automatic function names and line numbers.
  */
 #ifdef MSG_INFO
+#ifndef USE_XCUBE_WITH_TOPPERS
 #define msg_info(...)    \
 	{\
 	printf(__VA_ARGS__); \
 	}
+#else
+#define msg_info(...)    \
+	{\
+	syslog((unsigned int)(5), __VA_ARGS__); \
+	}
+#endif
 #else
 #define msg_info(...)
 #endif
@@ -102,11 +117,19 @@
  * Macro to expose function, line number as well as desired log message.
  */
 #ifdef MSG_WARNING
+#ifndef USE_XCUBE_WITH_TOPPERS
 #define msg_warning(...)   \
 	{ \
 	printf("WARN:  %s L#%d ", __func__, __LINE__);  \
 	printf(__VA_ARGS__); \
 	}
+#else
+#define msg_warning(...)   \
+	{ \
+	syslog((unsigned int)(5), "WARN:  %s L#%d ", __func__, __LINE__);  \
+	syslog((unsigned int)(5), __VA_ARGS__); \
+	}
+#endif
 #else
 #define msg_warning(...)
 #endif
@@ -117,14 +140,30 @@
  * Macro to expose function, line number as well as desired log message.
  */
 #ifdef MSG_ERROR
+#ifndef USE_XCUBE_WITH_TOPPERS
 #define msg_error(...)  \
 	{ \
 	printf("ERROR: %s L#%d ", __func__, __LINE__); \
 	printf(__VA_ARGS__); \
 	}
 #else
+#define msg_error(...)  \
+	{ \
+	syslog((unsigned int)(5), "ERROR:  %s L#%d ", __func__, __LINE__);  \
+	syslog((unsigned int)(5), __VA_ARGS__); \
+	}
+#endif
+#else
 #define msg_error(...)
 #endif
+
+#ifdef USE_XCUBE_WITH_TOPPERS
+#define printf(...)   \
+	{ \
+	syslog((unsigned int)(5), __VA_ARGS__); \
+	}
+#endif
+
 
 #endif /* __MSG_H__ */
 

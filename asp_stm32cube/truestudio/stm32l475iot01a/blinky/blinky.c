@@ -88,11 +88,11 @@ void led_task(intptr_t exinf)
 
   while (true) {
     //msg_info("Blinky LED 10s\n");
-    syslog(LOG_NOTICE, "Blinky LED 1");
+    syslog(LOG_NOTICE, "Blinky LED 1\n");
     dly_tsk(1000);
-    syslog(LOG_NOTICE, "Blinky LED 10s");
+    syslog(LOG_NOTICE, "Blinky LED 10s\n");
     Led_Blink(1000, 500, 10);
-    syslog(LOG_NOTICE, "Blinky LED 2");
+    syslog(LOG_NOTICE, "Blinky LED 2\n");
     dly_tsk(1000);
   }
 }
@@ -106,11 +106,11 @@ void main_task(intptr_t exinf)
   ER_UINT	ercd;
 
   SVC_PERROR(syslog_msk_log(LOG_UPTO(LOG_INFO), LOG_UPTO(LOG_EMERG)));
-  syslog(LOG_NOTICE, "Blinky program starts (exinf = %d).", (int_t) exinf);
+  syslog(LOG_NOTICE, "Blinky program starts (exinf = %d).\n", (int_t) exinf);
 
   ercd = serial_opn_por(TASK_PORTID);
   if (ercd < 0 && MERCD(ercd) != E_OBJ) {
-    syslog(LOG_ERROR, "%s (%d) reported by `serial_opn_por'.",
+    syslog(LOG_ERROR, "%s (%d) reported by `serial_opn_por'.\n",
         itron_strerror(ercd), SERCD(ercd));
   }
   SVC_PERROR(serial_ctl_por(TASK_PORTID,
@@ -132,7 +132,7 @@ void main_task(intptr_t exinf)
     }
   } while (c != '\003' && c != 'Q');
 
-  syslog(LOG_NOTICE, "Sample program ends.");
+  syslog(LOG_NOTICE, "Sample program ends.\n");
   SVC_PERROR(ext_ker());
   assert(0);
 }

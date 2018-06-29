@@ -8,7 +8,7 @@
  *  Copyright (C) 2005-2011 by Embedded and Real-Time Systems Laboratory
  *              Graduate School of Information Science, Nagoya Univ., JAPAN
  * 
- *  上記著作権者は，以下の(1)〜(4)の条件を満たす場合に限り，本ソフトウェ
+ *  上記著作権者は，以下の(1)~(4)の条件を満たす場合に限り，本ソフトウェ
  *  ア（本ソフトウェアを改変したものを含む．以下同じ）を使用・複製・改
  *  変・再配布（以下，利用と呼ぶ）することを無償で許諾する．
  *  (1) 本ソフトウェアをソースコードの形で利用する場合には，上記の著作
@@ -133,8 +133,13 @@ logtask_main(intptr_t exinf)
 	logtask_portid = (ID) exinf;
 	(void) serial_opn_por(logtask_portid);
 	(void) syslog_msk_log(LOG_UPTO(LOG_NOTICE), LOG_UPTO(LOG_EMERG));
+#ifndef USE_XCUBE_WITH_TOPPERS
 	syslog_1(LOG_NOTICE, "System logging task is started on port %d.",
 													logtask_portid);
+#else
+	syslog_1(LOG_NOTICE, "System logging task is started on port %d.\n",
+													logtask_portid);
+#endif /* USE_XCUBE_WITH_TOPPERS */
 	for (;;) {
 		lostlog = 0U;
 		while ((rercd = syslog_rea_log(&logbuf)) >= 0) {
@@ -145,7 +150,9 @@ logtask_main(intptr_t exinf)
 					lostlog = 0U;
 				}
 				syslog_print(&logbuf, logtask_putc);
+#ifndef USE_XCUBE_WITH_TOPPERS
 				logtask_putc('\n');
+#endif /* USE_XCUBE_WITH_TOPPERS */
 			}
 		}
 		if (lostlog > 0U) {

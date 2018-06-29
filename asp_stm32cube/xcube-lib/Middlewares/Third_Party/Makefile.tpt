@@ -119,7 +119,7 @@ C_OBJ += \
 		$(XCUBE_LIB_DIR)/Middlewares/Third_Party/azure-iot-sdk-c/c-utility/src/vector.o \
 		$(XCUBE_LIB_DIR)/Middlewares/Third_Party/azure-iot-sdk-c/c-utility/src/xio.o \
 		$(XCUBE_LIB_DIR)/Middlewares/Third_Party/azure-iot-sdk-c/c-utility/src/xlogging.o \
-		$(XCUBE_LIB_DIR)/Middlewares/Third_Party/azure-iot-sdk-c/c-utility/src/singlylinkedlist.o \
+		$(XCUBE_LIB_DIR)/Middlewares/Third_Party/azure-iot-sdk-c/c-utility/src/singlylinkedlist.o 
 
 
 C_OBJ += \

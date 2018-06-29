@@ -271,6 +271,7 @@ int updateWiFiCredentials(const char ** const ssid, const char ** const psk, uin
   printf("\nEnter SSID: ");
   
   getInputString(wifi_config.ssid, USER_CONF_WIFI_SSID_MAX_LENGTH);
+  dly_tsk(10000);
   msg_info("You have entered %s as the ssid.\n", wifi_config.ssid);
   
   printf("\n");

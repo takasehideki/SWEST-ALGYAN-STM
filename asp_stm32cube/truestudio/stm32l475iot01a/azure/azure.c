@@ -79,12 +79,12 @@ void main_task(intptr_t exinf)
   ER_UINT	ercd;
 
   SVC_PERROR(syslog_msk_log(LOG_UPTO(LOG_INFO), LOG_UPTO(LOG_EMERG)));
-  syslog(LOG_NOTICE, "BlinkyButtonISR program starts (exinf = %d).", (int_t) exinf);
+  syslog(LOG_NOTICE, "BlinkyButtonISR program starts (exinf = %d).\n", (int_t) exinf);
 
   /* ここでシリアルオープンしたら後々に死ぬ可能性あり */
   ercd = serial_opn_por(TASK_PORTID);
   if (ercd < 0 && MERCD(ercd) != E_OBJ) {
-    syslog(LOG_ERROR, "%s (%d) reported by `serial_opn_por'.",
+    syslog(LOG_ERROR, "%s (%d) reported by `serial_opn_por'.\n",
         itron_strerror(ercd), SERCD(ercd));
   }
   SVC_PERROR(serial_ctl_por(TASK_PORTID,
@@ -107,7 +107,7 @@ void main_task(intptr_t exinf)
     }
   } while (c != '\003' && c != 'Q');
 
-  syslog(LOG_NOTICE, "Sample program ends.");
+  syslog(LOG_NOTICE, "Sample program ends.\n");
   SVC_PERROR(ext_ker());
   assert(0);
 }
@@ -138,7 +138,7 @@ static volatile uint8_t button_flags = 0;
 
 /* Private function prototypes -----------------------------------------------*/
 /* startupで初期化できているはずなので要らないはず */
-//static void SystemClock_Config(void);
+static void SystemClock_Config(void);
 void SPI_WIFI_ISR(void);
 
 /* TOPPERS側でUSART1を使えるようにしてるから要らないはず */
@@ -158,10 +158,10 @@ void led_task(intptr_t exinf)
   BSP_PB_Init(BUTTON_USER, BUTTON_MODE_EXTI);
 
   while (true) {
-    syslog(LOG_NOTICE, "Wait for interrupt upto 1s");
+    syslog(LOG_NOTICE, "Wait for interrupt upto 1s\n");
     if (Button_WaitForPush(1000) != BP_NOT_PUSHED) {
       //msg_info("Blinky LED 10s\n");
-      syslog(LOG_NOTICE, "Blinky LED 10s");
+      syslog(LOG_NOTICE, "Blinky LED 10s\n");
       Led_Blink(1000, 500, 10);
     }
   }
@@ -169,7 +169,13 @@ void led_task(intptr_t exinf)
 
 void azure_task(intptr_t exinf)
 {
-  syslog(LOG_NOTICE, "Azure program starts (exinf = %d).", (int_t) exinf);
+  SVC_PERROR(syslog_msk_log(LOG_UPTO(LOG_INFO), LOG_UPTO(LOG_EMERG)));
+  syslog(LOG_NOTICE, "Azure program starts (exinf = %d).\n", (int_t) exinf);
+
+  /* Configure the system clock */
+  //SystemClock_Config();
+
+  Periph_Config();
 
   /* 内部では何もしていないので書かなくてもよい */
   HAL_Init();
@@ -178,6 +184,18 @@ void azure_task(intptr_t exinf)
   /* USER Push-SWを割込みモードで使用できるように初期化 */
   BSP_PB_Init(BUTTON_USER, BUTTON_MODE_EXTI);
 
+  /* ここでシリアルオープンしてみる */
+  ER_UINT	ercd = serial_opn_por(TASK_PORTID);
+  if (ercd < 0 && MERCD(ercd) != E_OBJ) {
+    syslog(LOG_ERROR, "%s (%d) reported by `serial_opn_por'.\n",
+        itron_strerror(ercd), SERCD(ercd));
+  }
+
+  SVC_PERROR(serial_ctl_por(TASK_PORTID,
+        (IOCTL_CRLF | IOCTL_FCSND | IOCTL_FCRCV)));
+
+  syslog(LOG_NOTICE, "Azure 1 %d\n", TASK_PORTID);
+
   /* RNG init function */
   hrng.Instance = RNG;
   if (HAL_RNG_Init(&hrng) != HAL_OK)
@@ -185,21 +203,84 @@ void azure_task(intptr_t exinf)
     Error_Handler();
   }
 
+  syslog(LOG_NOTICE, "Azure 2\n");
+  dly_tsk(1000);
+
   /* RTC init */
-  RTC_Init();
+  //RTC_Init();
   /* UART console init */
   //Console_UART_Init();  
+
 
 #ifdef FIREWALL_MBEDLIB
   firewall_init();
 #endif
+  syslog(LOG_NOTICE, "Azure 3\n");
 
-  msg_info("Hello\n");
+  msg_info("Hello %s hoge\n", "hogehoge");
 
+  syslog(LOG_NOTICE, "Azure 4\n");
+  dly_tsk(1000);
   cloud_test(0);
 }
 
 
+/**
+ * @brief  System Clock Configuration
+ *         The system Clock is configured as follows :
+ *            System Clock source            = PLL (MSI MSE)
+ *            SYSCLK(Hz)                     = 80000000
+ *            HCLK(Hz)                       = 80000000
+ *            AHB Prescaler                  = 1
+ *            APB1 Prescaler                 = 1
+ *            APB2 Prescaler                 = 1
+ *            MSI Frequency(Hz)              = 48000000
+ *            PLL_M                          = 6
+ *            PLL_N                          = 20
+ *            PLL_R                          = 2
+ *            PLL_P                          = 7
+ *            PLL_Q                          = 2
+ *            Flash Latency(WS)              = 4
+ * @param  None
+ * @retval None
+ */
+void SystemClock_Config(void)
+{
+  RCC_OscInitTypeDef RCC_OscInitStruct;
+  RCC_ClkInitTypeDef RCC_ClkInitStruct;
+
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSE|RCC_OSCILLATORTYPE_MSI;
+  RCC_OscInitStruct.LSEState = RCC_LSE_ON;
+  RCC_OscInitStruct.MSIState = RCC_MSI_ON;
+  RCC_OscInitStruct.MSICalibrationValue = 0;
+  RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_11;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_MSI;
+  RCC_OscInitStruct.PLL.PLLM = 6;
+  RCC_OscInitStruct.PLL.PLLN = 20;
+  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV7;
+  RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
+  RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
+  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+     clocks dividers */
+  RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /* Enable MSI PLL mode */
+  HAL_RCCEx_EnableMSIPLLMode();
+}
 
 /**
  * @brief Set LED state
