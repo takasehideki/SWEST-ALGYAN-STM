@@ -177,6 +177,7 @@ int8_t SPI_WIFI_Init(uint16_t mode)
       return -1;
     }
 
+#ifndef USE_XCUBE_WITH_TOPPERS
 	 // Enable Interrupt for Data Ready pin , GPIO_PIN1
      HAL_NVIC_SetPriority((IRQn_Type)EXTI1_IRQn, 0x0F, 0x00);
      HAL_NVIC_EnableIRQ((IRQn_Type)EXTI1_IRQn);
@@ -184,6 +185,7 @@ int8_t SPI_WIFI_Init(uint16_t mode)
 	 // Enable Interrupt for SPI tx and rx
      HAL_NVIC_SetPriority((IRQn_Type)SPI3_IRQn, 1, 0);
      HAL_NVIC_EnableIRQ((IRQn_Type)SPI3_IRQn);
+#endif /* USE_XCUBE_WITH_TOPPERS */
     
     // create Mutex and Semaphore
 	RTOS_CREATE_SEM_MUTEX();

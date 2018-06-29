@@ -87,7 +87,7 @@ extern void	main_task(intptr_t exinf);
 void SPI3_IRQHandler(void);
 #define INHNO_SPI3     67    /* 割込みハンドラ番号 */
 #define INTNO_SPI3     67    /* 割込み番号 */
-#define INTPRI_SPI3    (-15) /* 割込み優先度 */
+#define INTPRI_SPI3    (-1)  /* 割込み優先度 */
 #define INTATR_SPI3    0U    /* 割込み属性 */
 
 

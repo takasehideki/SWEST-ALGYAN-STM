@@ -91,6 +91,14 @@ void EXTI1_IRQHandler(void);
 #define INTPRI_EXTI15_10    (-15) /* 割込み優先度 */
 #define INTATR_EXTI15_10    0U    /* 割込み属性 */
 
+/* 
+ *  EXTI Line1割込みハンドラ登録のための定数
+ */
+#define INHNO_EXTI1         23    /* 割込みハンドラ番号 */
+#define INTNO_EXTI1         23    /* 割込み番号 */
+#define INTPRI_EXTI1        (-15) /* 割込み優先度 */
+#define INTATR_EXTI1        0U    /* 割込み属性 */
+
 
 #ifdef __cplusplus
 }

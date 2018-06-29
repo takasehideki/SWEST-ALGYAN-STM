@@ -103,8 +103,12 @@ int getInputString(char *inputString, size_t len)
 {
   size_t currLen = 0;
   int c = 0;
-  
+ 
+#ifndef USE_XCUBE_WITH_TOPPERS
   c = getchar();
+#else
+  serial_rea_dat((unsigned int)1, &c, 1);
+#endif USE_XCUBE_WITH_TOPPERS
   
   while ((c != EOF) && ((currLen + 1) < len) && (c != '\r') && (c != '\n') )
   {
@@ -126,7 +130,11 @@ int getInputString(char *inputString, size_t len)
       
       ++currLen;
     }
+#ifndef USE_XCUBE_WITH_TOPPERS
     c = getchar();
+#else
+    serial_rea_dat((unsigned int)1, &c, 1);
+#endif USE_XCUBE_WITH_TOPPERS
   }
   if (currLen != 0)
   { /* Close the string in the input buffer... only if a string was written to it. */
@@ -134,7 +142,11 @@ int getInputString(char *inputString, size_t len)
   }
   if (c == '\r')
   {
+#ifndef USE_XCUBE_WITH_TOPPERS
     c = getchar(); /* assume there is '\n' after '\r'. Just discard it. */
+#else
+    serial_rea_dat((unsigned int)1, &c, 1);
+#endif USE_XCUBE_WITH_TOPPERS
   }
   
   return currLen;
@@ -271,7 +283,6 @@ int updateWiFiCredentials(const char ** const ssid, const char ** const psk, uin
   printf("\nEnter SSID: ");
   
   getInputString(wifi_config.ssid, USER_CONF_WIFI_SSID_MAX_LENGTH);
-  dly_tsk(10000);
   msg_info("You have entered %s as the ssid.\n", wifi_config.ssid);
   
   printf("\n");
@@ -279,7 +290,11 @@ int updateWiFiCredentials(const char ** const ssid, const char ** const psk, uin
   do
   {
       printf("\rEnter Security Mode (0 - Open, 1 - WEP, 2 - WPA, 3 - WPA2): \b");
-      c = getchar();
+#ifndef USE_XCUBE_WITH_TOPPERS
+:     c = getchar();
+#else
+      serial_rea_dat((unsigned int)1, &c, 1);
+#endif USE_XCUBE_WITH_TOPPERS
   }
   while ( (c < '0')  || (c > '3'));
   wifi_config.security_mode = c - '0';
