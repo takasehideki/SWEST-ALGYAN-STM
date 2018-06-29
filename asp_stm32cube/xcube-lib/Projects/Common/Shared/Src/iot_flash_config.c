@@ -56,6 +56,11 @@
 #include "iot_flash_config.h"
 #include "msg.h"
 
+/* ネットワーク接続情報を静的テキストから読み込み */
+#ifdef USE_STATIC_NETINFO
+#include "static_netinfo.h"
+#endif
+
 /* Private typedef -----------------------------------------------------------*/
 /* Private defines -----------------------------------------------------------*/
 #define PEM_READ_LINE_SIZE    120
@@ -108,7 +113,7 @@ int getInputString(char *inputString, size_t len)
   c = getchar();
 #else
   serial_rea_dat((unsigned int)1, &c, 1);
-#endif USE_XCUBE_WITH_TOPPERS
+#endif /* USE_XCUBE_WITH_TOPPERS */
   
   while ((c != EOF) && ((currLen + 1) < len) && (c != '\r') && (c != '\n') )
   {
@@ -281,8 +286,12 @@ int updateWiFiCredentials(const char ** const ssid, const char ** const psk, uin
   memset(&wifi_config, 0, sizeof(wifi_config_t));
     
   printf("\nEnter SSID: ");
-  
+ 
+#ifndef USE_STATIC_NETINFO
   getInputString(wifi_config.ssid, USER_CONF_WIFI_SSID_MAX_LENGTH);
+#else
+  strncpy(wifi_config.ssid, WIFI_SSID, USER_CONF_WIFI_SSID_MAX_LENGTH);
+#endif /* USE_STATIC_NETINFO */
   msg_info("You have entered %s as the ssid.\n", wifi_config.ssid);
   
   printf("\n");
@@ -290,11 +299,15 @@ int updateWiFiCredentials(const char ** const ssid, const char ** const psk, uin
   do
   {
       printf("\rEnter Security Mode (0 - Open, 1 - WEP, 2 - WPA, 3 - WPA2): \b");
+#ifndef USE_STATIC_NETINFO
 #ifndef USE_XCUBE_WITH_TOPPERS
 :     c = getchar();
 #else
       serial_rea_dat((unsigned int)1, &c, 1);
 #endif USE_XCUBE_WITH_TOPPERS
+#else
+      c = WIFI_SECMODE;
+#endif /* USE_STATIC_NETINFO */
   }
   while ( (c < '0')  || (c > '3'));
   wifi_config.security_mode = c - '0';
@@ -303,7 +316,12 @@ int updateWiFiCredentials(const char ** const ssid, const char ** const psk, uin
   if (wifi_config.security_mode != 0)
   {
     printf("\nEnter password: ");
+#ifndef USE_STATIC_NETINFO
     getInputString(wifi_config.psk, sizeof(wifi_config.psk));
+#else
+    strncpy(wifi_config.psk, WIFI_PASSWORD, sizeof(wifi_config.psk));
+    msg_info("\n\nNOTE: Your WiFi info was set statically from static_netinfo.h\n");
+#endif /* USE_STATIC_NETINFO */
   }
   
   wifi_config.magic = USER_CONF_MAGIC;

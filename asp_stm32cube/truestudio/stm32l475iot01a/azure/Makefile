@@ -54,6 +54,13 @@ C_OBJ += irq_handler/stm32l4xx_it.o
 INCLUDE_PATHS += -Iirq_handler
 
 #
+#  ネットワーク接続情報（WiFi,Azure）の静的設定
+#  リセット後にいちいち各情報を入力するのが面倒な時は，次の行のコメントアウトを
+#  外して "static_netinfo.h" に各情報を定義すること
+#  個人情報になりがちなので.gitignoreしてある
+#
+CC_SYMBOLS = -DUSE_STATIC_NETINFO
+#
 #  XCUBEライブラリ
 #
 include ../Makefile.xcb
